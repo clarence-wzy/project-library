@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.CommentaryMapper">
+
+    <insert id="insertCommentary" parameterType="com.wzy.entity.Commentary">
+        insert into
+            commentary(id, child_order_id, user_id, username, rate, commentary_content, commentary_image, anonymity, commentary_status, commentary_create_time)
+        values
+            (#{id}, #{childOrderId}, #{userId}, #{username}, #{rate}, #{commentaryContent}, #{commentaryImage}, #{anonymity}, "ENABLE", now())
+    </insert>
+
+    <select id="findCommentary" resultType="com.wzy.entity.Commentary">
+        select
+            id, child_order_id, user_id, username, rate, commentary_content, commentary_image, anonymity, commentary_status, commentary_create_time
+        from commentary
+        where commentary_status != "DISABLE"
+        <if test="childOrderId != 'null'">
+            and child_order_id = #{childOrderId}
+        </if>
+        <if test="userId != 0">
+            and user_id = #{userId}
+        </if>
+        <if test="username != 'null'">
+            and username = #{username}
+        </if>
+        group by commentary_create_time desc
+    </select>
+
+</mapper>

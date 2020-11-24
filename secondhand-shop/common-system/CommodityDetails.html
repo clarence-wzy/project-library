@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品详情页</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/header_footer.css" />
+    <link rel="stylesheet" href="css/commodityDetails.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.params.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body style="background: #f7f8f8;">
+    <!--------------------------头部-------------------------------->
+    <div id="commodityDetails-header"></div>
+    <!--------------------------主体-------------------------------->
+    <div class="main">
+        <div class="pageLocation c" id="productType">
+            <a href="#">首页</a>
+        </div>
+        <div class="goodsDetailsBox c">
+
+            <div class="goodsDetailsPicBox">
+                <!-- <div class="biger" id="biger"></div>
+                <div class="imgs">
+                    <div class="main" id="main">
+                        <div class="mask" id="mask"></div>
+                    </div>
+                    <ul class="smaller" id="smaller"></ul>
+                </div> -->
+
+                <div class="small_area" id="picBox">
+                    <ul id="productImage">
+                    </ul>
+                    <div class="mask" id="square"></div>
+                </div>
+                <ul id="btnBox">
+                </ul>
+                <div class="big_area" id="hugePic">
+                    <img id="huge" src="#" width="620" height="620" />
+                </div>
+            </div>
+
+
+            <div class="product-info">
+                <div class="summary-name">
+                    <h1 id="productName"></h1>
+                    <p></p>
+                    <input type="hidden" name="CommodityId" id="CommodityId" value="be2d76b9-da4a-4f93-81a5-85abf722ee4f">
+                </div>
+
+                <div class="summary-price clearfix">
+                    <div class="pro-price">
+                        <div>
+                            <span class="tt">价格：</span>
+                            <span><em>¥</em><strong id="productPrice"></strong></span>
+                        </div>
+                        <div class="pro-m2">
+                            更多商品优惠，尽在园猿网
+                        </div>
+                    </div>
+                    <!-- <div class="pro-tel">
+                        <p><i></i>手机下单购买<strong>立即扫码</strong></p>
+                    </div> -->
+                    <div class="pro-review">
+                        <p>用户信用度（<b id="own-credit"></b>）</p>
+                        <p style="margin-left: 20px; color: #999; width: 100px;"></p>
+                        <!-- 暂无不良记录 -->
+                    </div>
+                    <div class="pro-report" id="toReport">
+                        <span><a>我要举报</a></span>
+                    </div>
+                </div>
+
+                <div class="summary-other clearfix">
+                    <div class="left col-md-4">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <th>所属人：</th>
+                                    <td id="productUserName"></td>
+                                </tr>
+                                <tr>
+                                    <th>商品成色：</th>
+                                    <td id="productQuality"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="right col-md-6">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <th>交易方式：</th>
+                                    <td id="productTrade"></td>
+                                </tr>
+                                <tr>
+                                    <th>交易地址：</th>
+                                    <td id="productTradeDecription"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="cursor: default;" class="col-md-2 collect btn btn-lg disabled">
+                        <span class="glyphicon glyphicon-heart" value="false"></span>
+                        <div>收藏</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">数量：</label>
+                        <div class="col-sm-4 input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="button" id="decreaseBtn">-</button>
+                            </span>
+                            <input type="text" class="form-control" id="pnumber" placeholder="1" value="1" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="button" id="increaseBtn">+</button>
+                            </span>
+                        </div>
+                        <div class="col-sm-3" id="productNum"> （ 仅剩1件 ） </div>
+                    </div>
+
+                    <div class="product-btn">
+                        <button class="btn btn-success" id="addShopCart">加入购物车</button>
+                        <button class="btn btn-success">立即购买</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="c goodsContent">
+                <div class="guessLikeBox l">
+                    <div class="guessLikehead">猜你喜欢</div>
+                    <div id="you-like-list" style="padding-bottom: 10px; background-color: #fbfbee;"></div>
+                </div>
+                <div class="goodsContentBox r">
+                    <div class="hotSale">
+                        <div class="hotSaleHead">为您推荐</div>
+                        <ul id="recommend-list">
+                        </ul>
+                    </div>
+                    <div class="goodsIntroduceBox">
+                        <div class="IntroduceTable">
+                            <ul class="IntroduceUl">
+                                <li id="Introduce" class="goodsIntroduceChoose">商品详情</li>
+                                <li id="Appraise" class="goodsAppraise" style="display: none;">用户评论<b>1420</b></li>
+                            </ul>
+                        </div>
+                        <div class="allInContent" id="productContent">
+                            <table border="1" id="productDescription">
+                            </table>
+                        </div>
+                        <div class="allAppraise">
+                            <img src="img/commodityDetails/商品评价.png" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--------------------------加载中-------------------------------->
+    <div id="loading"></div>
+    <!--------------------------尾部-------------------------------->
+    <div id="commodityDetails-footer"></div>
+
+    <!-- 举报模态框 -->
+    <div class="modal fade bs-example-modal" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="reportModalLabel">
+                        我要举报 ---
+                        <span id="modalProductName"></span>
+                    </h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div class="form-group modal-form">
+                        <!-- <label class="control-label">详细地址：</label> -->
+                        <textarea class="form-control" id="report-content" rows="7" placeholder="请填写您要举报的信息，这将是我们进行审核的关键"></textarea>
+                    </div>
+                    <div class="form-group modal-form">
+                        <div class="modal-btn">
+                            <button type="button" id="report-btn" class="btn btn-primary">提交</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="js/public-tool.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function() {
+        $('#commodityDetails-header').load('PublicHeader.html #header');
+        $('#commodityDetails-footer').load('PublicFooter.html #footer');
+        $('#loading').load('PublicFooter.html #loading');
+    });
+</script>
+<script src="js/commodityDetails.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="js/move.js" type="text/javascript" charset="utf-8"></script> -->
+
+</html>

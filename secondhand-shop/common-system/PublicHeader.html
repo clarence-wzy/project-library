@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PublicHeader</title>
+</head>
+
+<body>
+    <header id="header">
+        <!--------------------------导栏行-------------------------------->
+        <div class="topNav" id="topNav">
+            <div class="container">
+                <div class="row wrap">
+                    <ul id="wrapLeft" class="l">
+                        <li class="wrapLeftText l">
+                            <img src="img/icon/home.png" />
+                            <span style="color: #999; font-size: 12px;">
+                                欢迎光临
+                                <span style="cursor: pointer; color: rgb(126, 126, 126); text-decoration: underline;"
+                                    onclick="window.location.href='index.html'">园猿网</span> ！！！
+                            </span>
+                        </li>
+                    </ul>
+                    <ul id="wrapRight" class="r">
+                        <li class="wrapRightText ">
+                            <div class="noLogin" style="display: block;">
+                                <a href="login.html">[登录]</a>
+                                <a href="login.html" style="margin-left: 15px;">[注册]</a>
+                            </div>
+                            <div class="hasLogin" style="display: none;">Hi，<span id="username">Clarence</span> ！！！
+                            </div>
+                        </li>
+                        <li class="wrapRightText" id="userMenu" style="display: none;">
+                            <i class="topBtn topBtnPeople"></i> 我的园猿
+                            <i class="topBtn topBtnList"></i>
+                            <div class="personList">
+                                <ul id="myMenu">
+                                    <li onclick="turnTo(1, 'person');">我的信息</li>
+                                    <!-- <li class="myCount">我的优惠券<span>0</span></li> -->
+                                    <li onclick="turnTo(2, 'deliver-address');">我的收获地址</li>
+                                    <li onclick="turnTo(3, 'my-collect');">我的收藏夹</li>
+                                    <li onclick="turnTo(4, 'my-shopcart');">我的购物车</li>
+                                    <li onclick="turnTo(5, 'my-order');">我的订单</li>
+                                    <li onclick="turnTo(6, 'my-evaluation');">我的评价</li>
+                                    <!-- <li onclick="turnTo(7, 'release-product');">发布商品</li>
+                                    <li onclick="turnTo(8, 'my-product');">我的商品</li>
+                                    <li onclick="turnTo(9, 'deliver-product');">我要发货</li> -->
+                                    <!-- <li onclick="loginOut();">退出登录</li> -->
+                                </ul>
+                            </div>
+                            <div class="wrapRightTextShadow"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--------------------------搜索区域-------------------------------->
+        <div class="headerSearch" style="width: 100%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 SearchMargin">
+                        <img src="img/logo.png" style="height: 80px; margin-top: -20px; margin-left: -20px;" onclick="window.location.href = 'index.html'" />
+                    </div>
+                    <div class="col-md-7 SearchMargin">
+                        <div class="input-group SearchInputBtn">
+                            <input type="text" class="form-control" id="search" placeholder="请输入您要搜索的商品名" onchange="inputChange('search')" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-success btn-search" id="search-btn"
+                                    onclick="productSearch('search')">搜索</button>
+                            </span>
+                        </div>
+                        <ul id="searchMenu1">
+                        </ul>
+                    </div>
+                    <div class="col-md-3 SearchMargin">
+                        <div class="shopCar">
+                            <i class="topBtn shopCarPic l">
+                                <p class="shopCarOverNum" id="shopcartNum">0</p>
+                            </i>
+                            <p class="shopCarNum l" id="shopcartPrice">0.00</p>
+                            <div class="shopCarContainerBox container" id="shopcart" style="width: 350px;">
+                                <p id="noLoginP">您还没登录，请先前往登录！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+
+</html>

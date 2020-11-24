@@ -1,0 +1,770 @@
+.modal {
+    top: 20%;
+}
+
+
+/****************************顶部图片区域**************************************/
+
+.top-img {
+    background-color: #000;
+    width: 100%;
+    height: 300px;
+    background-image: url(../img/personalInformation/background-image2.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+}
+
+
+/****************************个人头像区域**************************************/
+
+.panel {
+    width: 50%;
+    height: 156px;
+    text-align: center;
+    margin: auto;
+    font-size: 18px;
+    background-color: beige;
+}
+
+.head-img {
+    width: 78%;
+    margin: auto;
+    margin-top: -80px;
+}
+
+#user-headimg {
+    width: 68px;
+    height: 68px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+}
+
+
+/****************************个人页面主体区域**************************************/
+
+.info-body {
+    margin-top: 30px;
+    color: #34374C;
+}
+
+
+/****************************主体左边区域**************************************/
+
+.nav-left {
+    background: rgb(245, 247, 235);
+}
+
+.nav-left ul.nav-tabs {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+}
+
+
+/****************************主体右边区域**************************************/
+
+.info-right {
+    min-height: 600px;
+    width: 80%;
+    margin-left: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+
+/* 个人信息 */
+
+.form-horizontal {
+    margin-top: 50px;
+}
+
+.person-prompt {
+    font-size: 12px;
+    margin-top: 20px;
+    text-align: center;
+    color: rgb(248, 58, 58);
+}
+
+.person-btn-body {
+    margin-top: 30px;
+    margin-bottom: 80px;
+    min-height: 350px;
+}
+
+.person-btn-edit-body {
+    margin-top: 50px;
+    margin-bottom: 80px;
+    min-height: 350px;
+    display: none;
+}
+
+.person-control-input {
+    display: none;
+}
+
+.person-control label {
+    font-weight: normal;
+}
+
+.person-control a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.person-control a:hover {
+    color: #008000;
+    cursor: pointer;
+}
+
+.person-btn-body button,
+.person-btn-edit-body button {
+    width: 15%;
+}
+
+#person-cancel {
+    margin-left: 20px;
+}
+
+
+/* 发布商品 */
+
+.release-product-btn-body {
+    margin: 50px auto 50px auto;
+}
+
+.release-product-btn-body button {
+    width: 20%;
+}
+
+
+/* 我的商品 */
+
+.my-product-list {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    background: #e9fafa;
+    margin: 20px 10px 10px 10px;
+    padding: 20px 20px 20px 20px;
+}
+
+.my-product-list img {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 120px;
+    height: 120px;
+}
+
+.my-product-list input,
+.my-product-list select,
+.my-product-list textarea,
+.my-product-list .date {
+    display: none;
+}
+
+
+/* 我的收藏夹 */
+
+.my-collect-table {
+    margin: 30px 10px 30px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: aliceblue;
+    padding-bottom: 30px;
+}
+
+.no-collect {
+    display: none;
+    min-height: 200px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.my-collect-table>.row {
+    margin-top: 30px;
+}
+
+.my-collect-table-image img {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    width: auto;
+    height: auto;
+    max-width: 120px;
+    max-height: 120px;
+}
+
+.my-collect-table-title {
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.my-collect-table-title:hover {
+    color: #008000;
+    cursor: pointer;
+}
+
+.my-collect-table-price {
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+    cursor: default;
+}
+
+.collect-paginator {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: -10px;
+}
+
+#collect-pageLimit {
+    cursor: pointer;
+}
+
+
+/* 我的购物车 */
+
+.my-shopcart-table {
+    margin: 30px 10px 30px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: aliceblue;
+    padding-bottom: 30px;
+}
+
+.no-shopcart {
+    display: none;
+    min-height: 200px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.my-shopcart-table>.row {
+    margin-top: 30px;
+}
+
+.my-shopcart-total input[type="checkbox"],
+.my-shopcart-table input[type="checkbox"] {
+    margin: 10px 25px auto 25px;
+    width: 16px;
+    height: 16px;
+    color: #333;
+}
+
+.my-shopcart-table-image img {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    width: auto;
+    height: auto;
+    max-width: 120px;
+    max-height: 120px;
+}
+
+.my-shopcart-table-title {
+    margin-top: 5px;
+}
+
+.my-shopcart-table-title a {
+    color: #000000;
+}
+
+.my-shopcart-table-title a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(250, 100, 100);
+}
+
+.my-shopcart-table-price {
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.my-shopcart-table-number input {
+    text-align: center;
+}
+
+.my-shopcart-total {
+    margin-bottom: -30px;
+}
+
+.my-shopcart-total-button {
+    margin-top: -10px;
+}
+
+.my-shopcart-total-price {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+}
+
+.my-shopcart-total-button button {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+
+/* 我的订单 */
+
+.my-order-body .navbar-btn {
+    width: 100%;
+    text-align: center;
+    margin-left: -1px;
+    background-color: rgb(216, 227, 228);
+}
+
+.my-order-body .navbar-btn a {
+    border-radius: 4px;
+    /* border: 1px solid #ddd; */
+    font-size: 16px;
+}
+
+.my-order-body .navbar-btn a:hover {
+    background-color: #DCDCDC;
+}
+
+#all-order,
+#pay-order,
+#delivery-order,
+#refund-order {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.my-order-table {
+    width: 100%;
+    /* margin: 10px auto; */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: aliceblue;
+    padding-bottom: 30px;
+    margin-top: 30px;
+}
+
+.my-order-table-info {
+    margin-left: 10px;
+}
+
+.my-order-table-image {
+    margin-top: 10px;
+}
+
+.my-order-table-title {
+    margin-top: 10px;
+    margin-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.my-order-table-title a {
+    color: #000000;
+    cursor: pointer;
+}
+
+.my-order-table-title a:hover {
+    color: #008000;
+    cursor: pointer;
+}
+
+.my-order-table-image img {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    width: auto;
+    height: auto;
+    max-width: 120px;
+    max-height: 120px;
+}
+
+.my-order-table-content {
+    font-size: 12px;
+    color: #C0C0C0;
+    margin-top: 5px;
+}
+
+.my-order-table-btn {
+    margin-top: 10px;
+    /* margin-bottom: -10px; */
+}
+
+.my-order-table .my-order-table-btn:last-child {
+    margin-bottom: -10px;
+}
+
+.my-order-table-btn button {
+    margin-left: 15px;
+    float: right;
+    width: 82px;
+    height: 34px;
+}
+
+#no-order-div {
+    display: none;
+    min-height: 200px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.no-order {
+    min-height: 200px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50%;
+    position: relative;
+    left: 200%;
+}
+
+
+/* 我的评价 */
+
+#no-evaluation-div {
+    display: none;
+    min-height: 200px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15%;
+}
+
+.evaluation-item {
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+
+.evaluation-item:nth-child(1) {
+    margin-top: 20px;
+}
+
+.evaluation-item:nth-last-child(1) {
+    margin-bottom: 30px;
+}
+
+.evaluation-item .user-info {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 0 10px;
+}
+
+.user-info .user-info-img {
+    background-color: #f7f7f7;
+    background-image: url(../img/icon/head-background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 47px 47px;
+}
+
+.user-info .user-info-img img {
+    margin: 10px 10px 10px 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background: white;
+}
+
+.evaluation-item .user-info span {
+    margin: auto auto auto 0;
+    font-size: 16px;
+}
+
+.evaluation-item .item-time {
+    margin-left: 20px;
+}
+
+.evaluation-item .item-time span {
+    font-size: 12px;
+    color: #cccccc;
+}
+
+.item-body {
+    padding: 10px 10px 30px 20px;
+}
+
+.eval-img img {
+    width: 160px;
+    height: 160px;
+}
+
+.item-productInfo {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: rgb(245, 250, 250);
+    width: auto;
+    margin: 0 30px 0 20px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 10px 10px;
+}
+
+.item-productInfo img {
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+    margin: 0 20px 0 2px;
+}
+
+.product-name-price {
+    height: 100px;
+    /* position: fixed; */
+}
+
+.item-productInfo a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: black;
+    font-size: 16px;
+    height: 80px;
+}
+
+.item-productInfo a:hover {
+    cursor: pointer;
+    color: rgb(252, 40, 40);
+}
+
+.item-productInfo span {
+    font-size: 16px;
+    color: rgb(250, 100, 100);
+}
+
+
+/* 我的收货地址 */
+
+.deliver-address-body {
+    margin: 20px auto 20px auto;
+}
+
+.deliver-address-body .add-address-body {
+    margin: 10px auto 30px auto;
+    padding: 10px 10px 10px 10px;
+}
+
+.add-address-body .add-address-title {
+    margin: 10px auto 30px 10px;
+    font-size: 18px;
+    color: #f06b6b;
+}
+
+.add-address-body .form-group {
+    display: flex;
+}
+
+.add-address-body .form-group label {
+    margin: auto 10px auto 30px;
+    width: 90px;
+}
+
+.add-address-body .form-group label i {
+    margin-right: 5px;
+    color: red;
+}
+
+.add-address-body .form-group .col-md-4 {
+    width: 300px;
+    margin-right: 30px;
+}
+
+.add-address-body .form-group .control-body {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.add-address-body .form-group .control-body textarea {
+    width: 500px;
+    resize: none;
+}
+
+.checkbox-wrapper {
+    position: relative;
+    left: 148px;
+}
+
+.checkbox-wrapper input {
+    position: relative;
+    top: 2px;
+}
+
+.checkbox-wrapper span {
+    width: 200px;
+    font-size: 12px;
+    color: #333;
+}
+
+.add-address-btn {
+    margin: 20px auto 30px 148px;
+}
+
+.add-address-btn button {
+    width: 120px;
+    text-align: center;
+}
+
+.deliver-address-body table th,
+.deliver-address-body table td {
+    text-align: center;
+}
+
+.deliver-address-body table img {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    cursor: pointer;
+}
+
+.deliver-address-body table img:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    cursor: pointer;
+}
+
+.defult-address {
+    color: rgb(247, 99, 99);
+}
+
+.change-default-address:hover {
+    color: rgb(123, 123, 243);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.address-border {
+    height: 50px;
+}
+
+
+/******************************** 添加收货地址模态框 *********************************/
+
+
+/* #addAddressModal {
+    margin-top: -70px;
+} */
+
+#addAddressModal i {
+    color: red;
+    margin-right: 5px;
+}
+
+#addAddressModal textarea {
+    resize: none;
+}
+
+#addAddressModal .checkbox-wrapper {
+    position: relative;
+    left: 16px;
+}
+
+#addAddressModal .checkbox-wrapper input {
+    position: relative;
+    top: 2px;
+}
+
+#addAddressModal .checkbox-wrapper span {
+    font-size: 12px;
+    color: #333;
+}
+
+
+/* 我要发货 */
+
+.deliver-product-body .deliver-product-select {
+    margin: 20px auto 80px auto;
+}
+
+.deliver-product-select .deliver-product-select-title {
+    margin: 10px auto 30px 10px;
+    font-size: 18px;
+    color: #f06b6b;
+}
+
+.deliver-product-select .form-group {
+    display: flex;
+}
+
+.deliver-product-select .form-group label {
+    margin: auto 10px auto 30px;
+    width: 90px;
+}
+
+.deliver-product-select .form-group .control-body input {
+    width: 200px;
+}
+
+.deliver-product-select .form-group .control-body {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.deliver-product-select .deliver-product-select-btn {
+    margin-left: 350px;
+    margin-top: 30px;
+}
+
+.deliver-product-select .deliver-product-select-btn button {
+    width: 120px;
+    text-align: center;
+}
+
+.deliver-product-body table {
+    margin: 50px auto 50px auto;
+}
+
+.deliver-product-body table th,
+.deliver-product-body table td {
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+.deliver-product-body table img {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    cursor: pointer;
+}
+
+.deliver-product-body table img:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    cursor: pointer;
+}
+
+.deliver-product-body .deliver-productName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.deliver-product-body .deliver-productName:hover {
+    color: rgb(250, 75, 75);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.deliver-product-body a:hover {
+    color: rgb(248, 58, 58);
+    cursor: pointer;
+}
+
+
+/******************************** 绑定物流号模态框 *********************************/
+
+#bindLogisticsModal {
+    margin-top: -70px;
+}
+
+#bindLogisticsModal i {
+    color: red;
+    margin-right: 5px;
+}

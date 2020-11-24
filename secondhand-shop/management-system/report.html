@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>审核管理</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/cookie.js"></script>
+
+    <style>
+        .layui-table th {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="layui-hide" id="reportTable" lay-filter="reportTable"></table>
+
+    <script type="text/html" id="barDemo">
+        {{# if(d.reportStatus == "审核中"){ }}
+        <a class="layui-btn layui-btn-xs" id="edit-{{d.id}}" lay-event="edit">审核通过</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" id="del-{{d.id}}" lay-event="del">审核不通过</a> {{# } else { }}
+        <a class="layui-btn layui-btn-primary layui-btn-xs" id="detail-{{d.id}}" lay-event="detail">查看审核结果</a> {{# } }}
+    </script>
+    <script type="text/html" id="productName_tr">
+        <span class="productName-span" onclick="window.open('http://localhost:8888/src/page/CommodityDetails.html?admin=1&productId={{d.productId}}')">{{d.productName}}</span>
+    </script>
+    <script type="text/html" id="auditBody">
+        <div class="form-group row">
+            <label class="control-label">匿名：</label>
+            <input type="text" class="form-control" />
+        </div>
+    </script>
+
+    <script src="js/layui.js"></script>
+    <script src="js/report.js"></script>
+</body>
+
+</html>

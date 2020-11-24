@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.ShopCartMapper">
+
+    <select id="findAllShopCartByUserId" resultType="com.wzy.entity.ShopCartWithProduct">
+        select
+            p.product_id, p.product_name, p.own_id, p.own_name, p.type_id, p.number, p.image, p.detail_image, p.price, p.quality_name, p.expiration_time,
+            p.trade_name, p.trade_decription, p.product_decription, p.product_create_time, p.product_status, p.remark,
+            s.id, s.product_id, s.product_attr, s.cart_number, s.user_id, s.cart_status, s.cart_create_time, s.cart_modify_time
+        from product_info p
+        left join shop_cart s
+        on s.product_id = p.product_id
+        where s.user_id = #{userId} and s.cart_status = "ENABLE"
+        group by s.cart_create_time desc
+    </select>
+
+    <insert id="insertShopCart" parameterType="com.wzy.entity.ShopCart">
+        insert into shop_cart
+        values
+            (#{id}, #{productId}, #{productAttr}, #{cartNumber}, #{userId}, "ENABLE", #{cartCreateTime}, #{cartModifyTime})
+    </insert>
+
+    <update id="updateShopCartStatus" parameterType="com.wzy.entity.ShopCart">
+        update shop_cart
+        set cart_status = #{cartStatus}, cart_modify_time = #{cartModifyTime}
+        where product_id = #{productId} and user_id = #{userId} and cart_status != #{cartStatus}
+    </update>
+
+    <update id="updateShopCartNumber">
+        update shop_cart
+        set cart_number = #{cartNumber}
+        where id = #{id} and cart_status = "ENABLE"
+    </update>
+
+    <update id="updateShopCartBatch">
+        update shop_cart
+        set cart_status = "DISABLE", cart_modify_time = now()
+        where id = #{id} and cart_status != "DISABLE"
+    </update>
+
+    <update id="updateShopCartStatusById">
+        update shop_cart
+        set cart_status = #{cartStatus}, cart_modify_time = now()
+        where id = #{id} and cart_status != #{cartStatus}
+    </update>
+
+</mapper>

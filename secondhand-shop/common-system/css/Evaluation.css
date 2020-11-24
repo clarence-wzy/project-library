@@ -1,0 +1,132 @@
+.evaluation-body {
+    width: 990px;
+    margin: 50px auto 150px auto;
+    border: 1px solid #cccccc;
+    display: flex;
+    flex-direction: column;
+}
+
+.evaluation-body-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.product-info {
+    margin: 20px 50px auto 50px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.product-info img {
+    max-width: 150px;
+    max-height: 200px;
+}
+
+.product-info a {
+    max-width: 150px;
+    font-size: 10px;
+    color: red;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.rate-control {
+    margin: 40px auto auto 50px;
+}
+
+.rate-control li {
+    display: inline;
+}
+
+.rate-control li label {
+    float: left;
+    padding: 4px 5px;
+    cursor: pointer;
+}
+
+input {
+    vertical-align: text-bottom;
+    margin-right: 5px;
+}
+
+.tb-rate-ico {
+    width: 20px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.tb-rate-ico,
+.tb-rate-ico-bg {
+    background: transparent url(//img.alicdn.com/tps/TB1WgeNIVXXXXb5XXXXXXXXXXXX.png) no-repeat 1000px 1000px;
+    background-image: url(//img.alicdn.com/tps/TB1m8eIIVXXXXXKXpXXXXXXXXXX.png);
+}
+
+.tb-rate-ico.ico-good,
+.tb-rate-ico-bg.ico-good {
+    background-position: 0 -100px;
+}
+
+.tb-rate-ico.ico-neutral,
+.tb-rate-ico-bg.ico-neutral {
+    background-position: 0 -50px;
+}
+
+.tb-rate-ico.ico-bad,
+.tb-rate-ico-bg.ico-bad {
+    background-position: 0 0;
+}
+
+.rate-control li .rate-score {
+    text-align: center;
+    display: block;
+    color: #FFF;
+    line-height: 14px;
+    padding: 2px;
+    float: left;
+    visibility: hidden;
+    margin-right: 5px;
+}
+
+.rate-control li .rate-score.rate-score-good {
+    background-color: #FF6D02;
+}
+
+.rate-control li .rate-score.rate-score-normal {
+    background-color: #F0CA01;
+}
+
+.rate-control li .rate-score.rate-score-bad {
+    background-color: #999;
+}
+
+.evaluation-content textarea {
+    width: 580px;
+    resize: vertical;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.evaluation-radio {
+    margin-top: 20px;
+    /* margin: 20px auto auto auto; */
+}
+
+.evaluation-radio span {
+    margin-right: 20px;
+}
+
+.evaluation-btn {
+    margin: 50px auto 40px auto;
+}
+
+.evaluation-btn button {
+    width: 100px;
+    margin-right: 20px;
+}

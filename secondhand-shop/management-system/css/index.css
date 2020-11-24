@@ -1,0 +1,62 @@
+.layui-nav-tree .layui-nav-bar {
+    width: 5px;
+    height: 0;
+    background-color: #009688;
+}
+
+.layui-side-scroll .layui-nav .layui-nav-item>a {
+    padding-top: 9px;
+    padding-bottom: 8px;
+}
+
+.layui-side-scroll .layui-nav .layui-nav-item a {
+    padding-left: 45px;
+    padding-right: 30px;
+    height: 58px;
+    text-decoration: none;
+}
+
+.layui-side-scroll .layui-nav .layui-nav-item a:hover {
+    text-decoration: none;
+}
+
+.layui-nav-tree .layui-nav-bar {
+    width: 5px;
+    height: 58px;
+    background-color: #009688;
+    top: 0px;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.layui-side-scroll .layui-nav.layui-nav-tree .layui-icon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    margin-top: -19px;
+}
+
+.productName-span {
+    color: #53ace0;
+}
+
+.productName-span:hover {
+    text-decoration: underline;
+    color: #53ace0;
+    cursor: pointer;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    /* display: inline-block */
+}
+
+label {
+    width: 100px;
+    margin: auto;
+}
+
+textarea {
+    resize: none;
+}

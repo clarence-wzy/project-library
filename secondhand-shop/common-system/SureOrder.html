@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>确定订单 --园猿网</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/SureOrder.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/header_footer.css" />
+    <link rel="stylesheet" href="css/city-picker.css" />
+    <link rel="stylesheet" href="css/toastr.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/toastr.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <!--------------------------顶部-------------------------------->
+    <div id="sureOrder-topNav"></div>
+
+    <!--------------------------主体-------------------------------->
+    <div class="sureOrder-body">
+
+        <div class="order-stepbar">
+            <h1 class="buy-logo">
+                <!-- <a href="#" title="淘宝网"><i></i>淘宝网</a> -->
+                <img src="img/logo.png" style="width: 250px; margin-top: -40px; margin-left: -30px;" />
+            </h1>
+            <div class="stepbar-wrap stupid-biz stepbar-5">
+                <ol class="next-step next-step-circle next-step-horizontal next-step-label-vertical" style="width: auto; height: 64px;">
+                    <li class="next-step-item next-step-item-process next-step-item-first" style="width: 20%;">
+                        <div class="next-step-item-container">
+                            <div class="next-step-item-node-placeholder">
+                                <div class="next-step-item-node">
+                                    <div class="next-step-item-node-circle">1</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="next-step-item-body">
+                            <div class="next-step-item-title">查看购物车</div>
+                            <div class="next-step-item-content"></div>
+                        </div>
+                        <div class="next-step-item-tail">
+                            <div class="next-step-item-tail-underlay">
+                                <div class="next-step-item-tail-overlay"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="next-step-item next-step-item-wait" style="width: 20%;">
+                        <div class="next-step-item-container">
+                            <div class="next-step-item-node-placeholder">
+                                <div class="next-step-item-node">
+                                    <div class="next-step-item-node-circle">2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="next-step-item-body" tabindex="0">
+                            <div class="next-step-item-title">拍下商品</div>
+                            <div class="next-step-item-content"></div>
+                        </div>
+                        <div class="next-step-item-tail">
+                            <div class="next-step-item-tail-underlay">
+                                <div class="next-step-item-tail-overlay"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="next-step-item next-step-item-wait" style="width: 20%;">
+                        <div class="next-step-item-container">
+                            <div class="next-step-item-node-placeholder">
+                                <div class="next-step-item-node">
+                                    <div class="next-step-item-node-circle">3</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="next-step-item-body" tabindex="0">
+                            <div class="next-step-item-title">付款</div>
+                            <div class="next-step-item-content"></div>
+                        </div>
+                        <div class="next-step-item-tail">
+                            <div class="next-step-item-tail-underlay">
+                                <div class="next-step-item-tail-overlay"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="next-step-item next-step-item-wait" style="width: 20%;">
+                        <div class="next-step-item-container">
+                            <div class="next-step-item-node-placeholder">
+                                <div class="next-step-item-node">
+                                    <div class="next-step-item-node-circle">4</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="next-step-item-body" tabindex="0">
+                            <div class="next-step-item-title">确认收货</div>
+                            <div class="next-step-item-content"></div>
+                        </div>
+                        <div class="next-step-item-tail">
+                            <div class="next-step-item-tail-underlay">
+                                <div class="next-step-item-tail-overlay"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="next-step-item next-step-item-wait next-step-item-last" style="width: auto;">
+                        <div class="next-step-item-container">
+                            <div class="next-step-item-node-placeholder">
+                                <div class="next-step-item-node">
+                                    <div class="next-step-item-node-circle">5</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="next-step-item-body" tabindex="0">
+                            <div class="next-step-item-title">评价</div>
+                            <div class="next-step-item-content"></div>
+                        </div>
+                        <div class="next-step-item-tail">
+                            <div class="next-step-item-tail-underlay">
+                                <div class="next-step-item-tail-overlay"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="sureOrder-address-body">
+            <div class="order-address TwoRow">
+                <div class="header-wrapper ">
+                    <h2 class="header-title">选择收货地址</h2>
+                </div>
+                <div class="address-tips-top"></div>
+                <div class="address-list" id="address-body">
+                    <!-- <div style="padding: 10px 10px 30px 10px; color: #ccc;" id="no-address">您还没设置收货地址！(*￣︶￣)</div> -->
+                </div>
+                <div class="address-tips TwoRow"></div>
+                <div class="operations">
+                    <a class="manage-link" href="#">管理收货地址</a>
+                    <button class="next-btn next-medium next-btn-normal operation TwoRow" id="addAddress" type="button">使用新地址</button>
+                </div>
+            </div>
+
+            <div class="item-headers" id="orderDesc_orderDesc_1">
+                <div class="header-wrapper ">
+                    <h2 class="header-title">确认订单信息</h2>
+                </div>
+                <div class="item-headers-wrap item-headers-column-6">
+                    <div class="item-headers-content item-headers-0">店铺宝贝</div>
+                    <!-- <div class="item-headers-content item-headers-1">商品属性</div> -->
+                    <div class="item-headers-content item-headers-2">单价</div>
+                    <div class="item-headers-content item-headers-3">数量</div>
+                    <!-- <div class="item-headers-content item-headers-4">优惠方式</div> -->
+                    <div class="item-headers-content item-headers-5">小计</div>
+                </div>
+            </div>
+
+            <div class="orderInfo-body" id="orderInfo">
+            </div>
+
+            <div class="realpay">
+                <div class="box__wrapper">
+                    <div class="box__shadow">
+                        <div>
+                            <span class="realpay--title">实付款：</span>
+                            <span class="realpay--price-symbol">¥</span>
+                            <span class="realpay--price" id="realpay-price"></span>
+                        </div>
+                        <div class="order-confirmAddr">
+                            <div class="confirmAddr-addr">
+                                <span class="confirmAddr-title">寄送至：</span>
+                                <span class="confirmAddr-addr-bd" id="realpay-address"></span>
+                            </div>
+                            <div class="confirmAddr-addr-user">
+                                <span class="confirmAddr-title">收货人：</span>
+                                <span class="confirmAddr-addr-bd" id="realpay-consignee"></span>
+                            </div>
+                        </div>
+                        <div class="order-confirm-eticket"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submitOrder-container">
+                <div class="wrapper">
+                    <a class="go-back" role="button" onclick="turnTo(6, 'my-shopcart');">返回购物车</a>
+                    <a role="button" title="提交订单" class="go-btn" id="order-submit">提交订单</a>
+                </div>
+                <div class="base-msg">若价格变动，请在提交订单后联系卖家改价，并查看已买到的宝贝</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--------------------------添加收货地址模态框-------------------------------->
+    <div class="modal fade bs-example-modal" id="addAddressModal" tabindex="-1" role="dialog" aria-labelledby="addAddressModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addAddressModalLabel">新增收货地址</h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>地址信息：</label>
+                        <div class="col-md-8">
+                            <input id="addressProvince" class="form-control" type="text" placeholder="请选择省/市/区" data-toggle="city-picker" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>详细地址：</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="detailAddress" rows="3" placeholder="请输入详细地址信息，如道路、门牌号、小区、楼栋号、单元等信息"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">邮政编码：</label>
+                        <div class="col-md-8">
+                            <input id="postCode" type="text" class="form-control" placeholder="请填写邮编">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>收货人姓名：</label>
+                        <div class="col-md-8">
+                            <input id="addressName" type="text" class="form-control" placeholder="长度不能超过25个字符" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>手机号码：</label>
+                        <div class="col-md-8">
+                            <input id="addressPhone" type="text" class="form-control" placeholder="请填写手机号码" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="checkbox-wrapper form-check-label col-md-offset-3">
+                            <input class="form-check-input" id="defaultAddress" type="checkbox" />
+                            <span>设置为默认收货地址</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                    <button type="button" id="address_btn" class="btn btn-primary" data-modify-addressId="null">保存</button>
+                    <button type="button" id="address_btn_close" class="btn btn-default">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div id="promptModal"></div>
+    <!--------------------------加载中-------------------------------->
+    <div id="loading"></div>
+    <!--------------------------尾部-------------------------------->
+    <div id="sureOrder-footer"></div>
+</body>
+
+<script src="js/city-picker.data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/city-picker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public-tool.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/SureOrder.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function() {
+        $('#sureOrder-topNav').load('PublicHeader.html #topNav');
+        $('#sureOrder-footer').load('PublicFooter.html #footer-dellist');
+        $('#loading').load('PublicFooter.html #loading');
+    });
+</script>
+
+
+</html>

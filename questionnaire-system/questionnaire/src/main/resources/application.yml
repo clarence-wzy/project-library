@@ -1,0 +1,77 @@
+#DataSource Config
+spring:
+  rabbitmq:
+    host: 47.101.142.52
+    port: 5672
+    username: xxx
+    password: xxx
+    publisher-confirms: true
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 100
+
+  mail:
+    host: 220.181.12.11
+    username: xxx@163.com
+    password: xxx
+    from: xxx@163.com
+
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
+
+#      mail:
+#        stmp:
+#          auth: true
+#          required: true
+#          port: 465
+#          ssl:
+#            enable: true
+
+    port: 465
+    protocol: smtp
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-wz9zz14nrwy8p27an1o.mysql.rds.aliyuncs.com:3306/wen?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Hongkong
+    username: xxx
+    password: xxx
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 47.101.142.52
+    port: 6379
+    timeout: 6000
+    jedis:
+      pool:
+        max-active: 1000
+        max-wait: -1
+        min-idle: 5
+        max-idle: 10
+    password: xxx
+
+  data:
+    mongodb:
+      uri: mongodb://xxx:xxx@47.101.142.52:27017/?authSource=admin
+      database: wen
+
+
+
+mybatis:
+  type-aliases-package: com.wzz.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    use-generated-keys: true
+    #\u5F00\u542F\u9A7C\u5CF0\u547D\u540D\u8F6C\u6362
+    map-underscore-to-camel-case: true
+    #\u4F7F\u7528\u5217\u540D
+    use-column-label: true
+
+
+

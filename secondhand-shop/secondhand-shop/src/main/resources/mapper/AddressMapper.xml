@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.AddressMapper">
+
+    <select id="findAddressByOwn" resultType="com.wzy.entity.Address">
+        select
+            address_id, consignee_name, consignee_phone, province, city, area, detail_address, post_code, default_address,
+            address_status, create_time, modify_time, own_id, own_name
+        from address
+        where address_status != "DISABLE"
+        <if test="ownId != 0">
+            and own_id = #{ownId}
+        </if>
+        <if test="ownName != null">
+            and own_name = #{ownName}
+        </if>
+    </select>
+
+    <select id="findAddressByAddressId" resultType="com.wzy.entity.Address">
+        select
+            address_id, consignee_name, consignee_phone, province, city, area, detail_address, post_code, default_address,
+            address_status, create_time, modify_time, own_id, own_name
+        from address
+        where address_status != "DISABLE" and address_id = #{addressId}
+    </select>
+
+    <insert id="insertAddress" parameterType="com.wzy.entity.Address">
+        insert into address
+        values
+            (#{addressId}, #{consigneeName}, #{consigneePhone}, #{province}, #{city}, #{area}, #{detailAddress}, #{postCode},
+             #{defaultAddress}, "ENABLE", now(), #{modifyTime}, #{ownId}, #{ownName})
+    </insert>
+
+    <update id="updateAddress" parameterType="com.wzy.entity.Address">
+        update address
+        set
+            consignee_name = #{consigneeName}, consignee_phone = #{consigneePhone}, province = #{province}, city = #{city},
+            area = #{area}, detail_address = #{detailAddress}, post_code = #{postCode}, default_address = #{defaultAddress}
+        where address_id = #{addressId} and address_status != "DISABLE"
+    </update>
+
+    <select id="findDefaultAddress" resultType="java.lang.Integer">
+        select address_id from address
+        where address_status != "DISABLE" and default_address = "true" and own_id = #{ownId}
+    </select>
+
+    <update id="updateDefaultAddress">
+        update address
+        set default_address = #{defaultAddress}
+        where address_id = #{addressId} and address_status != "DISABLE"
+    </update>
+
+    <update id="updateAddressStatus">
+        update address
+        set address_status = #{addressStatus}
+        where address_id = #{addressId} and address_status != #{addressStatus}
+    </update>
+
+</mapper>

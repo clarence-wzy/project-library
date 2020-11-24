@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>评价 --园猿网</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/header_footer.css" />
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/fileinput.css" />
+    <link rel="stylesheet" href="css/toastr.css" />
+    <link rel="stylesheet" href="css/Evaluation.css" />
+    <link rel="stylesheet" href="css/waifu.css" />
+    <script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/fileinput.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/toastr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/live2d.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/waifu-tips.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <!--------------------------顶部-------------------------------->
+    <div id="evaluation-topNav"></div>
+
+    <div class="evaluation-body">
+        <div class="evaluation-body-content">
+            <div class="product-info">
+                <img id="productImage" src="img/person.png" />
+                <a id="productName">【24期免息 至高优惠1000】OPPO Reno 10倍变焦版opporeno高通骁龙855全网通官方旗舰正品手机opporenoR17pro</a>
+            </div>
+
+            <div class="rate-control">
+                <ul>
+                    <li class="good">
+                        <label>
+                            <input type="radio" name="rate" class="good-rate" value="1">
+                            <i class="tb-rate-ico ico-good" title="好评"></i>
+                        </label>
+                        <span class="rate-score rate-score-good">卖家<br>+1分</span>
+                    </li>
+                    <li class="normal">
+                        <label>
+                            <input type="radio" name="rate" class="noraml-rate" value="0">
+                            <i class="tb-rate-ico ico-neutral" title="中评"></i>
+                        </label>
+                        <span class="rate-score rate-score-normal">卖家<br>不加分</span>
+                    </li>
+                    <li class="bad">
+                        <label>
+                            <input type="radio" name="rate" class="bad-rate" value="-1">
+                            <i class="tb-rate-ico ico-bad" title="差评"></i>
+                        </label>
+                        <span class="rate-score rate-score-bad">卖家<br>-1分</span>
+                    </li>
+                </ul>
+
+                <div class="evaluation-content">
+                    <textarea id="evaluation-content" class="form-control" rows="4" onkeydown="if(event.keyCode==13)return false;" title="评价内容" placeholder="亲，写点评价吧，你的评价对其他买家有很大帮助的。"></textarea>
+                    <div>
+                        <input id="inputfile" class="file" type="file" multiple />
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="color: rgb(94, 94, 240); font-size:12px;">
+                                * 允许上传类型：'jpg', 'png', 'jpeg', 'gif', 'bmp', 'AVI', 'mov', 'rmvb', 'rm', 'FLV', 'mp4'
+                            </span>
+                            <span style="color: red; font-size:12px;">* 最多上传 5 张图片 </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="evaluation-radio">
+                    <input type="radio" name="anonymity" value="公开" /> <span>公开</span>
+                    <input type="radio" name="anonymity" value="匿名" checked /> <span>匿名</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="evaluation-btn">
+            <button class="btn btn-success" id="evaluation-submit">提交</button>
+            <button class="btn btn-default" id="evaluation-cancel">返回</button>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div id="promptModal"></div>
+    <!-- 看板娘 -->
+    <div class="waifu" id="waifu">
+        <div class="waifu-tips" style="opacity: 1;"></div>
+        <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+    </div>
+    <!-- 加载中 -->
+    <div id="loading" style="position: fixed; top: 40%; left: 50%;"></div>
+</body>
+
+<script src="js/link.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public-tool.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Evaluation.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    initModel();
+    $(document).ready(function() {
+        $('#evaluation-topNav').load('PublicHeader.html #topNav');
+    });
+</script>
+
+</html>

@@ -1,0 +1,474 @@
+/****************************导栏行**************************************/
+
+.topNav {
+    background: #f7f9f8;
+}
+
+.wrap {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+}
+
+#wrapLeft {
+    height: 30px;
+    width: 225px;
+    position: relative;
+}
+
+.wrapLeftText {
+    margin-right: 10px;
+    color: #008842;
+}
+
+.wrapLeftText:hover i {
+    background: url(../img/icon/header-img.png) no-repeat;
+    background-position-x: -25px;
+    background-position-y: 0;
+    transform: rotate(180deg);
+}
+
+i {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.wrapLeftText:nth-child(1) {
+    margin-right: 10px;
+    color: #444;
+}
+
+#wrapRight {
+    height: 30px;
+    position: relative;
+}
+
+#wrapRight span {
+    color: rgb(84, 198, 233);
+    font-weight: bold;
+}
+
+.wrapRightText {
+    float: left;
+    border-left: 1px solid #f7f9f8;
+    border-right: 1px solid #f7f9f8;
+    padding: 0 9px;
+    cursor: pointer;
+}
+
+.wrapRightText a:hover {
+    text-decoration: none;
+    color: #007F4D;
+}
+
+.wrapRightText:hover {
+    color: #007F4D;
+}
+
+.wrapRightText:hover .personList {
+    display: block;
+}
+
+.wrapRightText:hover .personList li:hover {
+    font-weight: bold;
+    color: #007F4D;
+}
+
+.wrapRightText:hover .wrapRightTextShadow {
+    display: block;
+}
+
+.wrapRightText .topBtnList {
+    transition: transform .2s ease-in 0s;
+}
+
+.wrapRightText:hover .topBtnList {
+    background: url(../img/icon/header-img.png) no-repeat -13px 4px;
+    transform: rotate(360deg);
+}
+
+.wrapRightTextShadow {
+    position: absolute;
+    top: 30px;
+    left: 110px;
+    width: 109px;
+    height: 1px;
+    background-color: white;
+    z-index: 10;
+    display: none;
+}
+
+.personList {
+    position: absolute;
+    top: 31px;
+    /* left: 109px; */
+    width: 110px;
+    /* height: 201px; */
+    background-color: white;
+    border: 1px solid #727272;
+    z-index: 9;
+    display: none;
+}
+
+.personList ul li {
+    padding-left: 20px;
+    text-align: left;
+    font-size: 12px;
+    color: #727272;
+    height: 28px;
+    margin-bottom: 5px;
+}
+
+.personList ul .myCount span {
+    margin-left: 10px;
+    text-align: center;
+    line-height: 15px;
+    display: inline-block;
+    width: 18px;
+    height: 15px;
+    border-radius: 70%;
+    background-color: #007F4D;
+    color: white;
+    font-weight: 700;
+}
+
+.topBtn {
+    background-image: url(../img/icon/header-img.png);
+}
+
+.topBtnPeople {
+    background-position: -40px 0;
+}
+
+.topBtnList {
+    width: 13px;
+    height: 15px;
+    background-position: 0px 6px;
+    background-image: no-repeat;
+}
+
+
+/****************************搜索区域**************************************/
+
+.headerSearch {
+    background: #e0e0e0;
+}
+
+.SearchMargin {
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+.SearchInputBtn {
+    margin-top: 0px;
+    width: 70%;
+    height: 28px;
+}
+
+#searchMenu1 {
+    margin-top: 10px;
+}
+
+.searchMenuName {
+    display: inline-block;
+    height: 30px;
+    font-size: 12px;
+    color: #008842;
+    margin-left: 8px;
+}
+
+.searchMenuName:nth-child(1) {
+    margin-left: 1px;
+}
+
+.shopCar {
+    width: 192px;
+    height: 42px;
+    border: 1px solid #008842;
+    background: white;
+    cursor: default;
+    position: relative;
+}
+
+.shopCarPic {
+    width: 30px;
+    height: 19px;
+    margin: 11px 0 0 40px;
+    background-position: -112px 0;
+}
+
+.shopCar:hover .shopCarContainerBox {
+    display: block;
+}
+
+.shopCarOverNum {
+    color: #008842;
+    font-weight: 550;
+    font-size: 13px;
+    line-height: 12px;
+    margin-left: 8px;
+}
+
+.shopCarNum {
+    font-size: 23px;
+    color: #008842;
+    line-height: 32px;
+    margin-left: 10px;
+}
+
+.shopCarContainerBox {
+    position: absolute;
+    top: 42px;
+    /* width: 400px;
+    height: 110px; */
+    border: 1px solid #008842;
+    z-index: 9;
+    background-color: white;
+    text-align: center;
+    /* padding-top: 70px; */
+    padding-top: 20px;
+    padding-bottom: 10px;
+    display: none;
+}
+
+.shopCarContainerBox .row {
+    padding-bottom: 10px;
+}
+
+.carPname {
+    /* 文本内容两行输出，溢出的用'...' 代替*/
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+/************************************footer*********************************/
+
+.service {
+    background: #e0e0e0;
+    margin-top: 50px;
+    padding: 30px 0;
+}
+
+.serviceBox {
+    height: 42px;
+}
+
+.serviceNameList {
+    /* width: 190px; */
+    height: 42px;
+    margin-left: 55px;
+    padding-left: 55px;
+    background: url(../img/icon/footer_service_icon.png) no-repeat left top;
+}
+
+.serviceNameList:nth-child(1) {
+    background-position: 0 0;
+}
+
+.serviceNameList:nth-child(2) {
+    background-position: 0 -42px;
+}
+
+.serviceNameList:nth-child(3) {
+    background-position: 0 -84px;
+}
+
+.serviceNameList:nth-child(4) {
+    background-position: 0 -126px;
+}
+
+.serviceNameList b {
+    display: block;
+    padding-right: 75px;
+    color: #007f4d;
+    border-left: 1px solid #a6a6a6;
+    font: normal 18px/25px "Microsoft YaHei";
+    padding-left: 10px;
+}
+
+.serviceNameList span {
+    display: block;
+    padding-right: 39px;
+    border-left: 1px solid #a6a6a6;
+    font: 12px 微软雅黑, "Arial Narrow", HELVETICA;
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+.footer_service {
+    background: #e0e0e0;
+    margin-top: 50px;
+    padding: 30px 0;
+}
+
+.footer_wrap {
+    width: 1200px;
+    margin: 0 auto;
+    height: 40px;
+    line-height: 40px;
+}
+
+.footer_service ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.footer_service li {
+    float: left;
+    height: 42px;
+    margin-left: 55px;
+    _margin-left: 44px;
+    padding-left: 55px;
+    background: url(../img/icon/footer_service_icon.png) no-repeat left top;
+}
+
+.footer_service span {
+    font-size: 12px;
+    font-family: Arial, Verdana, "\5b8b\4f53";
+}
+
+.footer_service .s1 {
+    background-position: 0 0;
+}
+
+.footer_service .s2 {
+    background-position: 0 -42px;
+}
+
+.footer_service .s3 {
+    background-position: 0 -84px;
+}
+
+.footer_service .s4 {
+    background-position: 0 -126px;
+}
+
+.serviceList {
+    clear: both;
+    text-align: center;
+    padding: 60px 0 20px;
+    color: #008842;
+    font-size: 14px;
+}
+
+.copyright {
+    color: #717171;
+    text-align: center;
+    line-height: 22px;
+}
+
+.authentication {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.authentication a {
+    margin-right: 15px;
+}
+
+
+/***********************************左边侧边栏****************************************/
+
+#sideBarMenu {
+    position: fixed;
+    left: 20px;
+    top: 150px;
+    z-index: 10;
+    display: none;
+}
+
+.sideBarMenuBtnList {
+    display: block;
+    width: 45px;
+    height: 50px;
+    position: relative;
+    /* z-index: 12; */
+    background-color: #F4F4F4;
+    margin-bottom: 5px;
+}
+
+.sideBarMenuBtnDiv {
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    margin: 5px 5px 5px 5px;
+}
+
+.sideBarMenuBtnText {
+    font-size: 16px;
+    color: #010503;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sideBarMenuBtnText:hover {
+    text-decoration: none;
+}
+
+.sideBarMenuBtnText2 {
+    display: none;
+    font-size: 16px;
+    color: #010503;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sideBarMenuBtnText2:hover {
+    text-decoration: none;
+}
+
+.sidebar {
+    height: 104px;
+    width: 56px;
+    position: fixed;
+    right: 7px;
+    top: 500px;
+    z-index: 6;
+}
+
+.customerService {
+    display: block;
+    width: 50px;
+    height: 42px;
+    background-image: url(../img/icon/sidebar.png);
+    background-position: 0 -46px;
+}
+
+.customerService:hover {
+    background-position: -54px -46px;
+}
+
+#backTop {
+    display: block;
+    margin-top: 15px;
+    width: 50px;
+    height: 42px;
+    background-image: url(../img/icon/sidebar.png);
+    background-position: 0 0;
+}
+
+#backTop:hover {
+    background-position: -55px 0;
+}
+
+
+/* 加载中 */
+
+#loading {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+}

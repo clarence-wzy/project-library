@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.ReportMapper">
+
+    <insert id="insertReport">
+        insert into
+            report(id, report_content, user_id, product_id, report_create_time, report_status)
+        values
+            (#{id}, #{reportContent}, #{userId}, #{productId}, now(), "审核中")
+    </insert>
+
+    <select id="findReport" resultType="com.wzy.entity.Report">
+        select
+            r.id, r.report_content, r.user_id, r.product_id, r.report_create_time, r.report_status, r.report_audit_time,
+            r.audit_content, r.deduct_credit, p.product_name, p.own_id, p.own_name
+        from report r
+        left join product_info p
+        on r.product_id = p.product_id
+        where 1 = 1
+        <if test="id != 0">
+            and r.id = #{id}
+        </if>
+        <if test="userIds != null">
+            and r.user_id in
+            <foreach collection="userIds" item="userId" index="index" open="(" close=")" separator=",">
+                #{userId}
+            </foreach>
+        </if>
+        <if test="productId != 0">
+            and r.product_id = #{productId}
+        </if>
+        <if test="timeType == 'create'">
+            group by r.report_create_time desc
+        </if>
+        <if test="timeType == 'audit'">
+            group by r.report_audit_time desc
+        </if>
+        <if test="end != 0">
+            limit #{begin}, #{end}
+        </if>
+    </select>
+
+    <update id="updateReport">
+        update report
+        set report_audit_time = now(), report_status = #{reportStatus}
+        <if test="auditContent != null">
+            ,audit_content = #{auditContent}
+        </if>
+        <if test="deductCredit != 0">
+            ,deduct_credit = #{deductCredit}
+        </if>
+        where id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>首页 --园猿网</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/header_footer.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/toastr.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body style="background-color: #f7f9f8;">
+    <!--------------------------头部-------------------------------->
+    <div id="index-header"></div>
+    <!--------------------------吸顶-------------------------------->
+    <div class="headerSearch2" style="width: 100%; display: none;">
+        <div class="container headerSearchBox2">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="img/logo.png" style="transform: scaleX(0.62) scaleY(0.62); width: 250px; margin-top: -35px;" />
+                </div>
+                <div class="col-md-7">
+                    <div class="input-group SearchInputBtn">
+                        <input type="text" class="form-control" id="search2" placeholder="请输入您要搜索的商品名" onchange="inputChange('search2')" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-success btn-search" id="search2-btn"
+                                onclick="productSearch('search2')">搜索</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------轮播图区域-------------------------------->
+    <div id="banner" class="t">
+        <div class="topNavMenuBoxFather c">
+            全部商品分类 ▼
+            <ul id="topNavMenuBox" value="0">
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 时尚男装
+                    </a>
+                    <span class="witheShadow"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">时尚男装</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '时尚男装')">T恤</a>
+                                <a href="javascript:void(0);" style="width: 60px;" onclick="getMenuName(this, '时尚男装')">衬衫</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚男装')">卫衣</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '时尚男装')">休闲裤</a>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '时尚男装')">牛仔裤</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚男装')">运动裤</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '时尚男装')">POLO衫</a>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '时尚男装')">夹克</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚男装')">风衣</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 80px;" onclick="getMenuName(this, '时尚男装')">马甲</a>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '时尚男装')">西服</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚男装')">西裤</a>
+                            </li>
+                            <img src="img/index/menuListPic1.png" class="topNavMenuNamePic" width="220px">
+                        </ul>
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a href="goodsList.html">
+                        <i class="topNavMenuNameListBtnPic"></i> 时尚女装
+                    </a>
+                    <span class="witheShadow"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">时尚女装</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '时尚女装')">T恤</a>
+                                <a href="javascript:void(0);" style="width: 60px;" onclick="getMenuName(this, '时尚女装')">衬衫</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚女装')">卫衣</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 60px;" onclick="getMenuName(this, '时尚女装')">休闲裤</a>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '时尚女装')">牛仔裤</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚女装')">运动裤</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '时尚女装')">针织衫</a>
+                                <a href="javascript:void(0);" style="width: 80px;" onclick="getMenuName(this, '时尚女装')">毛呢大衣</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '时尚女装')">打底裤</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚女装')">马甲</a>
+                                <a href="javascript:void(0);" style="width: 55px;" onclick="getMenuName(this, '时尚女装')">连衣裙</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚女装')">半身裙</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '时尚女装')">雪纺衫</a>
+                                <a href="javascript:void(0);" style="width: 60px;" onclick="getMenuName(this, '时尚女装')">风衣</a>
+                                <a href="javascript:void(0);" style="width: 40px;" onclick="getMenuName(this, '时尚女装')">毛衣</a>
+                            </li>
+                        </ul>
+                        <img src="img/index/menuListPic2.png" class="topNavMenuNamePic" width="220px">
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 男士鞋包
+                    </a>
+                    <span class="witheShadow"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">男士鞋包</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">跑步鞋</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">休闲鞋</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">帆布鞋</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 80px;" onclick="getMenuName(this, '时尚男男士鞋包装')">板鞋</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">足球鞋</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 90px;" onclick="getMenuName(this, '男士鞋包')">马丁靴</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">拖鞋</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">单肩包</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">双肩包</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">斜挎包</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '男士鞋包')">手表</a>
+                            </li>
+                        </ul>
+                        <img src="img/index/menuListPic3.png" class="topNavMenuNamePic" width="250px">
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 女士鞋包
+                    </a>
+                    <span class="witheShadow" style="top: 177px;"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">女士鞋包</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">跑步鞋</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">休闲鞋</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">帆布鞋</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">板鞋</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">足球鞋</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">拖鞋</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '女士鞋包')">马丁靴</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">高跟鞋</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">单肩包</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">双肩包</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">斜挎包</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 80px;" onclick="getMenuName(this, '女士鞋包')">手提包</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">钱包/卡包</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '女士鞋包')">手表</a>
+                            </li>
+                        </ul>
+                        <img src="img/index/menuListPic4.png" class="topNavMenuNamePic" width="270px">
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 美食馆
+                    </a>
+                    <span class="witheShadow" style="top: 221px;"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">美食馆</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美食馆')">休闲零食</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美食馆')">糖果</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美食馆')">坚果炒货</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美食馆')">饮料</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美食馆')">牛奶/奶粉</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美食馆')">咖啡/奶茶</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美食馆')">茶</a>
+                            </li>
+                            <img src="img/index/menuListPic5.png" class="topNavMenuNamePic" width="270px">
+                        </ul>
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 数码电器
+                    </a>
+                    <span class="witheShadow"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">数码电器</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '数码电器')">手机</a>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '数码电器')">平板</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '数码电器')">电脑笔记本</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '数码电器')">耳机</a>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '数码电器')">数据线</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '数码电器')">电器配件</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '数码电器')">洗衣机</a>
+                            </li>
+                        </ul>
+                        <img src="img/index/menuListPic6.png" class="topNavMenuNamePic" width="240px">
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 美妆馆
+                    </a>
+                    <span class="witheShadow" style="top: 265px;"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">美妆馆</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">防晒</a>
+                                <a href="javascript:void(0);" style="width: 70px;" onclick="getMenuName(this, '美妆馆')">面膜</a>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '美妆馆')">洁面</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">洗发水</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">沐浴露</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">护发素</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '美妆馆')">眼霜</a>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '美妆馆')">面霜</a>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '美妆馆')">乳液</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">腮红</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '美妆馆')">卸妆</a>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '美妆馆')">隔离</a>
+                                <a href="javascript:void(0);" style="width: 50px;" onclick="getMenuName(this, '美妆馆')">眼影</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">粉底</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 80px;" onclick="getMenuName(this, '美妆馆')">口红/唇膏</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">护手霜</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">爽肤水</a>
+                                <a href="javascript:void(0);" style="width: 60px;" onclick="getMenuName(this, '美妆馆')">美甲</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '美妆馆')">香水</a>
+                            </li>
+                        </ul>
+                        <img src="img/index/menuListPic7.png" class="topNavMenuNamePic" width="240px">
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 家庭百货
+                    </a>
+                    <span class="witheShadow" style="top: 353px;"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">家庭百货</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" style="width: 100px;" onclick="getMenuName(this, '家庭百货')">抽纸/卷纸</a>
+                                <a href="javascript:void(0);" style="width: 100px;" onclick="getMenuName(this, '家庭百货')">洗衣粉/洗衣液</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '家庭百货')">洗洁精</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '家庭百货')">洁厕剂</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '家庭百货')">消毒液</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" style="width: 100px;" onclick="getMenuName(this, '家庭百货')">垃圾桶</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '家庭百货')">垃圾袋</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '家庭百货')">拖把/扫把</a>
+                            </li>
+                        </ul>
+                        <img src="img/index/menuListPic8.png" class="topNavMenuNamePic" width="220px">
+                    </div>
+                </li>
+                <li class="topNavMenuNameList">
+                    <a>
+                        <i class="topNavMenuNameListBtnPic"></i> 学习馆
+                    </a>
+                    <span class="witheShadow" style="top: 397px;"></span>
+                    <div class="topNavMenuName">
+                        <h4 class="topNavMenuNameTitle">学习馆</h4>
+                        <ul class="topNavMenuNameContainer">
+                            <li>
+                                <a href="javascript:void(0);" style="width: 100px;" onclick="getMenuName(this, '学习馆')">英语四六级</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '学习馆')">考研</a>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '学习馆')">小说</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="getMenuName(this, '学习馆')">文学</a>
+                                <a href="javascript:void(0);" style="width: 100px;" onclick="getMenuName(this, '学习馆')">计算机与互联网</a>
+                            </li>
+                        </ul>
+                        <img src="img/index/menuListPic9.png" class="topNavMenuNamePic" width="230px">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="beforeBtn"><i class="beforePic slideBtn"></i></div>
+        <div id="nextBtn"><i class="nextPic slideBtn"></i></div>
+        <ul id="bannerPicBox">
+            <li class="bannerPicList" style="background-image: url(&quot;img/index/首页轮播5.jpg&quot;); transform: scaleX(1.1) scaleY(1.1); opacity: 0;">
+            </li>
+            <li class="bannerPicList" style="background-image: url(&quot;img/index/首页轮播2.jpg&quot;); transform: scaleX(1) scaleY(1); opacity: 1;">
+            </li>
+            <li class="bannerPicList" style="background-image: url(&quot;img/index/首页轮播4.jpg&quot;); transform: scaleX(1.1) scaleY(1.1); opacity: 0;">
+            </li>
+        </ul>
+        <div id="bannerPicBtnBox">
+            <span class="bannerPicBtn" style="background-color: rgb(181, 178, 168);"></span>
+            <span class="bannerPicBtn" style="background-color: rgb(90, 170, 22);"></span>
+            <span class="bannerPicBtn" style="background-color: rgb(181, 178, 168);"></span>
+        </div>
+    </div>
+
+    <!--------------------------中间区域-------------------------------->
+
+    <div class="container">
+        <div class="row">
+            <!--------------------------列表区域-------------------------->
+            <div class="adItemList">
+                <ul>
+                    <li class="adItemPic l" style="background-image: url(img/index/adItem1.jpg);" onclick="imgTo('美妆')">
+                        <p class="adItemText">
+                            <b style="font-size: 22px;">热销美妆</b>
+                            <br> "轻而易举 保持无瑕状态"
+                        </p>
+                    </li>
+                    <li class="adItemPic l" style="background-image: url(img/index/adItem2.jpg);" onclick="imgTo('美食')">
+                        <p class="adItemText">
+                            <b style="font-size: 22px;">热销零食</b>
+                            <br> "零时代 引领新生活"
+                        </p>
+                    </li>
+                    <li class="adItemPic l" style="background-image: url(img/index/adItem3.jpg);" onclick="imgTo('数码电器')">
+                        <p class="adItemText">
+                            <b style="font-size: 22px;">精品家器</b>
+                            <br> "为您所想 知您所需"
+                        </p>
+                    </li>
+                    <li class="adItemPic l" style="background-image: url(img/index/adItem4.jpg);" onclick="imgTo('美食')">
+                        <p class="adItemText">
+                            <b style="font-size: 22px;">冬季补品</b>
+                            <br> "养生全方位 滋补零距离"
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--------------------------主体区域-------------------------->
+        <div class="goodsFloor c row">
+            <div class="goodsFloorNameBox c">
+                <h2 id="floorOne">
+                    <i class="goodsFloorPicFlag">F1</i>
+                    <i class="goodsFloorPicText">时尚服装</i>
+                    <div class="goodsFloorKindArea r">
+                        <div class="goodsFloorKindAreaText">
+                            时尚男装<b style="margin-left: 10px; color: #B5B2A8;">︳</b>时尚女装
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="FloorOneToThreeLeftPic l">
+                <img src="img/index/37.png" width="275" height="462" />
+            </div>
+            <div class="FloorOneToThreeRightPicBox l" onclick="imgTo('时尚')">
+                <ul>
+                    <li class="FloorOneToThreeRightPic moveRight l">
+                        <a class="moveRight"><img src="img/index/31.png" /></a>
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/32.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/35.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/36.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/33.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/34.png" /></li>
+                </ul>
+            </div>
+        </div>
+        <div class="goodsFloor c row">
+            <div class="goodsFloorNameBox c">
+                <h2 id="floorTwo">
+                    <i class="goodsFloorPicFlag">F2</i>
+                    <i class="goodsFloorPicText">潮流鞋包</i>
+                    <div class="goodsFloorKindArea r">
+                        <div class="goodsFloorKindAreaText">
+                            潮流男士鞋包<b style="margin-left: 10px; color: #B5B2A8;">︳</b>潮流女士鞋包
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="FloorOneToThreeLeftPic l">
+                <img src="img/index/47.png" />
+            </div>
+            <div class="FloorOneToThreeRightPicBox l" onclick="imgTo('鞋包')">
+                <ul>
+                    <li class="FloorOneToThreeRightPic moveRight l">
+                        <a class="moveRight"><img src="img/index/41.png" /></a>
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/43.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/45.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/46.png" width="460" height="225" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/33.png" width="230" height="225" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/44.png" width="230" height="225" /></li>
+                </ul>
+            </div>
+        </div>
+        <div class="goodsFloor c row">
+            <div class="goodsFloorNameBox c">
+                <h2 id="floorThree">
+                    <i class="goodsFloorPicFlag">F3</i>
+                    <i class="goodsFloorPicText">美食馆</i>
+                    <div class="goodsFloorKindArea r">
+                        <div class="goodsFloorKindAreaText">
+                            休闲零食<b style="margin-left: 10px; color: #B5B2A8;">︳</b>坚果炒货
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="FloorOneToThreeLeftPic l">
+                <img src="img/index/17.png" />
+            </div>
+            <div class="FloorOneToThreeRightPicBox l" onclick="imgTo('美食')">
+                <ul>
+                    <li class="FloorOneToThreeRightPic moveRight l">
+                        <a class="moveRight"><img src="img/index/11.png" /></a>
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/12.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/F103.jpg" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/F104.jpg" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/13.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/14.png" /></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="goodsFloor c row">
+            <div class="goodsFloorNameBox c">
+                <h2 id="floorFour">
+                    <i class="goodsFloorPicFlag">F4</i>
+                    <i class="goodsFloorPicText">数码电器</i>
+                    <div class="goodsFloorKindArea r">
+                        <div class="goodsFloorKindAreaText">
+                            手机<b style="margin-left: 10px; color: #B5B2A8;">︳</b>平板<b style="margin-left: 10px; color: #B5B2A8;">︳</b>电脑笔记本
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="FloorOneToThreeLeftPic l">
+                <img src="img/index/7.png" />
+            </div>
+            <div class="FloorOneToThreeRightPicBox l" onclick="imgTo('数码电器')">
+                <ul>
+                    <li class="FloorOneToThreeRightPic moveRight l">
+                        <a class="moveRight"><img src="img/index/1.png" /></a>
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/2.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/5.png" width="460" height="230" />
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/6.png" width="460" height="225" />
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/4.png" width="230" height="225" />
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/3.png" width="230" height="225" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="goodsFloor c row">
+            <div class="goodsFloorNameBox c">
+                <h2 id="floorFive">
+                    <i class="goodsFloorPicFlag">F5</i>
+                    <i class="goodsFloorPicText">美妆馆</i>
+                    <div class="goodsFloorKindArea r">
+                        <div class="goodsFloorKindAreaText">
+                            面膜<b style="margin-left: 10px; color: #B5B2A8;">︳</b>口红
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="FloorOneToThreeLeftPic l">
+                <img src="img/index/27.png" />
+            </div>
+            <div class="FloorOneToThreeRightPicBox l" onclick="imgTo('美妆馆')">
+                <ul>
+                    <li class="FloorOneToThreeRightPic moveRight l">
+                        <a class="moveRight"><img src="img/index/21.png" /></a>
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/22.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/25.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/26.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/23.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/24.png" /></li>
+                </ul>
+            </div>
+        </div>
+        <div class="goodsFloor c row">
+            <div class="goodsFloorNameBox c">
+                <h2 id="floorSix">
+                    <i class="goodsFloorPicFlag">F6</i>
+                    <i class="goodsFloorPicText">家庭百货</i>
+                    <div class="goodsFloorKindArea r">
+                        <div class="goodsFloorKindAreaText">
+                            卷纸/抽纸
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="FloorOneToThreeLeftPic l">
+                <img src="img/index/67.png" />
+            </div>
+            <div class="FloorOneToThreeRightPicBox l" onclick="imgTo('家庭百货')">
+                <ul>
+                    <li class="FloorOneToThreeRightPic moveRight l">
+                        <a class="moveRight"><img src="img/index/61.png" width="230" height="230" /></a>
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/62.png" width="230" height="230" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/65.png" width="460" height="230" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/66.png" width="460" height="225" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/63.png" width="230" height="225" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/64.png" width="230" height="225" /></li>
+                </ul>
+            </div>
+        </div>
+        <div class="goodsFloor c row">
+            <div class="goodsFloorNameBox c">
+                <h2 id="floorSeven">
+                    <i class="goodsFloorPicFlag">F7</i>
+                    <i class="goodsFloorPicText">学习馆</i>
+                    <div class="goodsFloorKindArea r">
+                        <div class="goodsFloorKindAreaText">
+                            英语四六级
+                        </div>
+                    </div>
+                </h2>
+            </div>
+            <div class="FloorOneToThreeLeftPic l">
+                <img src="img/index/57.png" />
+            </div>
+            <div class="FloorOneToThreeRightPicBox l" onclick="imgTo('学习馆')">
+                <ul>
+                    <li class="FloorOneToThreeRightPic moveRight l">
+                        <a class="moveRight"><img src="img/index/51.png" /></a>
+                    </li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/52.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/55.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/56.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/53.png" /></li>
+                    <li class="FloorOneToThreeRightPic moveRight l"><img src="img/index/54.png" /></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------左侧导栏航-------------------------------->
+    <div id="sideBarMenu">
+        <ul>
+            <li class="sideBarMenuBtnList">
+                <div class="sideBarMenuBtnDiv">
+                    <a class="sideBarMenuBtnText" href="#floorOne">时尚服装</a>
+                    <a class="sideBarMenuBtnText2" href="#floorOne">时尚服装</a>
+                </div>
+            </li>
+            <li class="sideBarMenuBtnList">
+                <div class="sideBarMenuBtnDiv">
+                    <a class="sideBarMenuBtnText" href="#floorTwo">潮流鞋包</a>
+                    <a class="sideBarMenuBtnText2" href="#floorTwo">潮流鞋包</a>
+                </div>
+            </li>
+            <li class="sideBarMenuBtnList">
+                <div class="sideBarMenuBtnDiv">
+                    <a class="sideBarMenuBtnText" href="#floorThree">美食馆</a>
+                    <a class="sideBarMenuBtnText2" href="#floorThree">美食馆</a>
+                </div>
+            </li>
+            <li class="sideBarMenuBtnList">
+                <div class="sideBarMenuBtnDiv">
+                    <a class="sideBarMenuBtnText" href="#floorFour">数码电器</a>
+                    <a class="sideBarMenuBtnText2" href="#floorFour">数码电器</a>
+                </div>
+            </li>
+            <li class="sideBarMenuBtnList">
+                <div class="sideBarMenuBtnDiv">
+                    <a class="sideBarMenuBtnText" href="#floorFive">美妆馆</a>
+                    <a class="sideBarMenuBtnText2" href="#floorFive">美妆馆</a>
+                </div>
+            </li>
+            <li class="sideBarMenuBtnList">
+                <div class="sideBarMenuBtnDiv">
+                    <a class="sideBarMenuBtnText" href="#floorSix">家庭百货</a>
+                    <a class="sideBarMenuBtnText2" href="#floorSix">家庭百货</a>
+                </div>
+            </li>
+            <li class="sideBarMenuBtnList">
+                <div class="sideBarMenuBtnDiv">
+                    <a class="sideBarMenuBtnText" href="#floorSeven">学习馆</a>
+                    <a class="sideBarMenuBtnText2" href="#floorSeven">学习馆</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 提示框 -->
+    <div id="promptModal"></div>
+    <!--------------------------加载中-------------------------------->
+    <div id="loading" style="position: fixed; top: 40%; left: 50%;"></div>
+    <!--------------------------尾部-------------------------------->
+    <footer>
+        <div class="footer_service">
+            <div class="footer_wrap">
+                <ul>
+                    <li class="s1 serviceNameList">
+                        <b>全球精选</b>
+                        <span>一站式生鲜购物方案</span>
+                    </li>
+                    <li class="s2 serviceNameList">
+                        <b>多仓直发</b>
+                        <span>次日达配送服务</span>
+                    </li>
+                    <li class="s3 serviceNameList">
+                        <b>品质严选</b>
+                        <span>精选正宗品质好食材</span>
+                    </li>
+                    <li class="s4 serviceNameList">
+                        <b>天天低价</b>
+                        <span>会员专属优惠购不停</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="serviceList">
+            <span>客服热线 100-000-0000 请转2号键咨询</span>
+            <span>周一至周日 9:00-21:00</span>
+        </div>
+        <div class="copyright">
+            <p>所有图片均受著作权保护，未经许可任何单位与个人不得使用、复制、转载、摘编，违者必究法律责任。</p>
+            <p>
+                <a href="#" onclick="return false;" style="text-decoration: none;">粤ICP备000000000号</a> Copyright © 2018-2019 版权所有
+            </p>
+            <p class="authentication">
+                <a href="#" onclick="return false;">
+                    <img style="height: 47px;" src="img/index/ordermeal.png">
+                </a>
+                <a href="#" onclick="return false;">
+                    <img style="height: 47px;" src="img/index/wxb.png">
+                </a>
+                <a href="#" onclick="return false;">
+                    <img src="img/index/consumerrights.png">
+                </a>
+                <a href="#" onclick="return false;">
+                    <img src="img/index/962110.png" height="47">
+                </a>
+                <a href="#" onclick="return false;" style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px;">
+                    <img src="img/index/ghs.png" style="float: left;">
+                    <span style="float: left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393;">粤公网安备
+                        44070302000615号</span>
+                </a>
+            </p>
+            <p>违法和不良信息举报电话 100-000-0000</p>
+        </div>
+        <div class="sidebar">
+            <!-- <a class="customerService"></a> -->
+            <a id="backTop" style="display: none;" onclick="backTop();"></a>
+        </div>
+    </footer>
+</body>
+
+<script src="js/public-tool.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function() {
+        $('#index-header').load('PublicHeader.html #header');
+    });
+</script>
+
+</html>

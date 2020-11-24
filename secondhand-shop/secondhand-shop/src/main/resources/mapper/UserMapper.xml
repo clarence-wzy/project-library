@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.UserMapper">
+
+    <select id="getRolePermission" parameterType="string" resultType="com.wzy.entity.RolePermission">
+        select r.role_id, r.role_name, rrp.perm_id, rrp.perm_name
+        from sys_role r
+        left join
+        (
+            select p.perm_id, p.perm_name, rp.role_id
+            from sys_permission p
+            left join sys_role_permission rp
+            on p.perm_id = rp.perm_id
+        ) rrp
+        on r.role_id = rrp.role_id
+        where r.role_name = #{roleName};
+    </select>
+
+    <select id="getUserRole" parameterType="string" resultType="com.wzy.entity.User">
+        select
+            u.user_id, u.username, u.real_name, u.sex, u.password, u.credit, u.email, u.phone, u.qq, u.wechat, u.student_id,
+            u.student_password, u.head_image, u.admin_id, u.user_status, rur.role_id, rur.role_name
+        from sys_user u
+        left join
+        (
+            select r.role_id, r.role_name, ur.user_id
+            from sys_role r
+            left join sys_user_role ur
+            on r.role_id = ur.role_id
+        ) rur
+        on u.user_id = rur.user_id
+        where u.username = #{username} and u.user_status != "DISABLE"
+    </select>
+
+    <insert id="addUser" parameterType="com.wzy.entity.User">
+        insert into
+            sys_user(username, real_name, password, credit, email, phone, admin_id, user_status, head_image)
+        values
+            (#{username}, #{realName}, #{password}, 500, #{email}, #{phone}, #{adminId}, "ENABLE", "http://106.15.74.177:9090/shop/user/person.png")
+    </insert>
+
+    <select id="findAllAdmin" resultType="int">
+        select admin_id
+        from sys_admin
+        where admin_status != "DIABLE"
+        <if test="remark != null">
+            and remark = #{remark}
+        </if>
+    </select>
+
+    <select id="findUserByUserId" parameterType="int" resultType="com.wzy.entity.User">
+        select
+            user_id, username, real_name, sex, password, credit, email, phone, qq, wechat, student_id, student_password, head_image, admin_id, user_status
+        from sys_user
+        where user_id = #{userId} and user_status != "DISABLE"
+    </select>
+
+    <select id="findUserByUsername" parameterType="string" resultType="com.wzy.entity.User">
+        select
+            user_id, username, real_name, sex, password, credit, email, phone, qq, wechat, student_id, student_password, head_image, admin_id, user_status
+        from sys_user
+        where username = #{username} and user_status != "DISABLE"
+    </select>
+    
+    <update id="updatePasswordWithEncryption" parameterType="string">
+        update sys_user
+        set password = #{password}
+        where username = #{username} and user_status != "DISABLE"
+    </update>
+
+    <update id="updateUserInfo" parameterType="com.wzy.entity.User">
+        update sys_user
+        set username = #{username}, sex = #{sex}, qq = #{qq}, wechat = #{wechat}
+        where user_id = #{userId} and user_status != "DISABLE"
+    </update>
+
+    <update id="updateStudentInfo">
+        update sys_user
+        set student_id = #{studentId}, student_password = #{studentPassword}
+        where user_id = #{userId} and user_status != "DISABLE"
+    </update>
+
+    <update id="updateEmail">
+        update sys_user
+        set email = #{email}
+        where user_id = #{userId} and user_status != "DISABLE" and email != #{email}
+    </update>
+
+    <update id="updatePhone">
+        update sys_user
+        set phone = #{phone}
+        where user_id = #{userId} and user_status != "DISABLE" and phone != #{phone}
+    </update>
+
+    <update id="updateHeadImage" parameterType="string">
+        update sys_user
+        set head_image = #{headImage}
+        where
+            username = #{username} and u.user_status != "DISABLE"
+    </update>
+
+    <select id="findUserByAdminId" resultType="int">
+        select user_id
+        from sys_user
+        where user_status != "DISABLE" and admin_id = #{adminId}
+    </select>
+
+    <update id="updateCredit">
+        update sys_user
+        set credit = credit - #{credit}
+        where user_id = #{userId} and user_status != "DISABLE" and credit != #{credit}
+    </update>
+
+    <select id="findAllByAdminId" resultType="com.wzy.entity.User">
+        select
+            user_id, username, real_name, sex, password, credit, email, phone, qq, wechat, student_id, student_password, head_image,
+            admin_id, user_status
+        from sys_user
+        where user_status != "DISABLE" and admin_id = #{adminId}
+    </select>
+
+    <update id="updateUserStatusByUserId">
+        update sys_user
+        set user_status = #{userStatus}
+        where user_status != #{userStatus} and user_id = #{userId}
+    </update>
+
+    <select id="findAmdinByAdminId" resultType="com.wzy.entity.Admin">
+        select
+            admin_id, password, phone, email, remark, admin_status, admin_create_time, admin_modify_time
+        from sys_admin
+        <if test="adminId != 0">
+            where admin_id = #{adminId}
+        </if>
+    </select>
+
+</mapper>

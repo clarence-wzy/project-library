@@ -1,0 +1,778 @@
+body {
+    background: #f7f9f8;
+    font-size: 12px;
+    font-family: Arial, Verdana, "\5b8b\4f53"
+}
+
+.t {
+    width: 100%;
+}
+
+.c {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+ul,
+li,
+a {
+    text-align: center;
+    color: #444;
+    outline: none;
+    text-decoration: none;
+}
+
+
+/****************************主体**************************************/
+
+.pageLocation {
+    height: 14px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.pageLocation a {
+    margin: 0 10px;
+}
+
+.pageLocation a:hover {
+    text-decoration: none;
+    color: #008842;
+}
+
+.goodsDetailsBox {
+    /* position: relative; */
+    /* height: 600px; */
+    margin-top: 10px;
+}
+
+.goodsDetailsPicBox {
+    /* position: relative; */
+    height: 600px;
+    width: 500px;
+    float: left;
+}
+
+
+/*  */
+
+#picBox {
+    display: inline-block;
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bigPicImg {
+    width: 500px;
+    height: 500px;
+}
+
+.bigVideo {
+    width: 500px;
+    height: 500px;
+}
+
+#square {
+    display: none;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    background-color: rgb(182, 212, 182);
+    opacity: 0.5;
+    z-index: 5;
+}
+
+#hugePic {
+    display: none;
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    top: 200px;
+    left: 660px;
+    z-index: 4;
+    border: 1px solid #007F4D;
+    overflow: hidden;
+}
+
+#huge {
+    width: 1000px;
+    height: 1000px;
+    position: absolute;
+    left: 0px;
+    top: 0;
+}
+
+.bigPic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+}
+
+.bigPic:nth-child(1) {
+    z-index: 4;
+}
+
+#btnBox {
+    display: inline-block;
+    width: 500px;
+    height: 97px;
+    margin-top: 10px;
+}
+
+.picBtn {
+    border-color: #008842;
+    padding: 0;
+    overflow: hidden;
+    height: 85px;
+    width: 85px;
+    border: 1px solid #bcbcbc;
+    margin-left: 16px;
+}
+
+.picBtn:nth-child(1) {
+    margin-left: 0;
+}
+
+.picBtn img {
+    width: 85px;
+    height: 85px;
+}
+
+
+/*  */
+
+.goodsDetailsTextBox {
+    width: 680px;
+    height: 190px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.product-info {
+    width: 680px;
+    margin-left: 520px;
+}
+
+.summary-name {
+    margin: 0 85px 0 0;
+}
+
+.summary-name h1 {
+    font: normal 26px "Microsoft YaHei";
+}
+
+.summary-name p {
+    /* height: 40px; */
+    height: 20px;
+    margin-top: 5px;
+    color: #777;
+    font: normal 16px/20px "Microsoft YaHei";
+}
+
+.summary-name input {
+    vertical-align: middle;
+    outline: none;
+}
+
+.summary-name input[type="hidden"i] {
+    display: none;
+    -webkit-appearance: initial;
+    background-color: initial;
+    cursor: default;
+    padding: initial;
+    border: initial;
+}
+
+.summary-price {
+    height: 100px;
+    padding: 10px 20px;
+    background: #fff;
+    position: relative;
+}
+
+.pro-price {
+    float: left;
+    height: 70px;
+    /* width: 423px; */
+    width: 230px;
+}
+
+.pro-price .tt {
+    width: 60px;
+}
+
+.pro-price span {
+    display: inline-block;
+}
+
+.pro-price em {
+    padding: 0 5px;
+    font-size: 18px;
+    color: #ff0000;
+    font-style: normal;
+}
+
+.pro-price strong {
+    color: #ff0000;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.pro-m1,
+.pro-m2,
+.pro-m3 {
+    border-top: 1px solid #e2e2e2;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.pro-tel {
+    position: absolute;
+    right: 160px;
+    top: 5px;
+}
+
+.pro-tel p {
+    float: left;
+    margin-top: 53px;
+    margin-right: 10px;
+}
+
+.pro-tel i {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    /* background: url(../images/icon-tel.png) no-repeat center; */
+    margin-right: 5px;
+    vertical-align: top;
+}
+
+.pro-tel strong {
+    font-weight: normal;
+    color: #11b57c;
+    margin-left: 10px;
+}
+
+.pro-tel .code {
+    float: left;
+    width: 73px;
+    height: 73px;
+    padding: 3px 4px 4px 10px;
+    /* background: url(../images/bg-code.png) no-repeat; */
+}
+
+.pro-tel .code img {
+    width: 73px;
+    height: 73px;
+}
+
+.pro-review {
+    border-top: 1px solid #e2e2e2;
+    /* float: right; */
+    float: left;
+    text-align: center;
+    margin-top: 41px;
+    display: flex;
+    flex-direction: row;
+}
+
+.pro-review p {
+    padding-top: 10px;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.pro-review b {
+    color: #68c0fa;
+    /* font-size: 18px; */
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+.pro-review a {
+    color: #999;
+}
+
+.pro-review span {
+    padding: 0 5px;
+}
+
+.pro-report {
+    /* width: 200px; */
+    float: left;
+    margin: 13px auto 10px auto;
+}
+
+.pro-report span {
+    margin-left: 60px;
+}
+
+.pro-report a {
+    color: rgb(240, 132, 132);
+    cursor: pointer;
+}
+
+.pro-report a:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.summary-other {
+    margin-top: 30px;
+}
+
+.summary-other .left,
+.summary-other .right {
+    color: #777;
+}
+
+.summary-other .left th,
+.summary-other .right th {
+    padding: 5px 0;
+    width: 85px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.summary-other .left td,
+.summary-other .right td {
+    padding-left: 5px;
+}
+
+.summary-other .collect {
+    font-size: 20px;
+}
+
+
+/* 收藏时的样式 */
+
+.glyphicon-heart {
+    color: gainsboro;
+}
+
+.like {
+    color: red;
+}
+
+.summary-other .collect .glyphicon-heart:active {
+    color: red;
+    transform: scale(2, 2);
+    transition: transform 0.5s;
+}
+
+.summary-other .collect div {
+    color: #FF5151;
+    font-size: 15px;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.summary-other .form-group .input-group {
+    margin-top: 100px;
+    width: 150px;
+}
+
+.summary-other .form-group .input-group label {
+    width: 50px;
+}
+
+.summary-other .form-group .input-group input {
+    text-align: center;
+}
+
+.summary-other .form-group .control-label {
+    height: 34px;
+    font-size: 16px;
+}
+
+#productNum {
+    margin-top: 10px;
+    margin-left: 13px;
+    color: #777;
+}
+
+.product-btn {
+    margin-top: 50px;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.product-btn button {
+    width: 120px;
+    margin-left: 20px;
+}
+
+.goodsContent {
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.guessLikeBox {
+    width: 250px;
+    margin-bottom: 20px;
+    border: 1px solid #cde4c0;
+    background: #fff;
+}
+
+.guessLikehead {
+    height: 30px;
+    padding: 0 15px;
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    background: #fa7529;
+}
+
+.guessLikeGoodsBox {
+    position: relative;
+    height: 80px;
+    padding: 10px 0 5px 0;
+    /* margin-bottom: 8px; */
+}
+
+.guessLikeGoodsBox:hover {
+    background-color: white;
+}
+
+.guessLikeGoodsPic {
+    margin-left: 10px;
+    width: 68px;
+    height: 68px;
+}
+
+.guessLikeGoodsPic img {
+    display: inline-block;
+    border: 1px solid #cccccc;
+    width: 68px;
+    height: 68px;
+}
+
+.guessLikeGoodsTxt {
+    width: 153px;
+    /* margin-left: 10px; */
+    padding: 4px 0 0 10px;
+    line-height: 20px;
+}
+
+.guessLikeGoodsTxt a:hover {
+    text-decoration: none;
+}
+
+.guessLikeGoodsTxt strong {
+    text-align: left;
+    height: 40px;
+    margin-bottom: 5px;
+    color: #777;
+    font-weight: normal;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.guessLikeGoodsTxt strong:hover {
+    text-decoration: underline;
+    color: rgb(240, 39, 39);
+}
+
+.guessLikeGoodsTxt span {
+    font-size: 12px;
+    color: #e8380d;
+    cursor: default;
+}
+
+
+/* .addShopCar {
+    z-index: 1;
+    display: none;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 12px;
+    color: #fff;
+    padding: 3px 8px;
+    background: #008842;
+    border-radius: 3px;
+}
+
+.guessLikeGoodsBox:hover a {
+    text-decoration: none;
+}
+
+.guessLikeGoodsBox:hover .addShopCar {
+    display: block;
+    color: #fff;
+} */
+
+.hotSale {
+    width: 930px;
+    height: 278px;
+    border: 1px solid #dfdfdf;
+    background: #fff;
+}
+
+.hotSaleHead {
+    padding: 10px 20px;
+    line-height: 35px;
+    color: #108f2b;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hotSaleHead ul li {
+    text-align: center;
+}
+
+.hotSalegoods {
+    margin-left: 55px;
+}
+
+.hotSalegoods:nth-child(1) {
+    margin-left: 15px;
+}
+
+.p-img {
+    margin-bottom: 10px;
+}
+
+.p-name {
+    cursor: pointer;
+    overflow: hidden;
+    height: 36px;
+    width: 132px;
+    line-height: 18px;
+    /* margin-bottom: 7px; */
+    text-align: center;
+}
+
+.p-name a {
+    color: #777;
+}
+
+.p-name a:hover {
+    color: #e8380d;
+}
+
+.p-price strong {
+    color: #e8380d;
+    /* padding-right: 15px; */
+}
+
+
+/* .p-price del {
+    text-decoration: line-through;
+} */
+
+.goodsIntroduceBox {
+    width: 930px;
+    border: 1px solid #dfdfdf;
+    margin-top: 20px;
+    background: #fff;
+}
+
+.IntroduceTable {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #d4d4d4;
+    background: #fff;
+    margin-top: -1px;
+}
+
+.IntroduceUl li {
+    /*    position: relative;*/
+    display: block;
+    float: left;
+    width: 132px;
+    /*    margin-top: -1px;*/
+    text-align: center;
+    border-right: 1px solid #d4d4d4;
+    height: 36px;
+    padding-top: 4px;
+    line-height: 36px;
+    font-size: 12px;
+}
+
+.goodsIntroduce {
+    cursor: default;
+    border-bottom: 3px solid #fff;
+}
+
+.goodsIntroduceChoose {
+    cursor: default;
+    border-bottom: 3px solid #fff;
+    /* background: url(../img/commodityDetails/product.png) no-repeat -33px -58px #fff; */
+}
+
+.goodsAppraise {
+    cursor: default;
+}
+
+.goodsAppraiseChoose {
+    cursor: default;
+    /* background: url(../img/commodityDetails/product.png) no-repeat -33px -58px #fff; */
+}
+
+.IntroduceUl li b {
+    font-weight: normal;
+    color: #e8380d;
+    padding-left: 5px;
+}
+
+
+/*  */
+
+.tb-price-spec {
+    /* width: 750px; */
+    margin-top: 15px;
+}
+
+.tb-price-spec .spec-title {
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.tb-price-spec .title {
+    color: #fe702f;
+}
+
+.tb-price-spec .info {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.tb-price-spec .info strong {
+    color: #333;
+    font-weight: 600;
+}
+
+
+/*  */
+
+.allInContent {
+    /*	display: none;*/
+    width: 880px;
+    margin: 20px auto;
+}
+
+.allInContent img {
+    width: 100%;
+}
+
+.allInContent table {
+    width: 100%;
+    font-size: 14px;
+    margin: 0 0 20px 0;
+    border: 1px solid #d3e2ca;
+}
+
+.allInContent table tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.allInContent table th {
+    background: #e7f5ee;
+    font-weight: normal;
+    width: 150px;
+    padding: 10px 10px 10px 20px;
+    text-align: left;
+}
+
+.allInContent table th,
+.allInContent table td {
+    color: #666;
+    border: 1px solid #d3e2ca;
+    border-width: 1px 0;
+}
+
+.allInContent table td {
+    padding: 10px 10px 10px 20px;
+}
+
+.allAppraise {
+    display: none;
+    width: 900px;
+    margin: 20px auto;
+}
+
+
+/* 弹出框样式 */
+
+#successImg {
+    width: 58px;
+    height: 58px;
+    margin: 0px auto;
+    background: url("../img/login/success.png") no-repeat;
+    background-size: 58px;
+    border: none;
+}
+
+#failImg {
+    width: 58px;
+    height: 58px;
+    margin: 0px auto;
+    background: url("../img/login/fail.png") no-repeat;
+    background-size: 58px;
+    border: none;
+}
+
+
+/* 模态框 */
+
+.modal {
+    top: 20%;
+}
+
+.modal-title {
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.modal-title span {
+    color: rgb(236, 118, 118);
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-form label {
+    width: 100px;
+    margin: 0 10px 10px 20px;
+}
+
+.modal-form textarea {
+    width: 500px;
+    margin: 0 auto 10px auto;
+}
+
+.modal textarea {
+    resize: vertical;
+}
+
+.modal-btn {
+    margin: 0 auto 0 auto;
+}
+
+.modal-btn button {
+    width: 80px;
+}
+
+.modal-btn button:nth-child(1) {
+    margin-right: 20px;
+}

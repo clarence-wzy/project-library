@@ -1,0 +1,177 @@
+.select {
+    line-height: 25px;
+    margin-top: 20px;
+    background: #eaeaea;
+    border: 1px solid #c7c7c7;
+    border-right-color: #e5e5e5;
+}
+
+.title {
+    padding: 6px 0 5px 20px;
+    color: #909090;
+}
+
+.select li {
+    float: left;
+    line-height: 37px;
+}
+
+.select li:after {
+    content: "|";
+}
+
+.select li:last-child:after {
+    content: "";
+}
+
+.select a {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 0 15px;
+    text-decoration: none;
+    color: #777;
+}
+
+.select a:hover {
+    text-decoration: none;
+    color: #008842;
+}
+
+.picListSelect {
+    background: #eaeaea;
+    height: 40px;
+    margin: 20px auto;
+}
+
+.picListSelect a {
+    display: inline-block;
+    height: 30px;
+    line-height: 18px;
+    margin-left: -4px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    border: 1px solid #c7c7c7;
+    background: #fff;
+}
+
+.filter_sort {
+    height: 35px;
+    margin-left: 10px;
+    cursor: default;
+}
+
+.dowm {
+    width: 10px;
+    height: 16px;
+    margin-left: 3px;
+    /* background: url(../img/goodsList/filter_icon.png) no-repeat 0 0; */
+}
+
+.filter_sort a:hover .dowm {
+    background-position: -10px 0;
+}
+
+.filter_sort a:hover .sort_down {
+    background-position: -30px 0;
+}
+
+.filter_sort a:hover {
+    color: #008842;
+    text-decoration: none;
+}
+
+.sort_down {
+    width: 10px;
+    height: 16px;
+    margin-left: 3px;
+    /* background: url(../img/goodsList/filter_icon.png) no-repeat 0 0; */
+    background-position: -20px 0;
+}
+
+#goodsListContentRow {
+    text-align: center;
+}
+
+.goodsListContentBox {
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+#goodsListContent {
+    display: block;
+    margin: 0 auto;
+}
+
+.listSty {
+    background: white;
+    margin: 0 0 0 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.listpicBox {
+    width: 290px;
+    height: 290px;
+    overflow: hidden;
+}
+
+.listpicBox img {
+    width: 290px;
+    height: 290px;
+    transition: all .5s;
+}
+
+.listSty a {
+    margin-top: 10px;
+    margin-left: 35px;
+    margin-right: 20px;
+    line-height: 20px;
+    display: block;
+    color: #444;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    /* 固定宽度，多出来的内容用“...”来代替 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listSty a:hover {
+    color: #008000;
+    text-decoration: none;
+}
+
+.listSty strong {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    color: #e7380d;
+    text-align: center;
+    cursor: default;
+}
+
+.addShopCarBtn {
+    display: none;
+    position: absolute;
+    top: 240px;
+    left: 40px;
+    height: 30px;
+    width: 200px;
+    background: #008842;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.paginatorDiv {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#pageLimit {
+    cursor: pointer;
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzz.mapper.InvitationMapper">
+
+    <insert id="insertInvitationInfo" parameterType="com.wzz.entity.Invitation">
+        insert into invitation_info
+            (invitation_id, name, dept, email, email_status, email_status_time,
+             recycle_status, recycle_status_time, url, questionnaire_id)
+        values
+            (#{invitationId}, #{name}, #{dept}, #{email}, #{emailStatus}, #{emailStatusTime},
+             #{recycleStatus}, #{recycleStatusTime}, #{url}, #{questionnaireId})
+    </insert>
+
+    <select id="findByQuestionnaireId" parameterType="integer" resultType="com.wzz.entity.Invitation">
+        select
+            invitation_id, name, dept, email, email_status, email_status_time,
+            recycle_status, recycle_status_time, url, questionnaire_id
+        from invitation_info
+        where
+            questionnaire_id = #{questionnaireId}
+    </select>
+
+    <select id="findByUrl" parameterType="string" resultType="java.lang.Integer">
+        select count(*)
+        from invitation_info
+        where
+            url like #{url}
+    </select>
+
+    <select id="findRecycleStatusByUrl" parameterType="string" resultType="com.wzz.entity.Invitation">
+        select recycle_status, questionnaire_id
+        from invitation_info
+        where
+            url like #{url}
+    </select>
+
+    <select id="recycleTotal" parameterType="integer" resultType="java.lang.Integer">
+        select count(*)
+        from invitation_info
+        where
+            questionnaire_id = #{questionnaireId} and recycle_status = 1
+    </select>
+
+    <select id="emailSuccessTotal" parameterType="integer" resultType="java.lang.Integer">
+        select count(*)
+        from invitation_info
+        where
+            questionnaire_id = #{questionnaireId} and email_status = 1
+    </select>
+
+    <update id="updateRecycleStatus" parameterType="string">
+        update invitation_info
+        set recycle_status = 1
+        where
+            url like #{url}
+    </update>
+
+</mapper>

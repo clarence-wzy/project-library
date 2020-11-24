@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.ProductMapper">
+
+    <select id="findAllProduct" resultType="com.wzy.entity.Product">
+        select
+            product_id, product_name, own_id, own_name, type_id, number, image, detail_image, price, quality_name, expiration_time, trade_name,
+            trade_decription, product_decription, product_create_time, product_modify_time, product_status, remark
+        from
+            product_info
+        where product_status = "ENABLE"
+        limit #{startIndex}, #{pageSize}
+    </select>
+    
+    <select id="findProductWithCondition" resultType="com.wzy.entity.Product">
+        select
+               pi.product_id, pi.product_name, pi.own_id, pi.own_name, pi.type_id, pi.number, pi.image, pi.detail_image, pi.price, pi.quality_name, pi.expiration_time, pi.trade_name,
+               pi.trade_decription, pi.product_decription, pi.product_create_time, pi.product_modify_time, pi.product_status, pi.remark
+        from product_info pi
+        left join product_type pt
+        on pi.type_id = pt.type_id
+        where pi.product_status != "DISABLE"
+        <if test="typeName != null or productName != null">
+            and
+            <if test="typeName != null and productName == null">
+                pt.type_name like concat('%' ,#{typeName}, '%')
+            </if>
+            <if test="productName != null and typeName == null">
+                pi.product_name like concat('%' ,#{productName}, '%')
+            </if>
+            <if test="productName != null and typeName != null">
+                pt.type_name like concat('%' ,#{typeName}, '%')
+                or pi.product_name like concat('%' ,#{productName}, '%')
+            </if>
+        </if>
+        <if test="startIndex != null and pageSize != null">
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="countAllProduct" resultType="int">
+        select count(product_id) from product_info
+        where product_status = "ENABLE"
+    </select>
+
+    <select id="findProductByProductName" resultType="com.wzy.entity.Product" parameterType="string">
+        select
+            p.product_id, p.product_name, p.own_id, p.own_name, u.username, p.type_id, p.number, p.image, p.detail_image, p.price, p.quality_name, p.expiration_time, p.trade_name,
+            p.trade_decription, p.product_decription, p.product_create_time, p.product_modify_time, p.product_status, p.remark
+        from
+            product_info p
+        left join sys_user u
+        on p.own_id = u.user_id
+        where p.product_name like concat('%' ,#{productName}, '%') and p.product_status != "DISENABLE" and u.user_status = "ENABLE"
+    </select>
+
+    <select id="findProductByProductId" resultType="com.wzy.entity.Product" parameterType="Integer">
+        select
+            product_id, product_name, own_id, own_name, type_id, number, image, detail_image, price, quality_name, expiration_time, trade_name,
+            trade_decription, product_decription, product_create_time, product_modify_time, product_status, remark
+        from
+            product_info
+        where product_id = #{productId} and product_status != "DISENABLE"
+    </select>
+
+    <select id="findProductByUserId" resultType="com.wzy.entity.Product" parameterType="int">
+        select
+            p.product_id, p.product_name, p.own_id, p.own_name, p.type_id, t.type_name, p.number, p.image, p.detail_image, p.price, p.quality_name, p.expiration_time, p.trade_name,
+            p.trade_decription, p.product_decription, p.product_create_time, p.product_modify_time, p.product_status, p.remark
+        from
+            product_info p
+        left join product_type t
+        on p.type_id = t.type_id
+        where p.own_id = #{userId} and p.product_status != "DISENABLE" and t.type_status = "ENABLE"
+    </select>
+
+    <select id="findAllType" resultType="com.wzy.entity.ProductType">
+        select type_id, type_name, type_status
+        from product_type
+        where type_status = "ENABLE"
+    </select>
+
+    <select id="findTypeNameByTypeId" resultType="com.wzy.entity.ProductType">
+        select type_id, type_name, type_status
+        from product_type
+        where type_id = #{typeId} and type_status = "ENABLE"
+    </select>
+
+    <select id="findTypeByTypeName" resultType="com.wzy.entity.ProductType">
+        select type_id, type_name, type_status
+        from product_type
+        where type_name like concat('%' ,#{typeName}, '%') and type_status = "ENABLE"
+    </select>
+
+    <insert id="insertProduct">
+        insert into product_info
+            (product_id, product_name, own_id, own_name, type_id, number, image, detail_image, price, quality_name, expiration_time,
+             trade_name, trade_decription, product_decription, product_create_time, product_modify_time, product_status, remark)
+        values
+            (#{productId}, #{productName}, #{ownId}, #{ownName}, #{typeId}, #{number}, #{image}, #{detailImage}, #{price}, #{qualityName}, #{expirationTime},
+             #{tradeName}, #{tradeDecription}, #{productDecription}, #{productCreateTime}, #{productModifyTime}, "ENABLE", #{remark})
+    </insert>
+
+    <select id="findAllQuality" resultType="com.wzy.entity.Quality">
+        select quality_id, quality_name
+        from quality
+    </select>
+
+    <select id="findAllTrade" resultType="com.wzy.entity.Trade">
+        select trade_id, trade_name
+        from trade
+    </select>
+
+    <update id="updateProductNumber">
+        update product_info
+        set number = #{cartNumber}, product_status = #{productStatus}
+        where product_id = #{productId} and product_status = "ENABLE"
+    </update>
+
+    <update id="updateProductInfo" parameterType="com.wzy.entity.Product">
+        update product_info
+        set product_name = #{productName}, type_id = #{typeId}, number = #{number}, image = #{image}, detail_image = #{detailImage}, price = #{price},
+            quality_name = #{qualityName}, expiration_time = #{expirationTime}, trade_name = #{tradeName}, trade_decription = #{tradeDecription}, product_decription = #{productDecription},
+            product_modify_time = now()
+        where product_id = #{productId}
+    </update>
+
+    <select id="findRandProduct" resultType="com.wzy.entity.Product">
+        select
+            product_id, product_name, own_id, own_name, type_id, number, image, detail_image, price, quality_name, expiration_time, trade_name,
+            trade_decription, product_decription, product_create_time, product_modify_time, product_status, remark
+        from product_info
+        where product_status != "DISABLE"
+        and type_id in
+        <foreach collection="typeIds" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        <if test="count != 0">
+            order by rand()
+            limit #{count}
+        </if>
+    </select>
+
+</mapper>

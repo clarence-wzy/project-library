@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzz.mail.mapper.MessageMapper">
+    <update id="updateMessageStatus">
+        update t_msg_log
+        set status      = #{status},
+            update_time = now()
+        where msg_id = #{msgId}
+    </update>
+
+    <select id="getMessageByMsgId" resultType="com.wzz.mail.entity.Message">
+        select msg_id,
+               msg,
+               exchange,
+               routing_key,
+               status,
+               try_count,
+               next_try_time,
+               create_time,
+               update_time
+        from t_msg_log
+        where msg_id = #{msgId};
+    </select>
+
+    <select id="getTimeoutMessage" resultType="com.wzz.mail.entity.Message">
+        select msg_id,
+               msg,
+               exchange,
+               routing_key,
+               status,
+               try_count,
+               next_try_time,
+               create_time,
+               update_time
+        from t_msg_log
+        where status = 2;
+    </select>
+
+    <update id="updateTryCount">
+        update t_msg_log
+        set try_count     = try_count + 1,
+            next_try_time = #{tryTime},
+            update_time   = now()
+        where msg_id = #{msgId};
+    </update>
+
+    <insert id="insertMessage" parameterType="com.wzz.mail.entity.Message">
+        insert into t_msg_log(msg_id, msg, exchange, routing_key) value (#{msgId}, #{msg}, #{exchange}, #{routingKey});
+    </insert>
+</mapper>

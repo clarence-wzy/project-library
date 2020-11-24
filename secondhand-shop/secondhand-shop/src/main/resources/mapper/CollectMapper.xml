@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.CollectMapper">
+
+    <insert id="insertCollect" parameterType="com.wzy.entity.Collect">
+        insert into collect
+        values
+            (#{id}, #{productId}, #{userId}, "ENABLE", #{collectCreateTime}, #{collectModifyTime})
+    </insert>
+
+    <select id="findAllColllectByUserId" resultType="com.wzy.entity.CollectWithProduct">
+        select
+            p.product_id, p.product_name, p.own_id, p.type_id, p.number, p.image, p.detail_image, p.price, p.quality_name, p.expiration_time,
+            p.trade_name, p.trade_decription, p.product_decription, p.product_create_time, p.product_status, p.remark,
+            c.id, c.user_id, c.collect_status, c.collect_create_time, c.collect_modify_time
+        from product_info p
+        left join collect c
+        on c.product_id = p.product_id
+        where c.user_id = #{userId} and c.collect_status = "ENABLE"
+        group by c.collect_create_time desc
+        limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="countAllColllectByUserId" resultType="int">
+        select count(id) from collect
+        where collect_status = "ENABLE" and user_id = #{userId}
+    </select>
+
+    <select id="findCollectByUserIdAndProductId" resultType="com.wzy.entity.Collect">
+        select id, product_id, user_id, collect_status, collect_create_time, collect_modify_time
+        from collect
+        where user_id = #{userId} and product_id = #{productId}
+    </select>
+
+    <update id="updateCollectStatus" parameterType="com.wzy.entity.Collect">
+        update collect
+        set collect_status = #{collectStatus}, collect_modify_time = #{collectModifyTime}
+        where user_id = #{userId} and product_id = #{productId} and collect_status != #{collectStatus}
+    </update>
+
+</mapper>

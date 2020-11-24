@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.OrderMapper">
+
+    <select id="findMasterOrderByUserId" resultType="com.wzy.entity.MasterOrder">
+        select
+            id, master_order_id, user_id, address_id, logistics_id, master_order_status, create_time
+        from master_order
+        where user_id = #{userId} and master_order_status != "DISABLE"
+    </select>
+
+    <select id="findMasterOrderByMasterOrderId" resultType="com.wzy.entity.MasterOrder">
+        select
+            id, master_order_id, user_id, address_id, logistics_id, master_order_status, create_time
+        from master_order
+        where master_order_id = #{masterOrderId} and master_order_status != "DISABLE"
+    </select>
+
+    <select id="findChildOrderByMasterOrderId" resultType="com.wzy.entity.ChildOrder">
+        select
+            id, child_order_id, master_order_id, product_id, product_attr, number, logistics_id, price, child_order_status, create_time, pay_time,
+            deliver_time, receive_time, evaluate_time own_name, remark
+        from child_order
+        where master_order_id = #{masterOrderId} and child_order_status != "DISBALE"
+        <if test="childOrderStatus != null">
+            and child_order_status = #{childOrderStatus}
+        </if>
+    </select>
+
+    <insert id="insertMasterOrder" parameterType="com.wzy.entity.MasterOrder">
+        insert into
+            master_order(master_order_id, user_id, address_id, logistics_id, price, master_order_status, create_time)
+        values
+            (#{masterOrderId}, #{userId}, #{addressId}, #{logisticsId}, #{price}, #{masterOrderStatus}, now())
+    </insert>
+
+    <insert id="insertChildOrder" parameterType="com.wzy.entity.ChildOrder">
+        insert into
+            child_order(child_order_id, master_order_id, product_id, product_attr, number, logistics_id, price, child_order_status, create_time, pay_time, deliver_time, own_name, remark)
+        values
+            (#{childOrderId}, #{masterOrderId}, #{productId}, #{productAttr}, #{number}, #{logisticsId}, #{price}, #{childOrderStatus}, now(), #{payTime}, #{deliverTime}, #{ownName}, #{remark})
+    </insert>
+
+    <update id="updateMasterOrderStatus">
+        update master_order
+        set master_order_status = #{masterOrderStatus}
+        where master_order_id = #{masterOrderId} and master_order_status != #{masterOrderStatus}
+    </update>
+
+    <update id="updateChildOrderStatus">
+        update child_order
+        set child_order_status = #{childOrderStatus}, pay_time = now()
+        where master_order_id = #{masterOrderId} and child_order_status != #{childOrderStatus}
+    </update>
+
+    <update id="updateChildOrderStatusById">
+        update child_order
+        set child_order_status = #{childOrderStatus}, pay_time = now()
+        where id = #{id} and child_order_status != #{childOrderStatus}
+    </update>
+
+    <update id="updateChildOrderStatusByChildOrderId">
+        update child_order
+        set child_order_status = #{childOrderStatus}
+        where child_order_id = #{childOrderId} and child_order_status != "DISABLE"
+    </update>
+
+    <select id="findChildOrderById" resultType="com.wzy.entity.ChildOrder">
+        select
+            id, child_order_id, master_order_id, product_id, product_attr, number, logistics_id, price, child_order_status, create_time, pay_time,
+            deliver_time, receive_time, evaluate_time, own_name, remark
+        from child_order
+        where id = #{id}
+    </select>
+
+    <select id="findChildOrderByChildOrderId" resultType="com.wzy.entity.ChildOrder">
+        select
+            id, child_order_id, master_order_id, product_id, product_attr, number, logistics_id, price, child_order_status, create_time, pay_time,
+            deliver_time, receive_time, evaluate_time, own_name, remark
+        from child_order
+        where child_order_id = #{childOrderId}
+    </select>
+
+    <select id="findChildOrderByOwn" resultType="com.wzy.entity.ChildOrder">
+        select
+            id, child_order_id, master_order_id, product_id, product_attr, number, logistics_id, price, child_order_status, create_time, pay_time,
+            deliver_time, receive_time, evaluate_time, own_name, remark
+        from child_order
+        where child_order_status != "DISABLE" and own_name = #{ownName}
+    </select>
+
+    <update id="updateLogisticsIdByChildOrderId">
+        update child_order
+        set logistics_id = #{logisticsId}, deliver_time = now(), child_order_status = "已发货"
+        where child_order_id = #{childOrderId}
+    </update>
+
+    <select id="findChildOrderByOwnWithSelect" parameterType="com.wzy.entity.OrderSelect" resultType="com.wzy.entity.ChildOrder">
+        select
+            id, child_order_id, master_order_id, product_id, product_attr, number, logistics_id, price, child_order_status, create_time, pay_time,
+            deliver_time, receive_time, evaluate_time, own_name, remark
+        from child_order
+        where child_order_status != "DISABLE" and own_name = #{ownName}
+        <if test="productId != 0">
+            and product_id = #{productId}
+        </if>
+        <if test="childOrderId != null">
+            and child_order_id = #{childOrderId}
+        </if>
+        <if test="childOrderStatus != null">
+            and child_order_status = #{childOrderStatus}
+        </if>
+        <if test="orderStartTime != null">
+            and pay_time &gt;= #{orderStartTime}
+        </if>
+        <if test="orderEndTime != null">
+            and pay_time &lt;= #{orderEndTime}
+        </if>
+        <if test="logisticsIds != null">
+            and logistics_id in
+            <foreach collection="logisticsIds" item="logisticsId" index="index" open="(" close=")" separator=",">
+                #{logisticsId}
+            </foreach>
+        </if>
+        <if test="masterOrderIds != null">
+            and master_order_id in
+            <foreach collection="masterOrderIds" item="masterOrderId" index="index" open="(" close=")" separator=",">
+                #{masterOrderId}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="findMasterOrderIdByConsigneeName" resultType="string">
+        select m.master_order_id
+        from master_order m
+        left join address a
+        on m.address_id = a.address_id
+        where a.address_status != "DISABLE" and a.consignee_name like concat('%' ,#{consigneeName}, '%')
+    </select>
+
+    <update id="updateChildOrderStatusSenior">
+        update child_order
+        set child_order_status = #{childOrderStatus}
+        <if test="orderType == 'pay'">
+            , pay_time = now()
+        </if>
+        <if test="orderType == 'receive'">
+            , receive_time = now()
+        </if>
+        <if test="orderType == 'evaluate'">
+            , evaluate_time = now()
+        </if>
+        where id = #{id} and child_order_status != #{childOrderStatus}
+    </update>
+
+</mapper>

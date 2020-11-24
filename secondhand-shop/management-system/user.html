@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/cookie.js"></script>
+
+    <style>
+        .layui-table,
+        .layui-table th {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex; flex-direction: column;">
+        <span style="margin: 15px auto 10px 30px; font-size: 18px; font-weight: bold; color: rgb(122, 122, 120);">管理用户：</span>
+        <table class="layui-hide" id="userTable" lay-filter="userTable"></table>
+    </div>
+    <div style="margin-top: 30px; margin-bottom: 50px; display: flex; flex-direction: column;">
+        <span style="margin-left: 30px; margin-bottom: 10px; font-size: 18px; font-weight: bold; color: rgb(122, 122, 120);">已发布的商品：</span>
+        <table class="layui-hide" id="productTable" lay-filter="productTable"></table>
+    </div>
+
+    <script type="text/html" id="barOpera">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看用户信息</a> {{# if(d.userStatus == "FORBID") { }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">解除禁用</a> {{# } else { }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">禁用</a> {{# } }}
+    </script>
+    <script type="text/html" id="role_tr">
+        {{# if(d.studentId == null){ }}
+        <span>买家</span> {{# } else { }}
+        <span>卖家</span> {{# } }}
+    </script>
+    <script type="text/html" id="product">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">查看商品</a>
+    </script>
+    <script type="text/html" id="productName_tr">
+        <span class="productName-span" onclick="window.open('http://localhost:8888/src/page/CommodityDetails.html?admin=1&productId={{d.productId}}')">{{d.productName}}</span>
+    </script>
+    <script type="text/html" id="trade_tr">
+        <span>{{d.tradeName}} - {{d.tradeDecription}}</span>
+    </script>
+
+    <script src="js/layui.js"></script>
+    <script src="js/user.js"></script>
+</body>
+
+</html>

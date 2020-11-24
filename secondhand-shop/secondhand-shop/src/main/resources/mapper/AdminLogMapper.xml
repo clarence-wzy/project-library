@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.AdminLogMapper">
+
+    <insert id="insertAdminLog">
+        insert into
+            admin_log(id, admin_id, user_id, log_content, reason, log_time)
+        values
+            (#{id}, #{adminId}, #{userId}, #{logContent}, #{reason}, now())
+    </insert>
+
+</mapper>

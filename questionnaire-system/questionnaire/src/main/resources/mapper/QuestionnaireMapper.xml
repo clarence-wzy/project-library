@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzz.mapper.QuestionnaireMapper">
+
+    <select id="findQuestionnaireByUserId" resultType="com.wzz.entity.Questionnaire" parameterType="java.lang.Long">
+        select questionnaire_id,author,title,note,state,recovered,create_time from t_questionnaire where user_id = #{userId} order by create_time desc ;
+    </select>
+
+<!--    <select id="findTitleFromTempByQCode" resultType="String" parameterType="java.lang.Long">-->
+<!--        select title from t_questionnaire_template where questionnaire_id = #{qCode};-->
+<!--    </select>-->
+
+    <delete id="deleteQuestionnaire" parameterType="java.lang.Long">
+        delete from t_questionnaire where questionnaire_id = #{qCode};
+    </delete>
+
+
+    <select id="findQuestionnaireFromTempByQCode" resultType="com.wzz.entity.Questionnaire" parameterType="java.lang.Long">
+        select author,note,state,recovered from t_questionnaire_template where questionnaire_id = #{qCode};
+    </select>
+
+    <!--useGeneratedKeys="true" keyProperty="questionnaireId" 直接返回自增id-->
+    <insert id="insertQuestionnaireTitle" parameterType="com.wzz.entity.Questionnaire" useGeneratedKeys="true" keyProperty="questionnaireId">
+        insert into t_questionnaire(user_id,author,title,note,state) values (#{userId},#{author},#{title},#{note},#{state});
+    </insert>
+
+
+<!--    <select id="findQuestionnaireTemplateId" resultType="Integer" parameterType="String">-->
+<!--        select questionnaire_id from t_questionnaire where title=#{title};-->
+<!--    </select>-->
+
+    <select id="findQuestionnaireByQCode" parameterType="java.lang.Long" resultType="com.wzz.entity.Questionnaire">
+        select user_id,title,author,note,state,recovered from t_questionnaire where questionnaire_id = #{qCode};
+    </select>
+
+</mapper>

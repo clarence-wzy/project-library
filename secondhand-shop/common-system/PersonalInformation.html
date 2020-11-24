@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人信息页 --园猿网</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap-select.css" />
+    <link rel="stylesheet" href="css/fileinput.css" />
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="css/toastr.css" />
+    <link rel="stylesheet" href="css/city-picker.css" />
+    <link rel="stylesheet" href="css/PersonalInformation.css" />
+    <link rel="stylesheet" href="css/header_footer.css" />
+    <link rel="stylesheet" href="css/waifu.css" />
+    <script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap-select.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/fileinput.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/zh.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/piexif.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap-datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/toastr.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/live2d.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/waifu-tips.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        .krajee-default.file-preview-frame .kv-file-content {
+            width: 168px;
+            height: 120px;
+        }
+        
+        .modal {
+            top: 10%;
+        }
+        
+        .krajee-default .file-footer-caption {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="container" style="background: #f7f8f8;">
+    <!-- 顶部图片区域 -->
+    <div class="top-img"></div>
+    <!-- 个人头像区域 -->
+    <div class="row head-img">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div>
+                        <img id="user-headimg" class="img-circle" src="../page/img/personalInformation/head.jpg" />
+                    </div>
+                    <strong>Clarence</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-md-offset-2" style="cursor: pointer;" onclick="window.location.href='index.html'">
+            <img src="img/logo.png" style="width: 200px; margin-top: 75px;" />
+        </div>
+    </div>
+
+    <!-- 个人页面主体区域 -->
+    <div class="info-body row">
+        <!-- 左边区域 -->
+        <div class="col-md-2 info-left" id="myScrollspy">
+            <div class="nav-left">
+                <ul class="nav nav-tabs nav-stacked affix-top" id="nav-list">
+                    <li class="active"><a href="#person" data-toggle="tab">个人信息</a></li>
+                    <li><a href="#deliver-address" data-toggle="tab">我的收货地址</a></li>
+                    <li><a href="#my-collect" data-toggle="tab">我的收藏夹</a></li>
+                    <li><a href="#my-shopcart" data-toggle="tab">我的购物车</a></li>
+                    <li><a href="#my-order" data-toggle="tab">我的订单</a></li>
+                    <li><a href="#my-evaluation" data-toggle="tab">我的评价</a></li>
+                    <!-- <li><a href="#release-product" data-toggle="tab">发布商品</a></li>
+                    <li><a href="#my-product" data-toggle="tab">我的商品</a></li>
+                    <li><a href="#deliver-product" data-toggle="tab">我要发货</a></li> -->
+                </ul>
+            </div>
+        </div>
+        <!-- 右边区域 -->
+        <div class="tab-content info-right col-md-10">
+            <!-- 个人信息 -->
+            <div class="person-body tab-pane fade in active" id="person">
+                <form action="" method="POST" class="form-horizontal">
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">匿名：</label>
+                        <div class="col-md-3 person-control">
+                            <input type="text" id="usernameInput" class="form-control person-control-input">
+                            <label class="control-label person-control-label">
+                                <p id="username">null</p>
+                            </label>
+                        </div>
+                        <label for="" class="control-label col-md-2">实名：</label>
+                        <div class="col-md-3 person-control">
+                            <input type="text" id="realNameInput" class="form-control person-control-input" disabled>
+                            <!-- <label class="control-label person-control-input" id="realNameInput" style="color:rgb(243, 129, 129); font-weight: bold;">
+                                null
+                            </label> -->
+                            <label class="control-label person-control-label">
+                                <p id="realName">null</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">性别：</label>
+                        <div class="col-md-3 person-control">
+                            <input type="text" id="userSexInput" class="form-control person-control-input">
+                            <label class="control-label person-control-label">
+                                <p id="userSex">null</p>
+                            </label>
+                        </div>
+                        <label for="" class="control-label col-md-2">信用度：</label>
+                        <div class="col-md-3 person-control">
+                            <label class="control-label person-control-input" id="userCreditInput" style="color:rgb(243, 129, 129); font-weight: bold;">
+                                500
+                            </label>
+                            <label class="control-label person-control-label">
+                                <p id="userCredit">null</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">邮箱：</label>
+                        <div class="col-md-3 person-control">
+                            <label class="hasBindEmail control-label person-control-label" style="display: none;">
+                                <p id="userEmail">null</p>
+                            </label>
+                            <label class="noBindEmail control-label person-control-label">
+                                <a onclick="showEmailModal();">绑定邮箱</a>
+                            </label>
+                        </div>
+                        <label for="" class="control-label col-md-2">手机号：</label>
+                        <div class="col-md-3 person-control">
+                            <!-- <input type="text" id="userPhoneInput" class="form-control person-control-input"> -->
+                            <label class="hasBindPhone control-label person-control-label" style="display: none;">
+                                <p id="userPhone">null</p>
+                            </label>
+                            <label class="noBindPhone control-label person-control-label">
+                                <a onclick="showPhoneModal();">绑定手机</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">QQ：</label>
+                        <div class="col-md-3 person-control">
+                            <input type="text" id="userQQInput" class="form-control person-control-input">
+                            <label class="control-label person-control-label">
+                                <p id="userQQ">null</p>
+                            </label>
+                        </div>
+                        <label for="" class="control-label col-md-2">WeChat：</label>
+                        <div class="col-md-3 person-control">
+                            <input type="text" id="userWechatInput" class="form-control person-control-input">
+                            <label class="control-label person-control-label">
+                                <p id="userWechat">null</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">学生认证：</label>
+                        <div class="col-md-3 person-control">
+                            <label class="hasCertified control-label person-control-input" style="color:rgb(125, 190, 59); font-weight: bold;">
+                                已认证成功
+                            </label>
+                            <label class="noCertified control-label person-control-label" id="userStudent">
+                                <a onclick="showStudentModal();">我要认证</a>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+                <div class="person-prompt">* 学生认证成功后，即可成为卖家，开通商品发布等功能</div>
+                <div class="person-btn-body" align="center">
+                    <button id="person-edit" class="btn btn-success">编辑</button>
+                </div>
+                <div class="person-btn-edit-body" align="center">
+                    <button id="person-ensure" class="btn btn-success">确定</button>
+                    <button id="person-cancel" class="btn btn-default">取消</button>
+                </div>
+            </div>
+            <!-- 我的收货地址 -->
+            <div class="deliver-address-body tab-pane fade" id="deliver-address">
+                <div class="add-address-body">
+                    <div class="add-address-title">添加收货地址</div>
+                    <div class="form-group">
+                        <label class="control-label"><i>*</i>收货地址：</label>
+                        <div class="col-md-4">
+                            <input id="addressProvince" class="form-control" type="text" placeholder="请选择省/市/区" data-toggle="city-picker" required />
+                        </div>
+                        <label class="control-label">邮政编码：</label>
+                        <div class="col-md-2">
+                            <input id="postCode" type="text" class="form-control" placeholder="请填写邮编">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" style="margin-top: 0;"><i>*</i>详细地址：</label>
+                        <div class="control-body">
+                            <textarea class="form-control" id="detailAddress" rows="3" placeholder="请输入详细地址信息，如道路、门牌号、小区、楼栋号、单元等信息"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"><i>*</i>收货人：</label>
+                        <div class="control-body">
+                            <input id="addressName" type="text" class="form-control" placeholder="长度不能超过25个字符" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label"><i>*</i>联系方式：</label>
+                        <div class="control-body">
+                            <input id="addressPhone" type="text" class="form-control" placeholder="请填写手机号码" required />
+                        </div>
+                    </div>
+                    <label class="checkbox-wrapper form-check-label">
+                        <input class="form-check-input" id="defaultAddress" type="checkbox" />
+                        <span>设置为默认收货地址</span>
+                    </label>
+                    <div class="add-address-btn">
+                        <button class="btn btn-primary" id="add-address-info">添加</button>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>收货人</th>
+                            <th>联系方式</th>
+                            <th>收货地址</th>
+                            <th>操作</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="address-list"></tbody>
+                </table>
+                <div class="address-border"></div>
+            </div>
+            <!-- 我的收藏夹 -->
+            <div class="my-collect-body tab-pane fade" id="my-collect">
+                <div class="my-collect-table" id="my-collect-table">
+                    <div class="no-collect">您还没收藏喜欢的商品！ (*￣︶￣)</div>
+                </div>
+            </div>
+            <!-- 我的购物车 -->
+            <div class="my-shopcart-body tab-pane fade" id="my-shopcart">
+                <div class="my-shopcart-table" id="my-shopcart-table">
+                    <div class="no-shopcart">您还没加入喜欢的商品！ (*￣︶￣)</div>
+                </div>
+                <div class="my-shopcart-total row" style="margin-top: 80px; margin-left: 2px;">
+                    <div class="col-sm-6 form-group">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="allCheck" onclick="allCheck();" />
+                                <span>全选</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="my-shopcart-total-price col-sm-4 col-sm-offset-2">
+                        总计：￥ <b id="shopcart-total">0.00</b>
+                    </div>
+                </div>
+                <div class="my-shopcart-total-button row">
+                    <div class="col-sm-2 col-sm-offset-7">
+                        <button class="btn btn-default" id="shopcart-del">删除</button>
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-success" id="shopcart-settle">结算</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 我的订单 -->
+            <div class="my-order-body tab-pane fade" id="my-order">
+                <nav class="navbar navbar-btn">
+                    <ul class="nav navbar-btn row">
+                        <li class="col-sm-2"><a id="all-order-a" href="javascript:void(0);" onclick="orderType('all');" style="background-color:rgb(250, 240, 229);">全部订单</a></li>
+                        <li class="col-sm-2"><a id="pay-order-a" href="javascript:void(0);" onclick="orderType('pay');">待付款</a></li>
+                        <li class="col-sm-2"><a id="wait-deliver-order-a" href="javascript:void(0);" onclick="orderType('wait-deliver');">待发货</a></li>
+                        <li class="col-sm-2"><a id="deliver-order-a" href="javascript:void(0);" onclick="orderType('deliver');">待收货</a></li>
+                        <li class="col-sm-2"><a id="refund-order-a" href="javascript:void(0);" onclick="orderType('refund');">退款/售后</a></li>
+                    </ul>
+                </nav>
+                <div id="all-order"></div>
+                <div id="pay-order" style="display: none;"></div>
+                <div id="wait-deliver-order" style="display: none;"></div>
+                <div id="deliver-order" style="display: none;"></div>
+                <div id="refund-order" style="display: none;"></div>
+                <div id="no-order-div">您还没购买商品，暂无订单！ (*￣︶￣)</div>
+            </div>
+            <!-- 我的评价 -->
+            <div class="my-evaluation-body tab-pane fade" id="my-evaluation">
+                <div id="no-evaluation-div">您还没评价过任何商品！ (*￣︶￣)</div>
+                <div class="evaluation-list" id="evaluation-info"></div>
+            </div>
+            <!-- 发布商品 -->
+            <div class="release-product-body tab-pane fade" id="release-product">
+                <form action="" method="POST" class="form-horizontal">
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">商品名称：</label>
+                        <div class="col-md-6 release-product-control">
+                            <input type="text" id="productName" class="form-control release-product-control-input" placeholder="请输入商品名称" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">商品价格：</label>
+                        <div class="col-md-2 release-product-control">
+                            <input type="text" id="productPrice" class="form-control release-product-control-input" placeholder="10.00" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">商品类型：</label>
+                        <div class="col-md-3 release-product-control">
+                            <select class="selectpicker show-tick" id="productType1" onchange="typeChanged(this[selectedIndex].value);"></select>
+                        </div>
+                        <div class="col-md-3 release-product-control">
+                            <select class="selectpicker show-tick" id="productType2"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">商品数量：</label>
+                        <div class="col-md-2 release-product-control">
+                            <input type="number" id="productNumber" class="form-control release-product-control-input" value="1" min="1" style="text-align: center;">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">展示图片：</label>
+                        <div class="col-md-9 release-product-control">
+                            <input id="showImage" class="file" type="file" multiple />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">商品描述：</label>
+                        <div class="col-md-9 release-product-control">
+                            <textarea class="form-control" id="productDescription" rows="3" style="resize: vertical;" placeholder="请输入商品的描述，如 名称：xxx，价格：￥10.00 ..."></textarea>
+                            <span style="color: red; font-size:12px;">* 请按照规定格式填入，如 "名称：xxx，价格：￥10.00 ..." </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">详情图片：</label>
+                        <div class="col-md-9 release-product-control">
+                            <!-- <input id="inputfile" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-show-upload="false" data-allowed-file-extensions="['jpg', 'png', 'jpeg', 'gif', 'bmp', 'AVI', 'mov', 'rmvb', 'rm', 'FLV', 'mp4']"> -->
+                            <input id="detailImage" class="file" type="file" multiple />
+                        </div>
+                    </div>
+                    <div class="form-group row" id="qualityTypeDiv">
+                        <label for="" class="control-label col-md-2">成色类型：</label>
+                        <div class="col-md-4 release-product-control">
+                            <select class="selectpicker show-tick" id="qualityType"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row" id="expirationTimeDiv" style="display: none;">
+                        <label for="" class="control-label col-md-2">过期时间：</label>
+                        <div class="col-md-4 release-product-control">
+                            <div class='input-group date' id='expirationTime'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="control-label col-md-2">交易方式：</label>
+                        <div class="col-md-3 release-product-control">
+                            <select class="selectpicker show-tick" id="tradeType" onchange="divHasChanged(this[selectedIndex].value, '校内交易', $('#tradeDescriptionDiv'))"></select>
+                        </div>
+                        <div class="col-md-5 release-product-control" id="tradeDescriptionDiv" style="display: none;">
+                            <input type="text" id="tradeDescription" class="form-control release-product-control-input" placeholder="请输入校内交易的详细地址" />
+                        </div>
+                    </div>
+                </form>
+                <div class="release-product-btn-body" align="center">
+                    <button id="release-product-btn" class="btn btn-success">发布</button>
+                </div>
+            </div>
+            <!-- 我的商品 -->
+            <div class="my-product-body tab-pane fade" id="my-product">
+                <div id="my-product-list-body"></div>
+            </div>
+            <!-- 我要发货 -->
+            <div class="deliver-product-body tab-pane fade" id="deliver-product">
+                <div class="deliver-product-select">
+                    <div class="deliver-product-select-title">订单查询</div>
+                    <div class="form-group">
+                        <label class="control-label">商品名称：</label>
+                        <div class="control-body">
+                            <input id="deliverProductName" type="text" class="form-control" style="width: 400px;" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">开始时间：</label>
+                        <div class="control-body">
+                            <div class="input-group date" id="startTime">
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <label class="control-label">子订单编号：</label>
+                        <div class="control-body">
+                            <input id="deliverChildOrderId" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">结束时间：</label>
+                        <div class="control-body">
+                            <div class="input-group date" id="endTime">
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <label class="control-label">购买者：</label>
+                        <div class="control-body">
+                            <input id="deliverBuyer" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">物流类型：</label>
+                        <div class="control-body">
+                            <input id="deliverLogisticsType" type="text" class="form-control" />
+                        </div>
+                        <label class="control-label">物流编号：</label>
+                        <div class="control-body">
+                            <input id="deliverLogisticsId" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">订单状态：</label>
+                        <div class="control-body">
+                            <select class="selectpicker show-tick" id="deliverStatus">
+                                <option>全部</option>
+                                <option>未发货</option>
+                                <option>已发货</option>
+                                <option>未评价</option>
+                                <option>已评价</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="deliver-product-select-btn">
+                        <button class="btn btn-primary" id="deliver-select">查询</button>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th width="120">子订单编号</th>
+                            <th width="250">商品名称</th>
+                            <th width="70">购买者</th>
+                            <th width="100">下单时间</th>
+                            <th width="80">状态</th>
+                            <th width="80">订单备注</th>
+                            <th width="100">物流</th>
+                            <th width="80">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deliver-product-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 看板娘 -->
+        <div class="waifu" id="waifu">
+            <div class="waifu-tips" style="opacity: 1;"></div>
+            <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+        </div>
+    </div>
+
+    <!-- 加载中 -->
+    <div id="loading" style="position: fixed; top: 40%; left: 50%;"></div>
+    <!-- 尾部 -->
+    <footer id="footer">
+        <div class="serviceList">
+            <span>客服热线 100-000-0000 请转2号键咨询</span>
+            <span>周一至周日 9：00-21：00</span>
+        </div>
+        <div class="copyright">
+            <p>所有图片均受著作权保护，未经许可任何单位与个人不得使用、复制、转载、摘编，违者必究法律责任。</p>
+            <p>
+                <a href="#" onclick="return false;" style="text-decoration: none;">粤ICP备000000000号</a> Copyright © 2018-2019 版权所有
+            </p>
+            <p class="authentication">
+                <a href="#" onclick="return false;">
+                    <img style="height: 47px;" src="img/index/ordermeal.png">
+                </a>
+                <a href="#" onclick="return false;">
+                    <img style="height: 47px;" src="img/index/wxb.png">
+                </a>
+                <a href="#" onclick="return false;">
+                    <img src="img/index/consumerrights.png">
+                </a>
+                <a href="#" onclick="return false;">
+                    <img src="img/index/962110.png" height="47">
+                </a>
+                <a href="#" onclick="return false;" style="display: inline-block; text-decoration: none; height: 20px; line-height: 20px;">
+                    <img src="img/index/ghs.png" style="float: left;">
+                    <span style="float:left; height: 20px; line-height: 20px; margin: 0px 0px 0px 5px; color: #939393;">粤公网安备
+                        44070302000615号</span>
+                </a>
+            </p>
+            <p>违法和不良信息举报电话 100-000-0000</p>
+        </div>
+    </footer>
+
+    <!-- 提示框 -->
+    <div id="promptModal"></div>
+    <!-- 个人信息 --手机绑定模态框 -->
+    <div class="modal fade bs-example-modal-sm" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="phoneModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="phoneModalLabel">手机绑定</h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div class="form-group row">
+                        <label class="control-label col-md-4">手机号：</label>
+                        <div class="col-md-8">
+                            <input id="phone" type="text" class="form-control" placeholder="手机号">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-7">
+                            <input id="phoneCode" type="text" class="form-control" placeholder="验证码">
+                        </div>
+                        <div class="col-md-5">
+                            <!-- <button class="btn btn-primary" id="phone-sendcode">获取验证码</button> -->
+                            <input id="phone-sendcode" class="btn btn-primary" type="button" value="获取验证码">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="phone_btn" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 个人信息 --邮箱绑定模态框 -->
+    <div class="modal fade bs-example-modal-sm" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="phoneModalLabel">邮箱绑定</h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">邮箱：</label>
+                        <div class="col-md-9">
+                            <input id="email" type="text" class="form-control" placeholder="邮箱号">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <input id="emailCode" type="text" class="form-control" placeholder="验证码">
+                        </div>
+                        <div class="col-md-6">
+                            <!-- <button class="btn btn-primary" id="email-sendcode">获取验证码</button> -->
+                            <input id="email-sendcode" class="btn btn-primary" type="button" value="获取验证码">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="email_btn" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 个人信息 --学生认证模态框 -->
+    <div class="modal fade bs-example-modal-sm" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="studentModalLabel">学生认证</h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">学号：</label>
+                        <div class="col-md-9"><input id="studentId" type="text" class="form-control" placeholder="学号">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">密码：</label class="col-md-3">
+                        <div class="col-md-9">
+                            <input id="studentPassword" type="password" class="form-control" placeholder="密码">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="student_btn" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 我的收货地址 --收货地址模态框 -->
+    <div class="modal fade bs-example-modal" id="addAddressModal" tabindex="-1" role="dialog"
+        aria-labelledby="addAddressModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addAddressModalLabel">新增收货地址</h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>地址信息：</label>
+                        <div class="col-md-8">
+                            <input id="addressProvinceModal" class="form-control" type="text" placeholder="请选择省/市/区" data-toggle="city-picker" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>详细地址：</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="detailAddressModal" rows="3" placeholder="请输入详细地址信息，如道路、门牌号、小区、楼栋号、单元等信息"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">邮政编码：</label>
+                        <div class="col-md-8">
+                            <input id="postCodeModal" type="text" class="form-control" placeholder="请填写邮编">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>收货人姓名：</label>
+                        <div class="col-md-8">
+                            <input id="addressNameModal" type="text" class="form-control" placeholder="长度不能超过25个字符" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>手机号码：</label>
+                        <div class="col-md-8">
+                            <input id="addressPhoneModal" type="text" class="form-control" placeholder="请填写手机号码" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="checkbox-wrapper form-check-label col-md-offset-3">
+                            <input class="form-check-input" id="defaultAddressModal" type="checkbox" />
+                            <span>设置为默认收货地址</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                    <button type="button" id="address_btn_modal" class="btn btn-primary" data-modify-addressId="null">保存</button>
+                    <button type="button" id="address_btn_close" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 我要发货 --绑定物流号模态框 -->
+    <div class="modal fade bs-example-modal" id="bindLogisticsModal" tabindex="-1" role="dialog" aria-labelledby="bindLogisticsModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">绑定物流号</h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"><i>*</i>物流类型：</label>
+                        <div class="col-md-8">
+                            <input id="logistics-type" class="form-control" type="text" placeholder="请填写物流类型，如校园xxx、京东等" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">物流单号：</label>
+                        <div class="col-md-8">
+                            <input id="logistics-id" class="form-control" type="text" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请填写物流单号" />
+                        </div>
+                    </div>
+                    <div style="color: rgb(250, 75, 75); text-align: center;">
+                        * 物流类型，如果是校园类型的则无须填写物流单号，否则必须填写
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                    <button type="button" id="bindLogistics_btn_modal" class="btn btn-primary" data-modify-logistics-id="null">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 我的订单 --确定收货模态框 -->
+    <div class="modal fade bs-example-modal-sm" id="makeSureModal">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确定收货</h4>
+                </div>
+                <div class="modal-body form-horizontal" style="margin-top: 10px;">
+                    <div style="text-align: center;">您确定是否收货？</div>
+                </div>
+                <div class="modal-footer" style="text-align: center;">
+                    <button type="button" id="make_sure_btn" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="js/link.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/city-picker.data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/city-picker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public-tool.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/PersonalInformation.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    initModel()
+</script>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品详情页</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/header_footer.css" />
+    <link rel="stylesheet" href="css/commodityList.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap-paginator.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.params.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/toastr.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body style="background: #f7f8f8;">
+    <!--------------------------头部-------------------------------->
+    <div id="commodityDetails-header"></div>
+
+    <!--------------------------主体-------------------------------->
+    <div class="select container" id="type-list" style="width: 80%;">
+        <div class="row">
+            <div class="title col-md-1" id="typeName"></div>
+            <div class="col-md-11">
+                <ul id="typeId">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="formCx" class="picListSelect" style="width: 80%;">
+        <div class="filter_sort">
+            <a id="defaultSort" style="background: #f1f1f1 ; color: #008842;">默认排序</a>
+            <!-- <a id="saleSort">销量<i class="dowm" id="saleSortI"></i></a>
+            <a id="priceSort">价格<i class="sort_down" id="priceSortI"></i></a>
+            <a id="commentSort">评论<i class="dowm" id="commentSortI"></i></a> -->
+        </div>
+    </div>
+    <div class="container" style="width: 80%;">
+        <div class="row" id="goodsListContentRow">
+            <!-- <div class="col-md-3 goodsListContentBox">
+                <ul id="goodsListContent">
+                    <li class="listSty">
+                        <div class="addShopCarBtn">
+                            加入购物车
+                        </div>
+                        <div class="listpicBox">
+                            <img src="img/goodsList/list1.jpg" />
+                        </div>
+                        <a>原膳内蒙古带骨羊排1.2kg</a>
+                        <strong>¥89.90</strong>
+                    </li>
+                </ul>
+            </div> -->
+        </div>
+    </div>
+    <!-- 分页插件 -->
+    <div class="paginatorDiv">
+        <ul id="pageLimit"></ul>
+    </div>
+
+    <!-- 提示框 -->
+    <div id="promptModal"></div>
+    <!--------------------------加载中-------------------------------->
+    <div id="loading"></div>
+    <!--------------------------尾部-------------------------------->
+    <div id="commodityDetails-footer"></div>
+</body>
+
+<script src="js/public-tool.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/commodityList.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $(document).ready(function() {
+        $('#commodityDetails-header').load('PublicHeader.html #header');
+        $('#commodityDetails-footer').load('PublicFooter.html #footer');
+        $('#loading').load('PublicFooter.html #loading');
+    });
+</script>
+
+</html>

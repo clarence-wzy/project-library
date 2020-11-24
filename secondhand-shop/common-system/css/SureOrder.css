@@ -1,0 +1,953 @@
+.sureOrder-body {
+    width: 990px;
+    margin: 0 auto 50px auto;
+}
+
+
+/******************************** 顶部流程 *********************************/
+
+.order-stepbar {
+    position: relative;
+}
+
+.order-stepbar .buy-logo {
+    padding: 26px 0 12px;
+    display: inline-block;
+}
+
+.order-stepbar .buy-logo a {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 170px;
+    height: 35px;
+    font-size: 35px;
+    color: #fff;
+}
+
+.order-stepbar .buy-logo a i {
+    position: absolute;
+    display: inline-block;
+    width: 170px;
+    height: 35px;
+    top: 0;
+    left: 0;
+    background: url(//img.alicdn.com/tps/i2/TB1kJUdGFXXXXcyaXXX08VS7pXX-176-1320.png) 0 -555px no-repeat;
+    background-repeat: no-repeat;
+}
+
+.order-stepbar .stupid-biz.stepbar-5 {
+    margin-left: 0;
+    margin-right: -100px;
+}
+
+.order-stepbar .stupid-biz {
+    height: 60px;
+    margin-bottom: 35px;
+}
+
+.stepbar-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 25px;
+    width: 675px;
+}
+
+.stepbar-wrap .next-step-horizontal {
+    overflow: inherit;
+}
+
+.next-step-circle.next-step-horizontal {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.next-step-horizontal {
+    overflow: hidden;
+}
+
+.next-step {
+    width: 100%;
+    position: relative;
+    border: none;
+}
+
+.order-stepbar .stupid-biz.stepbar-5 li {
+    width: 200px;
+}
+
+.order-stepbar .stupid-biz li {
+    float: left;
+    text-align: center;
+}
+
+.next-step-horizontal>.next-step-item {
+    display: inline-block;
+    text-align: left;
+}
+
+.next-step-item {
+    position: relative;
+    vertical-align: middle;
+    outline: 0;
+    height: 100%;
+}
+
+.next-step-circle .next-step-item-container {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding: 0 8px;
+}
+
+.next-step-circle>.next-step-item-process .next-step-item-node-placeholder {
+    width: 32px;
+    height: 32px;
+    position: relative;
+}
+
+.next-step-circle .next-step-item-container .next-step-item-node-placeholder {
+    display: inline-block;
+}
+
+.next-step-circle>.next-step-item-process>.next-step-item-container .next-step-item-node {
+    color: #fff;
+}
+
+.next-step-circle>.next-step-item-process .next-step-item-node {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.next-step-circle>.next-step-item-process>.next-step-item-container .next-step-item-node-circle {
+    background: #f50;
+    border-color: #f50;
+}
+
+.next-step-circle .next-step-item-node-circle {
+    display: block;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 50%;
+    /* -webkit-transition: background-color .1s linear;
+    transition: background-color .1s linear; */
+}
+
+.stepbar-wrap .next-step-circle.next-step-horizontal .next-step-item .next-step-item-body {
+    left: -56px;
+    width: 160px;
+}
+
+.next-step-circle.next-step-horizontal .next-step-item-body {
+    width: 100px;
+    left: -26px;
+    text-align: center;
+    position: absolute;
+}
+
+.next-step-item-body {
+    outline: 0;
+}
+
+.stepbar-wrap .next-step-circle.next-step-horizontal .next-step-item .next-step-item-body .next-step-item-title {
+    font-size: 14px;
+}
+
+.next-step-circle.next-step-horizontal .next-step-item-title {
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+.next-step-circle.next-step-horizontal>.next-step-item .next-step-item-content,
+.next-step-circle.next-step-horizontal>.next-step-item .next-step-item-title {
+    white-space: normal;
+}
+
+.next-step-circle>.next-step-item-process .next-step-item-title {
+    color: #333;
+    word-break: break-word;
+}
+
+.next-step-circle.next-step-horizontal>.next-step-item-process>.next-step-item-body>.next-step-item-content {
+    margin-top: 4px;
+}
+
+.next-step-circle.next-step-horizontal>.next-step-item .next-step-item-content,
+.next-step-circle.next-step-horizontal>.next-step-item .next-step-item-title {
+    white-space: normal;
+}
+
+.next-step-circle>.next-step-item-process .next-step-item-content {
+    color: #333;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.next-step-circle.next-step-horizontal .next-step-item-tail {
+    display: inline-block;
+    clear: both;
+    width: calc(100% - 48px);
+    vertical-align: middle;
+}
+
+.next-step-circle.next-step-horizontal .next-step-item-tail .next-step-item-tail-underlay {
+    display: block;
+    height: 1px;
+    position: relative;
+}
+
+.next-step-circle .next-step-item-tail-underlay {
+    background: #e6e7eb;
+    margin-right: 2px;
+}
+
+
+/******************************** 收货地址 *********************************/
+
+.sureOrder-address-body {
+    border: 0px solid black;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-shrink: 0;
+}
+
+.sureOrder-address-body {
+    font-size: 12px;
+}
+
+.order-address {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.header-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.header-wrapper .header-title {
+    line-height: 25px;
+    color: #333;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.order-address .addr-item-wrapper.TwoRow {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 237px;
+    margin: 0 10px 14px 0;
+    color: #666;
+    cursor: pointer;
+}
+
+.order-address .address-tips-top {
+    margin-top: -10px;
+    margin-bottom: 5px;
+}
+
+.order-address .addr-selected.addr-item-wrapper.TwoRow .inner-infos {
+    background: url('../img/sureOrder/address-border.png') no-repeat;
+}
+
+.addr-active {
+    background: url('../img/sureOrder/address-border.png') no-repeat;
+}
+
+.order-address .addr-item-wrapper.TwoRow .inner-infos {
+    z-index: 2;
+    position: relative;
+    padding: 11px 15px;
+    background: url("../img/sureOrder/address-border-default.png") no-repeat;
+    overflow: hidden;
+}
+
+.order-address .address-list {
+    width: 1004px;
+}
+
+.addr-hd,
+.addr-hd span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.addr-hd {
+    width: 100%;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 0 0 5px;
+    margin-bottom: 5px;
+    line-height: 18px;
+    font-weight: 700;
+}
+
+.addr-hd span {
+    vertical-align: top;
+}
+
+.addr-hd,
+.addr-hd span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.order-address .addr-selected.addr-item-wrapper.TwoRow .inner-infos .addr-bd {
+    height: 36px;
+}
+
+.addr-bd,
+.addr-bd span {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.addr-bd {
+    height: 55px;
+    overflow: hidden;
+}
+
+.order-address.TwoRow a {
+    color: #c97;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+a,
+a:link,
+a:visited {
+    color: #36c;
+}
+
+.order-address .addr-item-wrapper.TwoRow .inner-infos .modify-operation {
+    display: none;
+}
+
+.order-address .addr-item-wrapper.TwoRow.addr-selected .inner-infos .modify-operation {
+    display: block;
+}
+
+.order-address .addr-item-wrapper.TwoRow.addr-selected .inner-infos .modify-operation:hover {
+    color: red;
+}
+
+.order-address .addr-default.addr-item-wrapper.TwoRow .default-tip {
+    display: block;
+    background: #666;
+    color: #fff;
+}
+
+.order-address .addr-default.addr-item-wrapper.TwoRow .set-default {
+    display: none;
+}
+
+.order-address .addr-item-wrapper.TwoRow.addr-selected .set-default {
+    display: block;
+}
+
+.order-address .addr-selected.addr-item-wrapper.TwoRow .set-default:hover {
+    color: red;
+}
+
+.order-address .addr-item-wrapper.TwoRow .default-tip,
+.order-address .addr-item-wrapper.TwoRow .set-default {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 2px;
+    text-decoration: none;
+    filter: alpha(opacity=70);
+    opacity: .7;
+    z-index: 3;
+}
+
+.order-address .addr-selected.addr-item-wrapper.TwoRow .curMarker {
+    visibility: visible;
+}
+
+.order-address .addr-item-wrapper.TwoRow .curMarker {
+    z-index: 3;
+    position: absolute;
+    background: url('../img/sureOrder/order-icon.png') no-repeat;
+    background-position: 0 -272px;
+    width: 28px;
+    height: 28px;
+    top: 77px;
+    right: 1px;
+    visibility: hidden;
+}
+
+.order-address .operations {
+    display: block;
+    position: relative;
+}
+
+.order-address .operations .manage-link {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+.order-address .operations .manage-link:hover {
+    color: red;
+}
+
+.next-btn.next-btn-normal {
+    border-style: solid;
+    background-color: #fff;
+    border-color: #c4c6cf;
+}
+
+.next-btn.next-medium {
+    border-radius: 3px;
+    padding: 0 12px;
+    height: 28px;
+    line-height: 26px;
+    font-size: 12px;
+    border-width: 1px;
+}
+
+
+/******************************** 商品信息 *********************************/
+
+.item-headers-wrap {
+    margin-top: 15px;
+    color: #6c6c6c;
+}
+
+.item-headers-content {
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-bottom: 3px solid #b2d1ff;
+    font-size: 12px;
+    margin-left: 1px;
+    vertical-align: bottom;
+}
+
+.item-headers-0 {
+    /* width: 255px; */
+    width: 400px;
+    margin-left: 0;
+}
+
+.item-headers-1 {
+    width: 190px;
+}
+
+.item-headers-2,
+.item-headers-3 {
+    /* width: 120px; */
+    width: 180px;
+}
+
+.item-headers-4 {
+    width: 190px;
+}
+
+.item-headers-5 {
+    /* width: 130px; */
+    width: 217px;
+}
+
+.orderInfo-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px dotted rgb(221, 221, 221);
+}
+
+#order-item-row {
+    /* margin-top: 20px; */
+    background-color: rgb(251, 252, 255);
+}
+
+.order-border {
+    margin-top: 20px;
+    background-color: rgb(251, 252, 255);
+}
+
+.order-orderInfo {
+    position: relative;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #80b2ff;
+    margin-top: 5px;
+    height: 27px;
+}
+
+.order-orderInfo .shopIcon {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+    margin-left: 20px;
+    margin-right: 6px;
+    position: relative;
+    top: 1px;
+}
+
+.order-itemInfo {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.order-itemInfo .info-detail {
+    /* width: 245px; */
+    width: 400px;
+    padding: 10px 0 10px 10px;
+}
+
+.order-itemInfo .info-cell {
+    display: inline-block;
+    box-sizing: content-box;
+    margin-right: 1px;
+}
+
+.order-itemInfo .info-img {
+    display: block;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.order-itemInfo .info-msg {
+    padding-left: 10px;
+    vertical-align: top;
+    float: right;
+    margin-right: 15px;
+}
+
+.order-itemInfo .info-title {
+    color: #3c3c3c;
+    width: 320px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    text-decoration: none;
+}
+
+.order-itemInfo .info-title:hover {
+    color: rgb(223, 14, 14);
+}
+
+.order-itemInfo .delivery-time {
+    color: #6c6c6c;
+    display: inline-block;
+    width: 180px;
+    margin-top: 5px;
+}
+
+.order-itemInfo .info-price {
+    color: #3c3c3c;
+    vertical-align: top;
+    display: inline-block;
+    /* width: 120px; */
+    width: 160px;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.order-quantity {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    /* width: 120px; */
+    width: 190px;
+    padding: 10px 0;
+    margin-right: 1px;
+}
+
+.order-quantity .quantity-inner {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 0 0 5px;
+}
+
+.item-row__price {
+    display: inline-block;
+    width: 217px;
+    vertical-align: top;
+    text-align: center;
+    padding-top: 12px;
+}
+
+.label {
+    display: inline-block;
+    padding: 5px;
+}
+
+.item-row__price-item span {
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    color: rgb(255, 68, 0);
+    font-size: 14px;
+    min-width: 100px;
+}
+
+.textarea {
+    position: relative;
+    padding: 10px;
+}
+
+.textarea .textarea__title {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.textarea .textarea__wrapper {
+    display: inline-block;
+}
+
+.textarea .textarea__wrapper .textarea__input {
+    vertical-align: top;
+    width: 328px;
+    resize: none;
+    text-indent: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    overflow: auto;
+}
+
+.next-input.next-input-textarea {
+    border-radius: 3px;
+    font-size: 0;
+}
+
+.next-input,
+.next-input *,
+.next-input :after,
+.next-input :before {
+    box-sizing: border-box;
+}
+
+.next-input {
+    vertical-align: middle;
+    display: inline-table;
+    border-collapse: separate;
+    font-size: 0;
+    line-height: 1;
+    width: 200px;
+    border-spacing: 0;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+    border: 1px solid #c4c6cf;
+    background-color: #fff;
+}
+
+.next-input.next-input-textarea textarea {
+    color: #333;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.next-input input,
+.next-input textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    background-color: transparent;
+    color: #333;
+}
+
+.next-input textarea {
+    resize: none;
+}
+
+.next-input.next-input-textarea .next-input-control {
+    display: block;
+    width: auto;
+    border-radius: 3px;
+}
+
+.next-input-control,
+.next-input-inner,
+.next-input-label {
+    display: table-cell;
+    width: 1px;
+    vertical-align: middle;
+    line-height: 1;
+    background-color: transparent;
+    white-space: nowrap;
+}
+
+.next-input.next-input-textarea .next-input-len {
+    padding: 0 8px 4px;
+    display: block;
+    text-align: right;
+    width: auto;
+}
+
+.next-input-control .next-input-len {
+    font-size: 12px;
+    line-height: 12px;
+    color: #999;
+    display: table-cell;
+    width: 1px;
+    vertical-align: bottom;
+}
+
+.next-input-control>* {
+    display: table-cell;
+    width: 1%;
+    top: 0;
+}
+
+.delivery-method {
+    position: relative;
+    padding-top: 11px;
+    padding-bottom: 10px;
+}
+
+.delivery-method .delivery-box,
+.delivery-method .delivery-radio,
+.delivery-method .delivery-select,
+.delivery-method .multiple-method {
+    display: inline;
+}
+
+.delivery-method .delivery-title {
+    display: inline-block;
+    padding-right: 15px;
+    min-width: 95px;
+    text-align: right;
+    font-size: 12px;
+}
+
+.delivery-method .delivery-type {
+    margin-right: 4px;
+}
+
+.delivery-method .appoint-container {
+    margin-left: 95px;
+}
+
+.delivery-method .select-price {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-weight: 700;
+    font-size: 12px;
+    color: rgb(255, 80, 0);
+}
+
+.label__header {
+    display: inline-block;
+    width: inherit;
+    text-align: right;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    font-size: 16px;
+    min-width: 100px;
+    margin-right: 10px;
+    color: black;
+}
+
+
+/* self */
+
+.order-note {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(242, 247, 255);
+    border-bottom: 1px dotted rgb(128, 178, 255);
+}
+
+.order-note .order-note-block {
+    padding: 0px;
+    border-top: 1px solid rgb(255, 255, 255);
+}
+
+.order-note .order-note-block .order-note-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0px;
+}
+
+.order-note-row .order-note-row-item {
+    padding: 0px;
+    border-right: 1px solid rgb(255, 255, 255);
+    border-top: 1px solid rgb(255, 255, 255);
+}
+
+.order-note-row .order-note-row-item .order-note-row-item-border {
+    padding: 5px;
+    border-top: 1px solid rgb(255, 255, 255);
+}
+
+.order-item-total {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 0px;
+    padding: 10px 0px;
+}
+
+#order-total {
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    color: rgb(255, 68, 0);
+    font-size: 16px;
+    min-width: 100px;
+}
+
+
+/******************************** 实付盒子 *********************************/
+
+.realpay {
+    text-align: right;
+    margin-top: 15px;
+}
+
+.realpay .box__wrapper {
+    display: inline-block;
+    border: 1px solid #ff0036;
+}
+
+.realpay .box__wrapper .box__shadow {
+    border: 3px solid #fff0e8;
+    min-width: 230px;
+    padding: 10px 5px 10px 20px;
+}
+
+.realpay .realpay--title {
+    font-weight: 700;
+    color: #333;
+}
+
+.realpay .realpay--price-symbol {
+    font-size: 26px;
+    margin-right: 4px;
+    color: #999;
+}
+
+.realpay .realpay--price {
+    color: rgb(255, 80, 0);
+    font: 700 26px tahoma;
+}
+
+.order-confirmAddr {
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.order-confirmAddr .confirmAddr-title {
+    font-weight: 700;
+    color: #333;
+}
+
+.order-confirmAddr .confirmAddr-title {
+    font-weight: 700;
+    color: #333;
+}
+
+.order-confirm-eticket {
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.submitOrder-container {
+    text-align: right;
+    margin-top: -1px;
+}
+
+.submitOrder-container .wrapper {
+    display: inline-block;
+    padding: 0 0 5px 5px;
+}
+
+.submitOrder-container .go-back {
+    color: #36c;
+    text-decoration: none;
+    margin-right: 50px;
+    line-height: 34px;
+}
+
+.submitOrder-container .go-back:hover {
+    color: rgb(223, 14, 14);
+}
+
+.submitOrder-container .go-btn {
+    display: inline-block;
+    width: 182px;
+    height: 39px;
+    position: relative;
+    vertical-align: middle;
+    line-height: 39px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    /* background: #dd2727; */
+    color: #fff;
+    background-color: rgb(255, 80, 0);
+}
+
+.submitOrder-container .go-back i {
+    font: 17px/33px normal;
+    font-family: tp-buy-font;
+    padding-right: 6px;
+}
+
+
+/******************************** 添加收货地址模态框 *********************************/
+
+#addAddressModal i {
+    color: red;
+    margin-right: 5px;
+}
+
+#addAddressModal textarea {
+    resize: none;
+}
+
+.checkbox-wrapper {
+    position: relative;
+    left: 16px;
+}
+
+.checkbox-wrapper input {
+    position: relative;
+    top: 2px;
+}
+
+.checkbox-wrapper span {
+    font-size: 12px;
+    color: #333;
+}

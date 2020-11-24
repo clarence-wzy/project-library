@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzy.mapper.LogisticsMapper">
+
+    <select id="findLogistics" resultType="com.wzy.entity.Logistics">
+        select
+            id, logistics_id, logistics_type, child_order_id, logistics_status, logistics_create_time, logistics_modify_time,
+            supplier_id, supplier_name
+        from logistics
+        where logistics_status != "DISABLE"
+        <if test="logisticsId != null">
+            and logistics_id = #{logisticsId}
+        </if>
+    </select>
+
+    <insert id="insertLogistics">
+        insert into
+            logistics(id, logistics_id, logistics_type, child_order_id, logistics_status, logistics_create_time,
+            supplier_id, supplier_name)
+        values
+            (#{id}, #{logisticsId}, #{logisticsType}, #{childOrderId}, "ENABLE", now(), #{supplierId}, #{supplierName})
+    </insert>
+
+    <update id="updateLogistics" parameterType="com.wzy.entity.Logistics">
+        update logistics
+        set logistics_id = #{logisticsId}, logistics_type = #{logisticsType}
+        where id = #{id} and logistics_status != "DISABLE"
+    </update>
+
+    <select id="findLogisticsIdByIdOrType" resultType="string">
+        select logistics_id
+        from logistics
+        where logistics_status != "DISABLE"
+        <if test="logisticsId != null">
+            and logistics_id = #{logisticsId}
+        </if>
+        <if test="logisticsType != null">
+            and logistics_type like concat('%' ,#{logisticsType}, '%')
+        </if>
+    </select>
+
+</mapper>

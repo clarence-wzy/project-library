@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wzz.mapper.UserMapper">
+
+    <select id="getUserInfoByName" resultType="com.wzz.entity.User">
+        select user_id,
+               username,
+               password,
+               role_id,
+               email_code,
+               max_email,
+               max_message,
+               max_storage,
+               max_account,
+               latest_time,
+               status
+        from t_user_info
+        where username = #{username, jdbcType=VARCHAR}
+    </select>
+    <select id="getPermIdByRoleId" resultType="com.wzz.entity.RolePermission">
+        select id, role_id, perm_id from sys_roles_permissions
+        where role_id = #{role_id, jdbcType=INTEGER}
+    </select>
+    <select id="getPermDetailByPermId" resultType="com.wzz.entity.Permission">
+        select perm_id, perm_name, perm_detail from sys_permissions
+        where perm_id = #{perm_id, jdbcType=INTEGER}
+    </select>
+
+    <!-- 用于密码加密更新数据库 -->
+    <update id="updatePasswordWithEncryption" parameterType="string">
+        update t_user_info
+        set password = #{password}
+        where username = #{username}
+    </update>
+</mapper>
