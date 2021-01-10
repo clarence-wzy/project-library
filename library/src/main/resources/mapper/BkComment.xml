@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ripen.dao.mapper.BkCommentMapper">
+
+    <!-- 书籍评论数据列 -->
+    <sql id="COMMENT_COL">
+        id, rcd_id, bk_id, rate, content, img, userId, is_anno, create_time, status
+    </sql>
+
+
+</mapper>

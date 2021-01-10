@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ripen.dao.mapper.OperationMapper">
+
+    <!-- 操作日志数据列 -->
+    <sql id="OP_COL">
+        op_id, op_type, op_detail, create_time
+    </sql>
+
+
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ripen.dao.mapper.SysUserMapper">
+
+    <!-- 用户表数据列 -->
+    <sql id="USER_COL">
+        account, pwd, `name`, sex, head_img, status AS user_status, create_time, update_time
+    </sql>
+
+    <!-- 新增用户 -->
+    <insert id="addUser" parameterType="SysUser">
+        INSERT INTO `sys_user`
+            (<include refid="USER_COL" />)
+        VALUES
+            (#{account}, #{pwd}, #{name}, #{sex}, #{headImg}, #{userStatus}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!-- 获取全部用户信息 -->
+    <select id="getAllUser" resultType="SysUser">
+        SELECT <include refid="USER_COL" />
+        FROM `sys_user`
+        ORDER BY create_time DESC
+        <if test="page.num != 0">
+            LIMIT #{page.num}, #{page.size}
+        </if>
+    </select>
+
+    <!-- 获取用户信息 -->
+    <select id="getUserWithCondition" resultType="SysUser">
+        SELECT <include refid="USER_COL" />
+        FROM `sys_user`
+        WHERE 1=1
+        <if test="sysUser.account != null">
+            AND account = #{sysUser.account}
+        </if>
+        <if test="sysUser.name != null">
+            AND `name` = #{sysUser.name}
+        </if>
+        <if test="sysUser.userStatus != null">
+            AND status = #{sysUser.userStatus}
+        </if>
+        ORDER BY create_time DESC
+        <if test="page.num != 0">
+            LIMIT #{page.num}, #{page.size}
+        </if>
+    </select>
+
+    <!-- 更新用户信息 -->
+    <update id="updateUser" parameterType="SysUser">
+        UPDATE `sys_user`
+        SET
+            update_time = now()
+            <if test="name != null">
+                , `name` = #{name}
+            </if>
+            <if test="sex != null">
+                , sex = #{sex}
+            </if>
+            <if test="headImg != null">
+                , head_img = #{headImg}
+            </if>
+            <if test="userStatus != null">
+                , status = #{userStatus}
+            </if>
+        WHERE account = #{account}
+    </update>
+
+    <!-- 获取最大ID -->
+    <select id="getMaxId">
+        SELECT MAX(id)
+        FROM `sys_user`
+    </select>
+
+</mapper>

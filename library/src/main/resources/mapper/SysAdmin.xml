@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ripen.dao.mapper.SysAdminMapper">
+
+    <!-- 管理员数据列 -->
+    <sql id="ADMIN_COL">
+        adm_id, pwd, sex, email, status AS admin_status, `level`, create_time, update_time
+    </sql>
+
+    <!-- 新增管理员 -->
+    <insert id="addAdmin" parameterType="SysAdmin">
+        INSERT INTO `sys_admin`
+            (<include refid="ADMIN_COL" />)
+        VALUES
+            (#{admId}, #{pwd}, #{sex}, #{email}, #{adminStatus}, #{level}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!-- 获取管理员信息 -->
+    <select id="getAdminWithCondition" resultType="SysAdmin">
+        SELECT <include refid="ADMIN_COL" />
+        FROM `sys_admin`
+        WHERE 1=1
+        <if test="sysAdmin.account != null">
+            AND adm_id = #{sysAdmin.admId}
+        </if>
+        <if test="sysUser.userStatus != null">
+            AND status = #{sysAdmin.adminStatus}
+        </if>
+        ORDER BY create_time DESC
+        <if test="page.num != 0">
+            LIMIT #{page.num}, #{page.size}
+        </if>
+    </select>
+
+    <!-- 更新管理员信息 -->
+    <update id="updateAdmin" parameterType="SysAdmin">
+        UPDATE `sys_admin`
+        SET
+            update_time = now()
+            <if test="name != null">
+                , `name` = #{name}
+            </if>
+            <if test="sex != null">
+                , sex = #{sex}
+            </if>
+            <if test="userStatus != null">
+                , status = #{adminStatus}
+            </if>
+        WHERE adm_id = #{admId}
+    </update>
+
+    <!-- 获取最大ID -->
+    <select id="getMaxId">
+        SELECT MAX(id)
+        FROM `sys_admin`
+    </select>
+
+</mapper>
