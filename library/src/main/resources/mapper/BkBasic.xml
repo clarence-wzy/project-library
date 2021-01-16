@@ -20,7 +20,7 @@
     <!-- 新增书籍类型 -->
     <insert id="addType" parameterType="BkType">
         INSERT INTO `bk_type`
-            (<include refid="TYPE_COL" />)
+            (id, t_name, status, create_time, update_time)
         VALUES
             (#{btId}, #{tName}, #{bkStatus}, #{createTime}, #{updateTime})
     </insert>
@@ -28,7 +28,7 @@
     <!-- 新增书籍信息 -->
     <insert id="addInfo" parameterType="BkInfo">
         INSERT INTO `bk_info`
-            (<include refid="INFO_COL" />)
+            (bk_id, bk_name, bk_author, bk_press, bk_price, remark, status, create_time, update_time)
         VALUES
             (#{bkId}, #{bkName}, #{bkAuthor}, #{bkPress}, #{remark}, #{bkInfoStatus}, #{createTime}, #{updateTime})
     </insert>
@@ -36,9 +36,19 @@
     <!-- 新增书籍详情 -->
     <insert id="addDetail" parameterType="BkDetail">
         INSERT INTO `bk_detail`
-            (<include refid="DETAIL_COL" />)
+            (ser_id, bk_id, status, create_time, adm_id)
         VALUES
             (#{serId}, #{bkId}, #{bkDetailStatus}, #{createTime}, #{admId})
+    </insert>
+
+    <!-- 批量新增书籍详情 -->
+    <insert id="batchAddDetail" parameterType="BkDetail">
+        INSERT INTO `bk_detail`
+            (ser_id, bk_id, status, create_time, adm_id)
+        VALUES
+            <foreach collection="bkDetailList" item="item" separator=",">
+                (#{item.serId}, #{item.bkId}, #{item.bkDetailStatus}, #{item.createTime}, #{item.admId})
+            </foreach>
     </insert>
 
     <!-- 批量新增书籍类型与信息关联 -->
@@ -59,7 +69,26 @@
         <if test="status != null">
             AND status = #{status}
         </if>
+        <if test="btId != null">
+            AND id = #{btId}
+        </if>
+        <if test="btIdList != null">
+            AND id IN
+            <foreach collection="btIdList" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
         ORDER BY t_name
+    </select>
+
+    <!-- 根据书籍信息ID获取书籍类型 -->
+    <select id="getTypeByBkId" resultType="BkType">
+        SELECT
+            bt.id AS bt_id, bt.t_name, bt.status AS bt_status, bt.create_time, bt.update_time
+        FROM `bk_type` bt
+        INNER IN `bk_type_info` bti
+        ON bt.id = bti.bt_id
+        WHERE bti.bk_id = #{bkId}
     </select>
 
     <!-- 获取书籍信息 -->
@@ -74,6 +103,30 @@
             AND status = #{status}
         </if>
         ORDER BY bk_name
+        <if test="page.num != 0">
+            LIMIT #{page.num}, #{page.size}
+        </if>
+    </select>
+
+    <!-- 多条件获取书籍信息 -->
+    <select id="getInfoWithCondition" resultType="BkInfo">
+        SELECT
+        i.bk_id, i.bk_name, i.bk_author, i.bk_press, i.bk_price, i.remark, i.status AS bk_info_status,
+        i.create_time, i.update_time
+        FROM `bk_info` i
+        INNER IN `bk_type_info` ti
+        ON i.bk_id = ti.bk_id
+        WHERE 1=1
+        <if test="bkId != null">
+            AND i.bk_id = #{bkId}
+        </if>
+        <if test="btId != null">
+            AND ti.id = #{bkId}
+        </if>
+        <if test="status != null">
+            AND i.status = #{status}
+        </if>
+        ORDER BY i.create_time DESC
         <if test="page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
@@ -96,27 +149,6 @@
         </if>
     </select>
 
-    <!-- 多条件获取书籍信息 -->
-    <select id="getInfoWithCondition" resultType="BkInfo">
-        SELECT
-            i.bk_id, i.bk_name, i.bk_author, i.bk_press, i.bk_price, i.remark, i.status AS bk_info_status,
-            i.create_time, i.update_time
-        FROM `bk_info` i
-        INNER IN `bk_type_info` ti
-        ON i.bk_id = ti.bk_id
-        WHERE 1=1
-        <if test="bkId != null">
-            AND i.bk_id = #{bkId}
-        </if>
-        <if test="btId != null">
-            AND ti.id = #{bkId}
-        </if>
-        ORDER BY i.create_time DESC
-        <if test="page.num != 0">
-            LIMIT #{page.num}, #{page.size}
-        </if>
-    </select>
-
     <!-- 获取带信息的书籍详情 -->
     <select id="getDetailWithInfo" resultType="BkDetail">
         SELECT
@@ -126,12 +158,45 @@
         INNER IN `bk_info` i
         ON d.bk_id = i.bk_id
         WHERE 1=1
+        <if test="bkId != null">
+            AND bk_id = #{bkId}
+        </if>
         <if test="serId != null">
             AND d.ser_id = #{serId}
         </if>
         <if test="page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
+    </select>
+
+    <!-- 获取书籍类型最大ID -->
+    <select id="getMaxTypeId" resultType="int">
+        SELECT IFNULL(MAX(id), 0)
+        FROM `bt_type`
+    </select>
+
+    <!-- 统计书籍类型与信息关联的数量 -->
+    <select id="countTypeInfo" resultType="int">
+        SELECT COUNT(bk_id)
+        FROM `bk_type_info`
+        WHERE 1=1
+        <if test="btId != null">
+            AND bt_id = #{btId}
+        </if>
+        GROUP BY bk_id
+    </select>
+
+    <!-- 统计书籍数量和书籍借出数量 -->
+    <select id="countDetailByStatus" resultType="list">
+        (
+            SELECT COUNT(ser_id) AS `num` FROM `bk_detail`
+            WHERE status = 0 AND bk_id = #{bk_id}
+        )
+        UNION
+        (
+            SELECT COUNT(ser_id) AS `num` FROM `bk_detail`
+            WHERE status = 1 AND bk_id = #{bk_id}
+        )
     </select>
 
 </mapper>

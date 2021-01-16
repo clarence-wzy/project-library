@@ -10,7 +10,7 @@
     <!-- 新增用户 -->
     <insert id="addUser" parameterType="SysUser">
         INSERT INTO `sys_user`
-            (<include refid="USER_COL" />)
+            (account, pwd, `name`, sex, head_img, status, create_time, update_time)
         VALUES
             (#{account}, #{pwd}, #{name}, #{sex}, #{headImg}, #{userStatus}, #{createTime}, #{updateTime})
     </insert>
@@ -66,8 +66,8 @@
     </update>
 
     <!-- 获取最大ID -->
-    <select id="getMaxId">
-        SELECT MAX(id)
+    <select id="getMaxId" resultType="int">
+        SELECT IFNULL(MAX(id) ,0)
         FROM `sys_user`
     </select>
 

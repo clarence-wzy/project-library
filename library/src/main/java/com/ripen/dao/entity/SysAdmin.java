@@ -42,7 +42,7 @@ public class SysAdmin implements Serializable {
     /**
      * 状态，0：正常，1：锁定，2：删除
      */
-    private int admStatus;
+    private int adminStatus;
 
     /**
      * 等级（暂无等级，默认都为0）

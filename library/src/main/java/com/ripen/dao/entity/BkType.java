@@ -46,4 +46,10 @@ public class BkType implements Serializable {
      */
     private LocalDateTime updateTime;
 
+
+    /**
+     * 书籍信息数量
+     */
+    int infoNum;
+
 }

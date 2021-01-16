@@ -36,6 +36,9 @@
         UPDATE `bk_record`
         SET
             update_time = now()
+            <if test="lendTime != null">
+                , lendTime = #{lendTime}
+            </if>
             <if test="returnTime != null">
                 , return_time = #{returnTime}
             </if>

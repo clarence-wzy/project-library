@@ -45,6 +45,14 @@ public interface BkBasicMapper {
     int addDetail (BkDetail bkDetail);
 
     /**
+     * 批量新增书籍详情
+     *
+     * @param bkDetailList
+     * @return
+     */
+    int batchAddDetail (@Param("bkDetailList") List<BkDetail> bkDetailList);
+
+    /**
      * 批量新增书籍类型与信息关联
      *
      * @param tiList
@@ -56,9 +64,19 @@ public interface BkBasicMapper {
      * 获取书籍类型
      *
      * @param status
+     * @param btId
+     * @param btIdList
      * @return
      */
-    List<BkType> getType (@Param("status") Integer status);
+    List<BkType> getType (@Param("status") Integer status, @Param("btId") Integer btId, @Param("btIdList") List<Integer> btIdList);
+
+    /**
+     * 根据书籍信息ID获取书籍类型
+     *
+     * @param bkId
+     * @return
+     */
+    BkType getTypeByBkId (@Param("bkId") String bkId);
 
     /**
      * 获取书籍信息
@@ -71,6 +89,17 @@ public interface BkBasicMapper {
     List<BkInfo> getInfo (@Param("bkId") String bkId, @Param("status") Integer status, @Param("page") Page page);
 
     /**
+     * 多条件获取书籍信息
+     *
+     * @param bkId
+     * @param btId
+     * @param status
+     * @param page
+     * @return
+     */
+    List<BkInfo> getInfoWithCondition (@Param("bkId") String bkId, @Param("btId") Integer btId, @Param("status") Integer status, @Param("page") Page page);
+
+    /**
      * 获取书籍详情
      *
      * @param bkId
@@ -81,22 +110,36 @@ public interface BkBasicMapper {
     List<BkDetail> getDetail (@Param("bkId") String bkId, @Param("serId") String serId, @Param("page") Page page);
 
     /**
-     * 多条件获取书籍信息
-     *
-     * @param bkId
-     * @param btId
-     * @param page
-     * @return
-     */
-    List<BkInfo> getInfoWithType (@Param("bkId") String bkId, @Param("btId") Integer btId, @Param("page") Page page);
-
-    /**
      * 获取带信息的书籍详情
      *
+     * @param bkId
      * @param serId
      * @param page
      * @return
      */
-    List<BkDetail> getDetailWithInfo (@Param("serId") String serId, @Param("page") Page page);
+    List<BkDetail> getDetailWithInfo (@Param("bkId") String bkId, @Param("serId") String serId, @Param("page") Page page);
+
+    /**
+     * 获取书籍类型最大ID
+     *
+     * @return
+     */
+    int getMaxTypeId ();
+
+    /**
+     * 获取书籍类型与信息关联的数量
+     *
+     * @param btId
+     * @return
+     */
+    int countTypeInfo(@Param("btId") Integer btId);
+
+    /**
+     * 统计书籍数量和书籍借出数量
+     *
+     * @param bkId
+     * @return
+     */
+    List<Integer> countDetailByStatus(@Param("bkId") String bkId);
 
 }

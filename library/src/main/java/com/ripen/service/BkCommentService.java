@@ -1,21 +1,21 @@
-package com.ripen.dao.mapper;
+package com.ripen.service;
 
 import com.ripen.dao.entity.BkComment;
 import com.ripen.dao.entity.BkRecord;
+import com.ripen.service.impl.BkCommentServiceImpl;
 import org.apache.ibatis.annotations.Param;
-import org.mapstruct.Mapper;
 
 import java.util.List;
 
 /**
- * 书籍评论映射
+ * 书籍评论服务层
  *
  * @author Ripen.Y
- * @version 2021/01/09 22:10
- * @since 2021/01/09
+ * @version 2021/01/16 23:58
+ * @see BkCommentServiceImpl
+ * @since 2021/01/16
  */
-@Mapper
-public interface BkCommentMapper {
+public interface BkCommentService {
 
     /**
      * 新增书籍评论
@@ -34,6 +34,7 @@ public interface BkCommentMapper {
      * @param status
      * @return
      */
-    List<BkRecord> getComment (@Param("rcdId") String rcdId, @Param("bkId") String bkId, @Param("userId") String userId, @Param("status") Integer status);
+    List<BkRecord> getComment (String rcdId, String bkId, String userId, Integer status);
+
 
 }

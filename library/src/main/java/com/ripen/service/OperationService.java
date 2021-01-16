@@ -1,21 +1,19 @@
-package com.ripen.dao.mapper;
+package com.ripen.service;
 
 import com.ripen.dao.entity.Operation;
 import com.ripen.util.Page;
-import org.apache.ibatis.annotations.Param;
-import org.mapstruct.Mapper;
 
 import java.util.List;
 
 /**
- * 操作日志映射
+ * 日志操作服务层
  *
  * @author Ripen.Y
- * @version 2021/01/09 22:10
- * @since 2021/01/09
+ * @version 2021/01/17 0:49
+ * @see
+ * @since 2021/01/17
  */
-@Mapper
-public interface OperationMapper {
+public interface OperationService {
 
     /**
      * 新增操作日志
@@ -34,6 +32,7 @@ public interface OperationMapper {
      * @param page
      * @return
      */
-    List<Operation> getOpera (@Param("opId") String opId, @Param("opType") Integer opType, @Param("opDetail") String opDetail, @Param("page") Page page);
+    List<Operation> getOpera (String opId, Integer opType, String opDetail, Page page);
+
 
 }

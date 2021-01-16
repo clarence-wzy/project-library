@@ -11,7 +11,7 @@
  Target Server Version : 50710
  File Encoding         : 65001
 
- Date: 10/01/2021 21:30:00
+ Date: 17/01/2021 00:54:54
 */
 
 SET NAMES utf8mb4;
@@ -23,7 +23,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `bk_comment`;
 CREATE TABLE `bk_comment`  (
   `id` int(11) NOT NULL COMMENT '自增id',
-  `rcd_id` int(11) NOT NULL COMMENT '记录id',
+  `rcd_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '记录id',
   `bk_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '书籍id',
   `rate` int(1) NOT NULL COMMENT '评论等级，-1：差评，0：中评，1：好评',
   `content` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
@@ -42,7 +42,7 @@ CREATE TABLE `bk_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `ser_id` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '书籍编号',
   `bk_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '书籍id',
-  `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态，0：正常',
+  `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态，0：正常，1：借出',
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `adm_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '管理员id',
   PRIMARY KEY (`id`) USING BTREE
@@ -74,9 +74,9 @@ CREATE TABLE `bk_record`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `ser_id` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '书籍编号',
   `bk_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '书籍id',
-  `lend_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '借出时间',
+  `lend_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '借出时间',
   `return_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '归还时间',
-  `expire_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '过期时间',
+  `expire_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '过期时间',
   `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '书籍记录表' ROW_FORMAT = Dynamic;
@@ -133,7 +133,7 @@ CREATE TABLE `sys_user`  (
   `sex` int(1) NOT NULL DEFAULT 0 COMMENT '性别，0：男，1：女',
   `head_img` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '头像',
   `status` int(1) NOT NULL DEFAULT 0 COMMENT '状态，0：正常，1：锁定，2：删除',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `UNI_ACCOUNT`(`account`) USING BTREE COMMENT '用户账号唯一索引'
@@ -146,7 +146,7 @@ DROP TABLE IF EXISTS `u_operation`;
 CREATE TABLE `u_operation`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `op_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '操作id',
-  `op_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '操作类型',
+  `op_type` int(11) NOT NULL COMMENT '操作类型',
   `op_detail` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '操作详情',
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE

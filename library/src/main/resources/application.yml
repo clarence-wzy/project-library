@@ -45,6 +45,7 @@ mybatis:
     use-generated-keys: true
     map-underscore-to-camel-case: true
     use-column-label: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #nginx图片配置
 #ftp:
 #  host: ip

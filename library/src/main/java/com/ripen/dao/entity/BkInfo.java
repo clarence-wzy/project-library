@@ -77,4 +77,14 @@ public class BkInfo implements Serializable {
      */
     private List<BkType> bkTypeList;
 
+    /**
+     * 书籍总数
+     */
+    private Integer bNum;
+
+    /**
+     * 书籍借出数量
+     */
+    private Integer bLendNum;
+
 }

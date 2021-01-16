@@ -10,7 +10,7 @@
     <!-- 新增管理员 -->
     <insert id="addAdmin" parameterType="SysAdmin">
         INSERT INTO `sys_admin`
-            (<include refid="ADMIN_COL" />)
+            (adm_id, pwd, sex, email, status, `level`, create_time, update_time)
         VALUES
             (#{admId}, #{pwd}, #{sex}, #{email}, #{adminStatus}, #{level}, #{createTime}, #{updateTime})
     </insert>
@@ -20,10 +20,10 @@
         SELECT <include refid="ADMIN_COL" />
         FROM `sys_admin`
         WHERE 1=1
-        <if test="sysAdmin.account != null">
+        <if test="sysAdmin.admId != null">
             AND adm_id = #{sysAdmin.admId}
         </if>
-        <if test="sysUser.userStatus != null">
+        <if test="sysAdmin.adminStatus != null">
             AND status = #{sysAdmin.adminStatus}
         </if>
         ORDER BY create_time DESC
@@ -37,21 +37,21 @@
         UPDATE `sys_admin`
         SET
             update_time = now()
-            <if test="name != null">
-                , `name` = #{name}
-            </if>
             <if test="sex != null">
                 , sex = #{sex}
             </if>
-            <if test="userStatus != null">
+            <if test="email != null">
+                , email = #{email}
+            </if>
+            <if test="adminStatus != null">
                 , status = #{adminStatus}
             </if>
         WHERE adm_id = #{admId}
     </update>
 
     <!-- 获取最大ID -->
-    <select id="getMaxId">
-        SELECT MAX(id)
+    <select id="getMaxId" resultType="int">
+        SELECT IFNULL(MAX(id) ,0)
         FROM `sys_admin`
     </select>
 

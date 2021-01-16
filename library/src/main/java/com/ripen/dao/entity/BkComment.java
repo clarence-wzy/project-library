@@ -30,7 +30,7 @@ public class BkComment implements Serializable {
     /**
      * 记录id
      */
-    private int rcdId;
+    private String rcdId;
 
     /**
      * 书籍id

@@ -4,7 +4,6 @@ import com.ripen.dao.entity.SysAdmin;
 import com.ripen.service.impl.SysAdminServiceImpl;
 import com.ripen.util.Page;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import java.util.List;
  * @see SysAdminServiceImpl
  * @since 2021/01/10
  */
-@Service
 public interface SysAdminService {
 
     /**

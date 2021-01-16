@@ -25,7 +25,6 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
-
     @Override
     public String addUser(SysUser sysUser) {
         String curAccount = String.format("%05d", sysUserMapper.getMaxId() + 1);

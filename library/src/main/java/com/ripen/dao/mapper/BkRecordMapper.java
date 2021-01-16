@@ -31,16 +31,17 @@ public interface BkRecordMapper {
      * @param serId
      * @return
      */
-    List<BkRecord> BkRecord (@Param("bkId") String bkId, @Param("serId") String serId);
+    List<BkRecord> getRecord (@Param("bkId") String bkId, @Param("serId") String serId);
 
     /**
      * 根据书籍编号更新书籍记录
      *
      * @param serId
+     * @param lendTime
      * @param returnTime
      * @param expireTime
      * @return
      */
-    int updateRecord (@Param("serId") String serId, @Param("returnTime") String returnTime, @Param("expireTime") String expireTime);
+    int updateRecord (@Param("serId") String serId, @Param("lendTime") String lendTime, @Param("returnTime") String returnTime, @Param("expireTime") String expireTime);
 
 }

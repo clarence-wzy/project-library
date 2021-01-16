@@ -7,5 +7,32 @@
         op_id, op_type, op_detail, create_time
     </sql>
 
+    <!-- 新增操作日志 -->
+    <insert id="addOpera" parameterType="Operation">
+        INSERT INTO `u_operation`
+            (<include refid="OP_COL" />)
+        VALUES
+            (#{opId}, #{opType}, #{opDetail}, #{createTime})
+    </insert>
+
+    <!-- 获取操作日志 -->
+    <select id="getOpera" resultType="Operation">
+        SELECT <include refid="OP_COL" />
+        FROM `u_operation`
+        WHERE 1=1
+        <if test="opId != null">
+            AND op_id = #{opId}
+        </if>
+        <if test="opType != null">
+            AND op_type = #{opType}
+        </if>
+        <if test="opDetail != null">
+            AND op_detail LIKE CONCAT("%", #{opDetail}, "%")
+        </if>
+        ORDER BY create_time DESC
+        <if test="page.num != 0">
+            LIMIT #{page.num}, #{page.size}
+        </if>
+    </select>
 
 </mapper>

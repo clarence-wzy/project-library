@@ -33,7 +33,7 @@ public class BkDetail implements Serializable {
     private String bkId;
 
     /**
-     * 状态，0：正常
+     * 状态，0：正常，1：借出
      */
     private int bkDetailStatus;
 
@@ -72,5 +72,11 @@ public class BkDetail implements Serializable {
      * 备注信息
      */
     private String remark;
+
+
+    /**
+     * 书籍类型
+     */
+    private BkType bkType;
 
 }

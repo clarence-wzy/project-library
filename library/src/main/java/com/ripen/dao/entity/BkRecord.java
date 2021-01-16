@@ -50,4 +50,16 @@ public class BkRecord implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime expireTime;
 
+    /**
+     * 更新时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
+
+
+    /**
+     * 书籍信息
+     */
+    private BkInfo bkInfo;
+
 }

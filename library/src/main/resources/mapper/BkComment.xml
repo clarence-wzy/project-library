@@ -4,8 +4,35 @@
 
     <!-- 书籍评论数据列 -->
     <sql id="COMMENT_COL">
-        id, rcd_id, bk_id, rate, content, img, userId, is_anno, create_time, status
+        id, rcd_id, bk_id, rate, content, img, user_id, is_anno, create_time, status AS comment_status
     </sql>
 
+    <!-- 新增书籍评论 -->
+    <insert id="addComment" parameterType="BkComment">
+        INSERT INTO `bk_comment`
+            (rcd_id, bk_id, rate, content, img, user_id, is_anno, create_time, status)
+        VALUES
+            (#{rcdId}, #{bkId}, #{rate}, #{content}, #{img}, #{userId}, #{isAnno}, #{createTime}, #{commentStatus})
+    </insert>
+
+    <!-- 获取书籍评论 -->
+    <select id="getComment" resultType="BkComment">
+        SELECT <include refid="COMMENT_COL" />
+        FROM `bk_comment`
+        WHERE 1=1
+        <if test="rcdId != null">
+            AND rcd_id = #{rcdId}
+        </if>
+        <if test="bkId != null">
+            AND bk_id = #{bkId}
+        </if>
+        <if test="userId != null">
+            AND user_id = #{userId}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        ORDER BY create_time DESC
+    </select>
 
 </mapper>

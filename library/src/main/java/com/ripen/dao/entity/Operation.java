@@ -30,7 +30,7 @@ public class Operation implements Serializable {
     /**
      * 操作类型
      */
-    private String opType;
+    private int opType;
 
     /**
      * 操作详情

@@ -4,12 +4,16 @@ import com.ripen.dao.entity.SysUser;
 import com.ripen.service.SysUserService;
 import com.ripen.util.JsonResult;
 import com.ripen.util.Page;
+import com.ripen.util.ThreeDes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.*;
+
+import java.util.List;
 
 /**
  * 用户控制层
@@ -28,6 +32,22 @@ public class UserController {
     @Autowired
     private SysUserService sysUserService;
 
+    @ApiOperation(value = "用户登录")
+    @PostMapping(value = "/login")
+    public JsonResult login (@RequestBody SysUser sysUser) {
+        SysUser tempSysUser = new SysUser();
+        tempSysUser.setAccount(sysUser.getAccount());
+        List<SysUser> sysUserList = sysUserService.getUserWithCondition(tempSysUser, null);
+        if (sysUserList == null || sysUserList.size() <= 0) {
+            return JsonResult.errorMsg("Login fail, account does not exist.");
+        }
+        String pwd = ThreeDes.encryptThreeDESECB(sysUser.getPwd());
+        if (!pwd.equals(sysUserList.get(0).getPwd())) {
+            return JsonResult.errorMsg("Login fail, password mistake.");
+        }
+        return JsonResult.ok("Login success.");
+    }
+
     @ApiOperation(value = "添加用户")
     @PostMapping(value = "/add")
     @Transactional()
@@ -37,12 +57,16 @@ public class UserController {
             return JsonResult.errorMsg("参数错误");
         }
         String result = sysUserService.addUser(sysUser);
-        return result == null ? JsonResult.errorMsg("add error") : JsonResult.ok(result);
+        if (result == null) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return JsonResult.errorMsg("add error");
+        }
+        return JsonResult.ok(result);
     }
 
     @ApiOperation(value = "获取用户信息")
     @GetMapping(value = "/get")
-    public JsonResult get (@RequestBody SysUser sysUser, @RequestBody Page page)
+    public JsonResult get (SysUser sysUser, Page page)
     {
         return JsonResult.ok(sysUserService.getUserWithCondition(sysUser, page));
     }
@@ -52,8 +76,11 @@ public class UserController {
     @Transactional()
     public JsonResult update (@RequestBody SysUser sysUser)
     {
-        return JsonResult.ok(sysUserService.updateUser(sysUser));
+        if (sysUserService.updateUser(sysUser) == -1) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return JsonResult.errorMsg("update error");
+        }
+        return JsonResult.ok();
     }
-
 
 }
