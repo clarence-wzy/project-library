@@ -22,7 +22,6 @@ spring:
         max-wait: -1
         min-idle: 5
         max-idle: 10
-    password: sise
 #  mail:
 #    host: smtp.qq.com
 #    username: xxx@qq.com

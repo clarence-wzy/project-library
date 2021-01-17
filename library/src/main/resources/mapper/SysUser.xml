@@ -20,7 +20,7 @@
         SELECT <include refid="USER_COL" />
         FROM `sys_user`
         ORDER BY create_time DESC
-        <if test="page.num != 0">
+        <if test="page != null and page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
     </select>
@@ -40,7 +40,7 @@
             AND status = #{sysUser.userStatus}
         </if>
         ORDER BY create_time DESC
-        <if test="page.num != 0">
+        <if test="page != null and page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
     </select>

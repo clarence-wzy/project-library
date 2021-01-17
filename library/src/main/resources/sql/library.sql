@@ -11,7 +11,7 @@
  Target Server Version : 50710
  File Encoding         : 65001
 
- Date: 17/01/2021 00:54:54
+ Date: 17/01/2021 16:50:12
 */
 
 SET NAMES utf8mb4;
@@ -122,6 +122,56 @@ CREATE TABLE `sys_admin`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for sys_perm
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_perm`;
+CREATE TABLE `sys_perm`  (
+  `perm_id` int(11) NOT NULL AUTO_INCREMENT,
+  `perm_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `perm_detail` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`perm_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_perm
+-- ----------------------------
+INSERT INTO `sys_perm` VALUES (1, 'SE_BK', '查询书籍');
+INSERT INTO `sys_perm` VALUES (2, 'AD_BK', '新增书籍');
+INSERT INTO `sys_perm` VALUES (3, 'UP_BK', '修改书籍');
+INSERT INTO `sys_perm` VALUES (4, 'LE_RE_BK', '借阅归还书籍');
+
+-- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `role_detail` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES (1, 'GE_USER', '普通用户');
+
+-- ----------------------------
+-- Table structure for sys_role_perm
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_perm`;
+CREATE TABLE `sys_role_perm`  (
+  `role_id` int(11) NOT NULL COMMENT '角色ID',
+  `perm_id` int(11) NULL DEFAULT NULL COMMENT '权限ID'
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色权限表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role_perm
+-- ----------------------------
+INSERT INTO `sys_role_perm` VALUES (1, 1);
+INSERT INTO `sys_role_perm` VALUES (1, 4);
+
+-- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
@@ -138,6 +188,21 @@ CREATE TABLE `sys_user`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `UNI_ACCOUNT`(`account`) USING BTREE COMMENT '用户账号唯一索引'
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for sys_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role`  (
+  `account` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户账号',
+  `role_id` int(11) NULL DEFAULT NULL COMMENT '角色ID',
+  `type` int(1) NOT NULL COMMENT '用户类型，0：用户，1：管理员'
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('00001', 1, 0);
 
 -- ----------------------------
 -- Table structure for u_operation

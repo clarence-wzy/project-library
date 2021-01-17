@@ -32,21 +32,21 @@ public class UserController {
     @Autowired
     private SysUserService sysUserService;
 
-    @ApiOperation(value = "用户登录")
-    @PostMapping(value = "/login")
-    public JsonResult login (@RequestBody SysUser sysUser) {
-        SysUser tempSysUser = new SysUser();
-        tempSysUser.setAccount(sysUser.getAccount());
-        List<SysUser> sysUserList = sysUserService.getUserWithCondition(tempSysUser, null);
-        if (sysUserList == null || sysUserList.size() <= 0) {
-            return JsonResult.errorMsg("Login fail, account does not exist.");
-        }
-        String pwd = ThreeDes.encryptThreeDESECB(sysUser.getPwd());
-        if (!pwd.equals(sysUserList.get(0).getPwd())) {
-            return JsonResult.errorMsg("Login fail, password mistake.");
-        }
-        return JsonResult.ok("Login success.");
-    }
+//    @ApiOperation(value = "用户登录")
+//    @PostMapping(value = "/login")
+//    public JsonResult login (@RequestBody SysUser sysUser) {
+//        SysUser tempSysUser = new SysUser();
+//        tempSysUser.setAccount(sysUser.getAccount());
+//        List<SysUser> sysUserList = sysUserService.getUserWithCondition(tempSysUser, null);
+//        if (sysUserList == null || sysUserList.size() <= 0) {
+//            return JsonResult.errorMsg("Login fail, account does not exist.");
+//        }
+//        String pwd = ThreeDes.encryptThreeDESECB(sysUser.getPwd());
+//        if (!pwd.equals(sysUserList.get(0).getPwd())) {
+//            return JsonResult.errorMsg("Login fail, password mistake.");
+//        }
+//        return JsonResult.ok("Login success.");
+//    }
 
     @ApiOperation(value = "添加用户")
     @PostMapping(value = "/add")

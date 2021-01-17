@@ -1,7 +1,6 @@
 package com.ripen.controller;
 
 import com.ripen.dao.entity.SysAdmin;
-import com.ripen.dao.entity.SysUser;
 import com.ripen.service.SysAdminService;
 import com.ripen.util.JsonResult;
 import com.ripen.util.Page;
