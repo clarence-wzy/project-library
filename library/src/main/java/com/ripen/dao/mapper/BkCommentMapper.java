@@ -1,7 +1,6 @@
 package com.ripen.dao.mapper;
 
 import com.ripen.dao.entity.BkComment;
-import com.ripen.dao.entity.BkRecord;
 import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
@@ -34,6 +33,6 @@ public interface BkCommentMapper {
      * @param status
      * @return
      */
-    List<BkRecord> getComment (@Param("rcdId") String rcdId, @Param("bkId") String bkId, @Param("userId") String userId, @Param("status") Integer status);
+    List<BkComment> getComment (@Param("rcdId") String rcdId, @Param("bkId") String bkId, @Param("userId") String userId, @Param("status") Integer status);
 
 }

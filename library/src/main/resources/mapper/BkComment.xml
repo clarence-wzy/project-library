@@ -12,7 +12,7 @@
         INSERT INTO `bk_comment`
             (rcd_id, bk_id, rate, content, img, user_id, is_anno, create_time, status)
         VALUES
-            (#{rcdId}, #{bkId}, #{rate}, #{content}, #{img}, #{userId}, #{isAnno}, #{createTime}, #{commentStatus})
+            (#{rcdId}, #{bkId}, #{rate}, #{content}, #{img}, #{userId}, #{isAnno}, #{createTime}, #{commStatus})
     </insert>
 
     <!-- 获取书籍评论 -->

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书籍记录映射
@@ -27,21 +28,35 @@ public interface BkRecordMapper {
     /**
      * 获取书籍记录
      *
-     * @param bkId
-     * @param serId
+     * @param bkRecord
      * @return
      */
-    List<BkRecord> getRecord (@Param("bkId") String bkId, @Param("serId") String serId);
+    List<BkRecord> getRecord (BkRecord bkRecord);
 
     /**
-     * 根据书籍编号更新书籍记录
+     * 根据书籍记录id更新书籍记录
      *
-     * @param serId
+     * @param rcdId
      * @param lendTime
      * @param returnTime
      * @param expireTime
      * @return
      */
-    int updateRecord (@Param("serId") String serId, @Param("lendTime") String lendTime, @Param("returnTime") String returnTime, @Param("expireTime") String expireTime);
+    int updateRecord (@Param("rcdId") String rcdId, @Param("lendTime") String lendTime, @Param("returnTime") String returnTime, @Param("expireTime") String expireTime);
+
+    /**
+     * 根据书籍信息id统计数量
+     *
+     * @return
+     */
+    List<Map<String, Object>> countByBkId ();
+
+    /**
+     * 获取书籍编号
+     *
+     * @param rcdIdList
+     * @return
+     */
+    List<String> getSerId (@Param("rcdIdList") List<String> rcdIdList);
 
 }

@@ -23,6 +23,16 @@ import java.time.LocalDateTime;
 public class BkRecord implements Serializable {
 
     /**
+     * 书籍记录id
+     */
+    private String rcdId;
+
+    /**
+     * 账号
+     */
+    private String account;
+
+    /**
      * 书籍编号
      */
     private String serId;

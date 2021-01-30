@@ -5,11 +5,13 @@ import com.ripen.service.SysAdminService;
 import com.ripen.util.JsonResult;
 import com.ripen.util.Page;
 import com.ripen.util.ThreeDes;
+import io.netty.util.internal.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
@@ -35,15 +37,15 @@ public class AdminController {
 
     @ApiOperation(value = "管理员登录")
     @PostMapping(value = "/login")
-    public JsonResult login (@RequestBody SysAdmin SysAdmin) {
+    public JsonResult login (@RequestParam String admId, String pwd) {
         SysAdmin tempSysAdmin = new SysAdmin();
-        tempSysAdmin.setAdmId(SysAdmin.getAdmId());
+        tempSysAdmin.setAdmId(admId);
         List<SysAdmin> sysAdminList = sysAdminService.getAdminWithCondition(tempSysAdmin, null);
         if (sysAdminList == null || sysAdminList.size() <= 0) {
             return JsonResult.errorMsg("Login fail, account does not exist.");
         }
-        String pwd = ThreeDes.encryptThreeDESECB(SysAdmin.getPwd());
-        if (!pwd.equals(sysAdminList.get(0).getPwd())) {
+        String tempPwd = ThreeDes.encryptThreeDESECB(pwd);
+        if (!tempPwd.equals(sysAdminList.get(0).getPwd())) {
             return JsonResult.errorMsg("Login fail, password mistake.");
         }
         return JsonResult.ok("Login success.");
@@ -51,7 +53,7 @@ public class AdminController {
 
     @ApiOperation(value = "添加管理员")
     @PostMapping(value = "/add")
-    @Transactional()
+    @Transactional(propagation = Propagation.REQUIRED)
     public JsonResult add (@RequestBody SysAdmin sysAdmin)
     {
         if (sysAdmin == null) {
@@ -73,10 +75,14 @@ public class AdminController {
     }
 
     @ApiOperation(value = "更新管理员信息")
-    @PostMapping(value = "/update")
-    @Transactional()
-    public JsonResult update (@RequestBody SysAdmin sysAdmin)
+    @PostMapping(value = "/modify/{admin_id}")
+    @Transactional(propagation = Propagation.REQUIRED)
+    public JsonResult update (@PathVariable("admin_id") String adminId, @RequestBody SysAdmin sysAdmin)
     {
+        if (StringUtil.isNullOrEmpty(adminId)) {
+            return JsonResult.errorMsg("参数错误");
+        }
+        sysAdmin.setAdmId(adminId);
         if (sysAdminService.updateAdmin(sysAdmin) == -1) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return JsonResult.errorMsg("update error");

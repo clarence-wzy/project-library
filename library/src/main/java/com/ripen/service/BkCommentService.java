@@ -1,9 +1,7 @@
 package com.ripen.service;
 
 import com.ripen.dao.entity.BkComment;
-import com.ripen.dao.entity.BkRecord;
 import com.ripen.service.impl.BkCommentServiceImpl;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public interface BkCommentService {
      * @param status
      * @return
      */
-    List<BkRecord> getComment (String rcdId, String bkId, String userId, Integer status);
+    List<BkComment> getComment (String rcdId, String bkId, String userId, Integer status);
 
 
 }

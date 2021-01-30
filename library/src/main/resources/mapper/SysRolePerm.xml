@@ -17,4 +17,14 @@
         ) t ON rp.role_id = t.role_id
     </select>
 
+    <!-- 新增用户角色关联 -->
+    <insert id="addUserRole" parameterType="SysRolePerm">
+        INSERT INTO `sys_user_role`
+            (account, role_id, `type`)
+        VALUES
+            <foreach collection="rolePermList" item="item" separator=",">
+                (#{item.account}, #{item.roleId}, #{item.type})
+            </foreach>
+    </insert>
+
 </mapper>

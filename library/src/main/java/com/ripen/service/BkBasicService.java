@@ -69,4 +69,32 @@ public interface BkBasicService {
      */
     List<BkDetail> getBkDetail(String bkId, String serId, int type, Page page);
 
+    /**
+     * 修改书籍信息
+     *
+     * @param bkId 书籍信息ID
+     * @param bkInfo 书籍信息
+     * @return
+     */
+    int modifyInfo(String bkId, BkInfo bkInfo);
+
+    /**
+     * 修改书籍类型信息关联
+     *
+     * @param bkId 书籍信息ID
+     * @param addTypeList 新增类型列表
+     * @param delTypeList 删除类型列表
+     * @return
+     */
+    int modifyTypeInfo(String bkId, List<Integer> addTypeList, List<Integer> delTypeList);
+
+    /**
+     * 修改书籍类型
+     *
+     * @param btId 类型ID
+     * @param bkType 书籍类型
+     * @return
+     */
+    int modifyType(Integer btId, BkType bkType);
+
 }

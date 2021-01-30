@@ -71,6 +71,6 @@ public class BkComment implements Serializable {
     /**
      * 状态，0：正常，1：删除
      */
-    private int commStatus;
+    private Integer commStatus;
 
 }

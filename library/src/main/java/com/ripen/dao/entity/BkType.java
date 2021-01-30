@@ -34,7 +34,7 @@ public class BkType implements Serializable {
     /**
      * 状态，0：正常，1：删除
      */
-    private int btStatus;
+    private Integer btStatus;
 
     /**
      * 创建时间

@@ -9,10 +9,14 @@ import com.ripen.util.Page;
 import com.ripen.util.SnowFlakeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书籍基础服务层实现
@@ -35,6 +39,7 @@ public class BkBasicServiceImpl implements BkBasicService {
     private BkRecordMapper bkRecordMapper;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public int addBook(BkInfo bkInfo, String admId, int num) {
         if (bkInfo == null || admId == null || num == 0) {
             return -1;
@@ -69,7 +74,8 @@ public class BkBasicServiceImpl implements BkBasicService {
             bkTypeInfo.setBtId(id);
             bkTypeInfoList.add(bkTypeInfo);
         }
-        if (bkBasicMapper.batchAddTypeInfo(bkTypeInfoList) != 0) {
+        if (bkBasicMapper.batchAddTypeInfo(bkTypeInfoList) == 0) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return -1;
         }
         // 新增书籍信息
@@ -78,6 +84,7 @@ public class BkBasicServiceImpl implements BkBasicService {
         bkInfo.setCreateTime(LocalDateTime.now());
         bkInfo.setUpdateTime(LocalDateTime.now());
         if (bkBasicMapper.addInfo(bkInfo) != 1) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return -1;
         }
 
@@ -90,6 +97,7 @@ public class BkBasicServiceImpl implements BkBasicService {
 
             bkDetail = new BkDetail();
             bkDetail.setSerId(serId);
+            bkDetail.setBkId(bkId);
             bkDetail.setBkDetailStatus(0);
             bkDetail.setCreateTime(LocalDateTime.now());
             bkDetail.setAdmId(admId);
@@ -102,13 +110,15 @@ public class BkBasicServiceImpl implements BkBasicService {
             bkRecordList.add(bkRecord);
         }
         // 新增书籍详情
-        if (bkBasicMapper.batchAddDetail(bkDetailList) != 0) {
+        if (bkBasicMapper.batchAddDetail(bkDetailList) == 0) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return -1;
         }
         // 新增书籍记录信息
-        if (bkRecordMapper.batchAddRecord(bkRecordList) != 0) {
-            return -1;
-        }
+//        if (bkRecordMapper.batchAddRecord(bkRecordList) == 0) {
+//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//            return -1;
+//        }
 
         return 0;
     }
@@ -116,10 +126,11 @@ public class BkBasicServiceImpl implements BkBasicService {
     @Override
     public int addBkType(BkType bkType) {
         if (bkType == null) {
-            return -1;
+            return -2;
         }
         int btId = bkBasicMapper.getMaxTypeId() + 1;
         bkType.setBtId(btId);
+        bkType.setBtStatus(0);
         bkType.setCreateTime(LocalDateTime.now());
         bkType.setUpdateTime(LocalDateTime.now());
         if (bkBasicMapper.addType(bkType) != 1) {
@@ -149,13 +160,22 @@ public class BkBasicServiceImpl implements BkBasicService {
         }
         if (type == 1) {
             // 为了提高性能，如果分页信息为null，或分页数量为0，则不获取书籍数量和借出数量
-            if (page == null || page.getNum() == 0) {} else {
+//            if (page == null || page.getNum() == 0) {} else {
                 for (BkInfo bkInfo : bkInfoList) {
-                    List<Integer> numList = bkBasicMapper.countDetailByStatus(bkInfo.getBkId());
-                    bkInfo.setBNum(numList.get(0) + numList.get(1));
-                    bkInfo.setBLendNum(numList.get(1));
+                    int bNum = 0, bLendNum = 0;
+                    for (Map<String, Object> numList : bkBasicMapper.countDetailByStatus(bkInfo.getBkId()))
+                    {
+                        int num = Integer.parseInt(numList.get("num").toString());
+                        int tempStatus = Integer.parseInt(numList.get("status").toString());
+                        bNum += num;
+                        if (tempStatus == 1) {
+                            bLendNum += num;
+                        }
+                    }
+                    bkInfo.setBNum(bNum);
+                    bkInfo.setBLendNum(bLendNum);
                 }
-            }
+//            }
         }
         return bkInfoList;
     }
@@ -186,6 +206,64 @@ public class BkBasicServiceImpl implements BkBasicService {
                 break;
         }
         return bkDetailList;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int modifyInfo(String bkId, BkInfo bkInfo) {
+        if (bkId == null || bkInfo == null) {
+            return -2;
+        }
+        try {
+            bkInfo.setBkId(bkId);
+            bkBasicMapper.modifyInfo(bkInfo);
+            return 0;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int modifyTypeInfo(String bkId, List<Integer> addTypeList, List<Integer> delTypeList) {
+        if (bkId == null) {
+            return -2;
+        }
+        try {
+            if (addTypeList != null && addTypeList.size() > 0) {
+                List<BkTypeInfo> bkTypeInfoList = new ArrayList<>(addTypeList.size());
+                BkTypeInfo bkTypeInfo = new BkTypeInfo();
+                bkTypeInfo.setBkId(bkId);
+                for (Integer btId : addTypeList) {
+                    bkTypeInfo.setBtId(btId);
+                    bkTypeInfoList.add(bkTypeInfo);
+                }
+                bkBasicMapper.batchAddTypeInfo(bkTypeInfoList);
+            }
+            if (delTypeList != null && delTypeList.size() > 0) {
+                bkBasicMapper.delBatchTypeInfo(bkId, delTypeList);
+            }
+            return 0;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
+    }
+
+    @Override
+    public int modifyType(Integer btId, BkType bkType) {
+        if (btId == null || bkType == null) {
+            return -2;
+        }
+        try {
+            bkType.setBtId(btId);
+            bkBasicMapper.modifyType(bkType);
+            return 0;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
     }
 
 }

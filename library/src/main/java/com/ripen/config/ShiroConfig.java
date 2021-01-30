@@ -57,8 +57,8 @@ public class ShiroConfig {
         filerMap.put("/login", "anon");
         filerMap.put("/user/add", "anon");
         // 添加页面需要的权限
-        filerMap.put("/user/get", "perms[SE_BK]");
-        filerMap.put("/admin/get", "perms[aaa]");
+//        filerMap.put("/user/get", "perms[SE_BK]");
+//        filerMap.put("/admin/get", "perms[aaa]");
         // 全部拦截
         filerMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filerMap);

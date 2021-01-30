@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 public class BkDetail implements Serializable {
 
     /**
-     * 类型名称
+     * 书籍编号
      */
     private String serId;
 
@@ -67,6 +67,11 @@ public class BkDetail implements Serializable {
      * 书籍报价
      */
     private BigDecimal bkPrice;
+
+    /**
+     * 书籍图片
+     */
+    private String bkImg;
 
     /**
      * 备注信息

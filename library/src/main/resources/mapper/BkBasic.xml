@@ -9,7 +9,7 @@
 
     <!-- 书籍信息数据列 -->
     <sql id="INFO_COL">
-        bk_id, bk_name, bk_author, bk_press, bk_price, remark, status AS bk_info_status, create_time, update_time
+        bk_id, bk_name, bk_author, bk_press, bk_price, bk_img, remark, status AS bk_info_status, create_time, update_time
     </sql>
 
     <!-- 书籍详情数据列 -->
@@ -22,15 +22,15 @@
         INSERT INTO `bk_type`
             (id, t_name, status, create_time, update_time)
         VALUES
-            (#{btId}, #{tName}, #{bkStatus}, #{createTime}, #{updateTime})
+            (#{btId}, #{tName}, #{btStatus}, #{createTime}, #{updateTime})
     </insert>
 
     <!-- 新增书籍信息 -->
     <insert id="addInfo" parameterType="BkInfo">
         INSERT INTO `bk_info`
-            (bk_id, bk_name, bk_author, bk_press, bk_price, remark, status, create_time, update_time)
+            (bk_id, bk_name, bk_author, bk_press, bk_price, bk_img, remark, status, create_time, update_time)
         VALUES
-            (#{bkId}, #{bkName}, #{bkAuthor}, #{bkPress}, #{remark}, #{bkInfoStatus}, #{createTime}, #{updateTime})
+            (#{bkId}, #{bkName}, #{bkAuthor}, #{bkPress}, #{bkPrice}, #{bkImg}, #{remark}, #{bkInfoStatus}, #{createTime}, #{updateTime})
     </insert>
 
     <!-- 新增书籍详情 -->
@@ -57,7 +57,7 @@
             (bt_id, bk_id)
         VALUES
             <foreach item="item" collection="tiList" separator=",">
-                (#{item.bt_id}, #{item.bk_id})
+                (#{item.btId}, #{item.bkId})
             </foreach>
     </insert>
 
@@ -86,7 +86,7 @@
         SELECT
             bt.id AS bt_id, bt.t_name, bt.status AS bt_status, bt.create_time, bt.update_time
         FROM `bk_type` bt
-        INNER IN `bk_type_info` bti
+        INNER JOIN `bk_type_info` bti
         ON bt.id = bti.bt_id
         WHERE bti.bk_id = #{bkId}
     </select>
@@ -103,7 +103,7 @@
             AND status = #{status}
         </if>
         ORDER BY bk_name
-        <if test="page.num != 0">
+        <if test="page != null and page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
     </select>
@@ -111,10 +111,10 @@
     <!-- 多条件获取书籍信息 -->
     <select id="getInfoWithCondition" resultType="BkInfo">
         SELECT
-        i.bk_id, i.bk_name, i.bk_author, i.bk_press, i.bk_price, i.remark, i.status AS bk_info_status,
-        i.create_time, i.update_time
+            i.bk_id, i.bk_name, i.bk_author, i.bk_press, i.bk_price, i.bk_img, i.remark,
+            i.status AS bk_info_status, i.create_time, i.update_time
         FROM `bk_info` i
-        INNER IN `bk_type_info` ti
+        INNER JOIN `bk_type_info` ti
         ON i.bk_id = ti.bk_id
         WHERE 1=1
         <if test="bkId != null">
@@ -127,7 +127,7 @@
             AND i.status = #{status}
         </if>
         ORDER BY i.create_time DESC
-        <if test="page.num != 0">
+        <if test="page != null and page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
     </select>
@@ -144,7 +144,7 @@
             AND ser_id = #{serId}
         </if>
         ORDER BY create_time DESC
-        <if test="page.num != 0">
+        <if test="page != null and page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
     </select>
@@ -153,9 +153,9 @@
     <select id="getDetailWithInfo" resultType="BkDetail">
         SELECT
             d.ser_id, d.bk_id, d.status AS bk_detail_status, d.create_time, d.adm_id,
-            i.bk_name, i.bk_author, i.bk_press, i.bk_price, i.remark
+            i.bk_name, i.bk_author, i.bk_press, i.bk_price, i.bk_img, i.remark
         FROM `bk_detail` d
-        INNER IN `bk_info` i
+        INNER JOIN `bk_info` i
         ON d.bk_id = i.bk_id
         WHERE 1=1
         <if test="bkId != null">
@@ -164,7 +164,7 @@
         <if test="serId != null">
             AND d.ser_id = #{serId}
         </if>
-        <if test="page.num != 0">
+        <if test="page != null and page.num != 0">
             LIMIT #{page.num}, #{page.size}
         </if>
     </select>
@@ -172,31 +172,92 @@
     <!-- 获取书籍类型最大ID -->
     <select id="getMaxTypeId" resultType="int">
         SELECT IFNULL(MAX(id), 0)
-        FROM `bt_type`
+        FROM `bk_type`
     </select>
 
     <!-- 统计书籍类型与信息关联的数量 -->
     <select id="countTypeInfo" resultType="int">
-        SELECT COUNT(bk_id)
-        FROM `bk_type_info`
-        WHERE 1=1
-        <if test="btId != null">
-            AND bt_id = #{btId}
-        </if>
-        GROUP BY bk_id
+        SELECT COUNT(t.count)
+        FROM (
+            SELECT COUNT(bk_id) AS `count`
+            FROM `bk_type_info`
+            WHERE 1=1
+            <if test="btId != null">
+                AND bt_id = #{btId}
+            </if>
+            GROUP BY bk_id
+        ) t
     </select>
 
     <!-- 统计书籍数量和书籍借出数量 -->
-    <select id="countDetailByStatus" resultType="list">
-        (
-            SELECT COUNT(ser_id) AS `num` FROM `bk_detail`
-            WHERE status = 0 AND bk_id = #{bk_id}
-        )
-        UNION
-        (
-            SELECT COUNT(ser_id) AS `num` FROM `bk_detail`
-            WHERE status = 1 AND bk_id = #{bk_id}
-        )
+    <select id="countDetailByStatus" resultType="map">
+        SELECT
+            status, COUNT(ser_id) AS `num`
+        FROM `bk_detail`
+        WHERE bk_id = #{bkId}
+        GROUP BY status
     </select>
 
+    <!-- 修改书籍信息 -->
+    <update id="modifyInfo" parameterType="BkInfo">
+        UPDATE `bk_info`
+        SET update_time = now()
+        <if test="bkName != null">
+            , bk_name = #{bkName}
+        </if>
+        <if test="bkAuthor != null">
+            , bk_author = #{bkAuthor}
+        </if>
+        <if test="bkPress != null">
+            , bk_press = #{bkPress}
+        </if>
+        <if test="bkPrice != null">
+            , bk_price = #{bkPrice}
+        </if>
+        <if test="bkImg != null">
+            , bk_img = #{bkImg}
+        </if>
+        <if test="remark != null">
+            , remark = #{remark}
+        </if>
+        <if test="bkInfoStatus != null">
+            , status = #{bkInfoStatus}
+        </if>
+        WHERE bk_id = #{bkId}
+    </update>
+
+    <!-- 批量删除书籍类型信息关联 -->
+    <delete id="delBatchTypeInfo">
+        DELETE FROM `bk_type_info`
+        WHERE bk_id = #{bkId}
+        AND bt_id IN
+        <foreach collection="btIdList" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 修改书籍类型 -->
+    <update id="modifyType">
+        UPDATE `bk_type`
+        SET update_time = now()
+        <if test="btStatus != null">
+            , status = #{btStatus}
+        </if>
+        <if test="tName != null">
+            , t_name = #{tName}
+        </if>
+        WHERE id = #{btId}
+    </update>
+
+    <!-- 批量修改书籍详情的状态 -->
+    <update id="batchModifyDetail">
+        UPDATE `bk_detail`
+        SET status = #{status}
+        WHERE ser_id IN
+            <foreach collection="serIdList" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        AND status != #{status}
+    </update>
+    
 </mapper>

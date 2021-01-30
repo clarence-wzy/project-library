@@ -28,12 +28,15 @@ public class BkCommentServiceImpl implements BkCommentService {
 
     @Override
     public int addComment(BkComment bkComment) {
+        if (bkComment.getBkId() == null || bkComment.getUserId() == null) {
+            return -2;
+        }
         bkComment.setRcdId("c_" + SnowFlakeUtil.getId());
         return bkCommentMapper.addComment(bkComment);
     }
 
     @Override
-    public List<BkRecord> getComment(String rcdId, String bkId, String userId, Integer status) {
+    public List<BkComment> getComment(String rcdId, String bkId, String userId, Integer status) {
         return bkCommentMapper.getComment(rcdId, bkId, userId, status);
     }
 }

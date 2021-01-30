@@ -4,7 +4,7 @@
 
     <!-- 书籍记录数据列 -->
     <sql id="RECORD_COL">
-        ser_id, bk_id, lend_time, return_time, expire_time, update_time
+        rcd_id, account, ser_id, bk_id, lend_time, return_time, expire_time, update_time
     </sql>
 
     <!-- 批量新增书籍记录 -->
@@ -13,15 +13,22 @@
             (<include refid="RECORD_COL" />)
         VALUES
             <foreach collection="recordList" item="item" separator=",">
-                (#{serId}, #{bkId}, #{lendTime}, #{returnTime}, #{expireTime}, #{updateTime})
+                (#{item.rcdId}, #{item.account}, #{item.serId}, #{item.bkId}, #{item.lendTime},
+                #{item.returnTime}, #{item.expireTime}, #{item.updateTime})
             </foreach>
     </insert>
 
     <!-- 获取书籍记录 -->
-    <select id="getRecord" resultType="BkRecord">
+    <select id="getRecord" parameterType="BkRecord" resultType="BkRecord">
         SELECT <include refid="RECORD_COL" />
         FROM `bk_record`
         WHERE 1=1
+        <if test="rcdId != null">
+            AND rcd_id = #{rcdId}
+        </if>
+        <if test="account != null">
+            AND account = #{account}
+        </if>
         <if test="bkId != null">
             AND bk_id = #{bkId}
         </if>
@@ -45,7 +52,25 @@
             <if test="expireTime != null">
                 , expire_time = #{expireTime}
             </if>
-        WHERE ser_id = #{serId}
+        WHERE rcd_id = #{rcdId}
     </update>
+
+    <!-- 根据书籍信息id统计数量 -->
+    <select id="countByBkId" resultType="map">
+        SELECT bk_id , COUNT(rcd_id) AS `num`
+        FROM `bk_record`
+        GROUP BY bk_id
+        ORDER BY `num` DESC
+    </select>
+
+    <!-- 获取书籍编号 -->
+    <select id="getSerId" resultType="string">
+        SELECT ser_id
+        FROM `bk_record`
+        WHERE rcd_id IN
+            <foreach collection="rcdIdList" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+    </select>
 
 </mapper>

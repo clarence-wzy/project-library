@@ -50,6 +50,11 @@ public class BkInfo implements Serializable {
     private BigDecimal bkPrice;
 
     /**
+     * 书籍图片
+     */
+    private String bkImg;
+
+    /**
      * 备注信息
      */
     private String remark;
@@ -57,7 +62,7 @@ public class BkInfo implements Serializable {
     /**
      * 状态，0：正常，1：删除
      */
-    private int bkInfoStatus;
+    private Integer bkInfoStatus;
 
     /**
      * 创建时间
@@ -86,5 +91,16 @@ public class BkInfo implements Serializable {
      * 书籍借出数量
      */
     private Integer bLendNum;
+
+
+    /**
+     * 新增类型列表
+     */
+    private List<Integer> addTypeList;
+
+    /**
+     * 删除类型列表
+     */
+    private List<Integer> delTypeList;
 
 }

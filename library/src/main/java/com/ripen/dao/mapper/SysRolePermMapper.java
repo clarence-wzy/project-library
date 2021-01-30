@@ -25,4 +25,12 @@ public interface SysRolePermMapper {
      */
     List<SysRolePerm> getRolePerm (@Param("account") String account, @Param("type") int type);
 
+    /**
+     * 新增用户角色关联
+     *
+     * @param sysRolePermList
+     * @return
+     */
+    int addUserRole (@Param("rolePermList") List<SysRolePerm> sysRolePermList);
+
 }

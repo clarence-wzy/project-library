@@ -5,6 +5,7 @@ import com.ripen.service.SysUserService;
 import com.ripen.util.JsonResult;
 import com.ripen.util.Page;
 import com.ripen.util.ThreeDes;
+import io.netty.util.internal.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,6 @@ public class UserController {
 
     @ApiOperation(value = "添加用户")
     @PostMapping(value = "/add")
-    @Transactional()
     public JsonResult add (@RequestBody SysUser sysUser)
     {
         if (sysUser == null) {
@@ -72,10 +72,14 @@ public class UserController {
     }
 
     @ApiOperation(value = "更新用户信息")
-    @PostMapping(value = "/update")
+    @PostMapping(value = "/modify/{account}")
     @Transactional()
-    public JsonResult update (@RequestBody SysUser sysUser)
+    public JsonResult modify (@PathVariable("account") String account, @RequestBody SysUser sysUser)
     {
+        if (StringUtil.isNullOrEmpty(account)) {
+            return JsonResult.errorMsg("参数错误");
+        }
+        sysUser.setAccount(account);
         if (sysUserService.updateUser(sysUser) == -1) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return JsonResult.errorMsg("update error");

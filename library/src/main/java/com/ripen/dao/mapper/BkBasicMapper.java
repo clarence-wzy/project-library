@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.mapstruct.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书籍基础映射
@@ -140,6 +141,40 @@ public interface BkBasicMapper {
      * @param bkId
      * @return
      */
-    List<Integer> countDetailByStatus(@Param("bkId") String bkId);
+    List<Map<String, Object>> countDetailByStatus(@Param("bkId") String bkId);
+
+    /**
+     * 修改书籍信息
+     *
+     * @param bkInfo
+     * @return
+     */
+    int modifyInfo(BkInfo bkInfo);
+
+    /**
+     * 批量删除书籍类型信息关联
+     *
+     * @param bkId 书籍信息ID
+     * @param btIdList 删除书籍类型列表
+     * @return
+     */
+    int delBatchTypeInfo(@Param("bkId") String bkId, @Param("btIdList") List<Integer> btIdList);
+
+    /**
+     * 修改书籍类型
+     *
+     * @param bkType 书籍类型
+     * @return
+     */
+    int modifyType(BkType bkType);
+
+    /**
+     * 批量修改书籍详情的状态
+     *
+     * @param status 状态，0：正常，1：借出
+     * @param serIdList 书籍编号列表
+     * @return
+     */
+    int batchModifyDetail(@Param("status") Integer status, @Param("serIdList") List<String> serIdList);
 
 }
