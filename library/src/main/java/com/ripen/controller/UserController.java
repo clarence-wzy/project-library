@@ -2,9 +2,9 @@ package com.ripen.controller;
 
 import com.ripen.dao.entity.SysUser;
 import com.ripen.service.SysUserService;
+import com.ripen.service.UploadService;
 import com.ripen.util.JsonResult;
 import com.ripen.util.Page;
-import com.ripen.util.ThreeDes;
 import io.netty.util.internal.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.*;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 用户控制层
@@ -32,6 +31,9 @@ public class UserController {
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private UploadService uploadService;
 
 //    @ApiOperation(value = "用户登录")
 //    @PostMapping(value = "/login")
@@ -85,6 +87,20 @@ public class UserController {
             return JsonResult.errorMsg("update error");
         }
         return JsonResult.ok();
+    }
+    /**
+     *  上传头像
+     *
+     * @param img 头像
+     * @return
+     */
+    @ApiOperation(value = "上传头像")
+    @PostMapping(value = "/upload/{account}")
+    public JsonResult uploadBk (@PathVariable("account") String account, @RequestParam(value = "img") MultipartFile img) {
+        if (StringUtil.isNullOrEmpty(account) || img.isEmpty()) {
+            return JsonResult.errorMsg("参数错误");
+        }
+        return JsonResult.ok(uploadService.upload(1, img, account));
     }
 
 }

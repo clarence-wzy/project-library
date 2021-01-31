@@ -12,13 +12,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 类
+ * 管理员服务层实现类
  *
- * <p> 功能详细描述
- *
- * @author wuziyi
+ * @author Ripen.Y
  * @version 2021/01/10 15:33
- * @see
  * @since 2021/01/10
  */
 @Service

@@ -2,6 +2,7 @@ package com.ripen.controller;
 
 import com.ripen.dao.entity.*;
 import com.ripen.service.BkBasicService;
+import com.ripen.service.UploadService;
 import com.ripen.util.JsonResult;
 import com.ripen.util.Page;
 import io.netty.util.internal.StringUtil;
@@ -14,7 +15,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,6 +36,9 @@ public class BkController {
 
     @Autowired
     private BkBasicService bkBasicService;
+
+    @Autowired
+    private UploadService uploadService;
 
     /**
      * 新增书籍信息
@@ -240,6 +247,25 @@ public class BkController {
         } else {
             return JsonResult.errorMsg("系统异常");
         }
+    }
+
+    /**
+     *  上传书籍图片
+     *
+     * @param imgs 图片列表
+     * @return
+     */
+    @ApiOperation(value = "上传书籍图片")
+    @PostMapping(value = "/upload/{bk_id}")
+    public JsonResult uploadBk (@PathVariable("bk_id") String bkId, @RequestParam(value = "img") MultipartFile[] imgs) {
+        if (StringUtil.isNullOrEmpty(bkId) || imgs == null || imgs.length == 0) {
+            return JsonResult.errorMsg("参数错误");
+        }
+        LinkedList<String> imgList = new LinkedList<>();
+        for (MultipartFile img : imgs) {
+            imgList.add(uploadService.upload(2, img, bkId));
+        }
+        return JsonResult.ok(imgList);
     }
 
 }

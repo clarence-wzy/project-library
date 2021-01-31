@@ -55,12 +55,13 @@ public class ShiroConfig {
         filerMap.put("/webjars/springfox-swagger-ui/**", "anon");
         // 放行登录与注册接口
         filerMap.put("/login", "anon");
+        filerMap.put("/admin/login", "anon");
         filerMap.put("/user/add", "anon");
         // 添加页面需要的权限
 //        filerMap.put("/user/get", "perms[SE_BK]");
 //        filerMap.put("/admin/get", "perms[aaa]");
         // 全部拦截
-        filerMap.put("/**", "authc");
+//        filerMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filerMap);
 
         LinkedHashMap<String, Filter> filtersMap = new LinkedHashMap<>();

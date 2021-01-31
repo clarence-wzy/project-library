@@ -46,11 +46,11 @@ mybatis:
     use-column-label: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #nginx图片配置
-#ftp:
-#  host: ip
-#  userName: xxx
-#  password: xxxx
-#  port: 22
-#  rootPath: /usr/nginx/image/shop/
-#  img:
-#    url: http://ip:端口/shop/
+ftp:
+  host: 39.108.208.27
+  userName: root
+  password: ogx960321..
+  port: 22
+  rootPath: /usr/nginx/image/library/
+  img:
+    url: http://39.108.208.27:9090/library/
