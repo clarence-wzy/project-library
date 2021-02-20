@@ -51,12 +51,13 @@ public interface BkBasicService {
      *
      * @param bkId 书籍信息ID
      * @param btId 书籍类型ID
+     * @param bkName 书籍名称
      * @param status 书籍信息状态
      * @param type 是否获取信息对应的书籍数量，0：否，1：是
      * @param page 分页信息
      * @return
      */
-    List<BkInfo> getBkInfo(String bkId, Integer btId, Integer status, int type, Page page);
+    List<BkInfo> getBkInfo(String bkId, Integer btId, String bkName, Integer status, int type, Page page);
 
     /**
      * 获取书籍详情

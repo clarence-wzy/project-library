@@ -94,11 +94,12 @@ public interface BkBasicMapper {
      *
      * @param bkId
      * @param btId
+     * @param bkName
      * @param status
      * @param page
      * @return
      */
-    List<BkInfo> getInfoWithCondition (@Param("bkId") String bkId, @Param("btId") Integer btId, @Param("status") Integer status, @Param("page") Page page);
+    List<BkInfo> getInfoWithCondition (@Param("bkId") String bkId, @Param("btId") Integer btId, @Param("bkName") String bkName, @Param("status") Integer status, @Param("page") Page page);
 
     /**
      * 获取书籍详情

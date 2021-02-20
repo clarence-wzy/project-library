@@ -151,12 +151,12 @@ public class BkBasicServiceImpl implements BkBasicService {
     }
 
     @Override
-    public List<BkInfo> getBkInfo(String bkId, Integer btId, Integer status, int type, Page page) {
+    public List<BkInfo> getBkInfo(String bkId, Integer btId, String bkName, Integer status, int type, Page page) {
         List<BkInfo> bkInfoList;
         if (btId == null) {
             bkInfoList = bkBasicMapper.getInfo(bkId, status, page);
         } else {
-            bkInfoList = bkBasicMapper.getInfoWithCondition(bkId, btId, status, page);
+            bkInfoList = bkBasicMapper.getInfoWithCondition(bkId, btId, bkName, status, page);
         }
         if (type == 1) {
             // 为了提高性能，如果分页信息为null，或分页数量为0，则不获取书籍数量和借出数量

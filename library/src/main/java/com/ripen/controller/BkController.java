@@ -131,7 +131,7 @@ public class BkController {
     @GetMapping(value = "/get/{select_type}")
     public JsonResult getBook (@PathVariable("select_type") int selectType,
                                int subType, Integer status, String bkId, Integer btId, String serId,
-                               Page page)
+                               String bkName, Page page)
     {
         JsonResult result = new JsonResult();
         switch (selectType) {
@@ -154,7 +154,7 @@ public class BkController {
                     result.setData("selectType为2时，subType必须是0或1");
                     break;
                 }
-                List<BkInfo> bkInfoList = bkBasicService.getBkInfo(bkId, btId, status, subType, page);
+                List<BkInfo> bkInfoList = bkBasicService.getBkInfo(bkId, btId, bkName, status, subType, page);
                 result.setOk("success");
                 result.setStatus(200);
                 result.setData(bkInfoList);
