@@ -89,6 +89,12 @@
         INNER JOIN `bk_type_info` bti
         ON bt.id = bti.bt_id
         WHERE bti.bk_id = #{bkId}
+        <if test="status != null">
+            AND bt.status = #{status}
+        </if>
+        <if test="btId != null">
+            AND bt.id = #{btId}
+        </if>
     </select>
 
     <!-- 获取书籍信息 -->
@@ -100,7 +106,7 @@
             AND bk_id = #{bkId}
         </if>
         <if test="bkName != null">
-            AND i.bk_name LIKE CONCAT("%", #{bkName}, "%")
+            AND bk_name LIKE CONCAT("%", #{bkName}, "%")
         </if>
         <if test="status != null">
             AND status = #{status}
@@ -124,7 +130,7 @@
             AND i.bk_id = #{bkId}
         </if>
         <if test="btId != null">
-            AND ti.id = #{bkId}
+            AND ti.bt_id = #{btId}
         </if>
         <if test="bkName != null">
             AND i.bk_name LIKE CONCAT("%", #{bkName}, "%")

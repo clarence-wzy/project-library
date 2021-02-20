@@ -95,7 +95,7 @@ public class BkRecordServiceImpl implements BkRecordService {
         if (type == 1) {
             List<BkInfo> bkInfoList = null;
             for (BkRecord record : bkRecordList) {
-                bkInfoList = bkBasicMapper.getInfo(record.getBkId(), null, null);
+                bkInfoList = bkBasicMapper.getInfo(record.getBkId(), null, null, null);
                 if (bkInfoList.size() > 0) {
                     record.setBkInfo(bkInfoList.get(0));
                 }
@@ -113,7 +113,7 @@ public class BkRecordServiceImpl implements BkRecordService {
             String bkId = (String) countMap.get("bk_id");
             int num = Integer.parseInt(countMap.get("num").toString());
 
-            List<BkInfo> tempBkInfoList = bkBasicMapper.getInfo(bkId, null, null);
+            List<BkInfo> tempBkInfoList = bkBasicMapper.getInfo(bkId, null, null, null);
             if (tempBkInfoList != null && tempBkInfoList.size() == 1) {
                 bkInfo = tempBkInfoList.get(0);
                 bkInfo.setBLendNum(num);

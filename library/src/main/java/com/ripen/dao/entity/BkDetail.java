@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 书籍详情实体类
@@ -82,6 +83,6 @@ public class BkDetail implements Serializable {
     /**
      * 书籍类型
      */
-    private BkType bkType;
+    private List<BkType> bkTypeList;
 
 }

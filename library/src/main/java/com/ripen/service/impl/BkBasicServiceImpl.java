@@ -52,7 +52,7 @@ public class BkBasicServiceImpl implements BkBasicService {
         SysAdmin sysAdmin = new SysAdmin();
         sysAdmin.setAdmId(admId);
         List<SysAdmin> sysAdminList = sysAdminMapper.getAdminWithCondition(sysAdmin, null);
-        if (sysAdminList == null || sysAdminList.size() != 0) {
+        if (sysAdminList == null || sysAdminList.size() != 1) {
             return -1;
         }
         List<Integer> btIdList = new ArrayList<>(bkTypeList.size());
@@ -140,8 +140,13 @@ public class BkBasicServiceImpl implements BkBasicService {
     }
 
     @Override
-    public List<BkType> getBkType(Integer btId, Integer status, int type) {
-        List<BkType> bkTypeList = bkBasicMapper.getType(status, btId, null);
+    public List<BkType> getBkType(String bkId, Integer btId, Integer status, int type) {
+        List<BkType> bkTypeList = null;
+        if (bkId == null) {
+            bkTypeList = bkBasicMapper.getType(status, btId, null);
+        } else {
+            bkTypeList = bkBasicMapper.getTypeByBkId(bkId, status, btId);
+        }
         if (type == 1) {
             for (BkType bkType : bkTypeList) {
                 bkType.setInfoNum(bkBasicMapper.countTypeInfo(bkType.getBtId()));
@@ -193,13 +198,13 @@ public class BkBasicServiceImpl implements BkBasicService {
             case 2:
                 bkDetailList = bkBasicMapper.getDetail(bkId, serId, page);
                 for (BkDetail bd : bkDetailList) {
-                    bd.setBkType(bkBasicMapper.getTypeByBkId(bd.getBkId()));
+                    bd.setBkTypeList(bkBasicMapper.getTypeByBkId(bd.getBkId(), null, null));
                 }
                 break;
             case 3:
                 bkDetailList = bkBasicMapper.getDetailWithInfo(bkId, serId, page);
                 for (BkDetail bd : bkDetailList) {
-                    bd.setBkType(bkBasicMapper.getTypeByBkId(bd.getBkId()));
+                    bd.setBkTypeList(bkBasicMapper.getTypeByBkId(bd.getBkId(), null, null));
                 }
                 break;
             default:

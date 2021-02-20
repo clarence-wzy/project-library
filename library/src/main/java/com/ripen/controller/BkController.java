@@ -142,7 +142,7 @@ public class BkController {
                     result.setData("selectType为1时，subType必须是0或1");
                     break;
                 }
-                List<BkType> bkTypeList = bkBasicService.getBkType(btId, status, subType);
+                List<BkType> bkTypeList = bkBasicService.getBkType(bkId, btId, status, subType);
                 result.setOk("success");
                 result.setStatus(200);
                 result.setData(bkTypeList);

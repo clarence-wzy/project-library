@@ -75,9 +75,11 @@ public interface BkBasicMapper {
      * 根据书籍信息ID获取书籍类型
      *
      * @param bkId
+     * @param status
+     * @param btId
      * @return
      */
-    BkType getTypeByBkId (@Param("bkId") String bkId);
+    List<BkType> getTypeByBkId (@Param("bkId") String bkId, @Param("status") Integer status, @Param("btId") Integer btId);
 
     /**
      * 获取书籍信息

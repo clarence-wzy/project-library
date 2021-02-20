@@ -39,12 +39,13 @@ public interface BkBasicService {
     /**
      * 获取书籍类型
      *
+     * @param bkId 书籍ID
      * @param btId 书籍类型ID
      * @param status 书籍类型状态
      * @param type 是否获取类型对应的书籍信息数量，0：否，1：是
      * @return
      */
-    List<BkType> getBkType(Integer btId, Integer status, int type);
+    List<BkType> getBkType(String bkId, Integer btId, Integer status, int type);
 
     /**
      * 获取书籍信息
