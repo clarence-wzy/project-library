@@ -99,6 +99,9 @@
         <if test="bkId != null">
             AND bk_id = #{bkId}
         </if>
+        <if test="bkName != null">
+            AND i.bk_name LIKE CONCAT("%", #{bkName}, "%")
+        </if>
         <if test="status != null">
             AND status = #{status}
         </if>

@@ -83,11 +83,12 @@ public interface BkBasicMapper {
      * 获取书籍信息
      *
      * @param bkId
+     * @param bkName
      * @param status
      * @param page
      * @return
      */
-    List<BkInfo> getInfo (@Param("bkId") String bkId, @Param("status") Integer status, @Param("page") Page page);
+    List<BkInfo> getInfo (@Param("bkId") String bkId, @Param("bkName") String bkName, @Param("status") Integer status, @Param("page") Page page);
 
     /**
      * 多条件获取书籍信息

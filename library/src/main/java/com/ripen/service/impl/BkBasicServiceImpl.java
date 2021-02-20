@@ -154,7 +154,7 @@ public class BkBasicServiceImpl implements BkBasicService {
     public List<BkInfo> getBkInfo(String bkId, Integer btId, String bkName, Integer status, int type, Page page) {
         List<BkInfo> bkInfoList;
         if (btId == null) {
-            bkInfoList = bkBasicMapper.getInfo(bkId, status, page);
+            bkInfoList = bkBasicMapper.getInfo(bkId, bkName, status, page);
         } else {
             bkInfoList = bkBasicMapper.getInfoWithCondition(bkId, btId, bkName, status, page);
         }
