@@ -271,5 +271,15 @@
             </foreach>
         AND status != #{status}
     </update>
+
+    <!-- 批量删除书籍编号 -->
+    <delete id="delBatchDetail">
+        DELETE FROM `bk_detail`
+        WHERE ser_id IN
+            <foreach collection="serIdList" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        AND status != 1
+    </delete>
     
 </mapper>

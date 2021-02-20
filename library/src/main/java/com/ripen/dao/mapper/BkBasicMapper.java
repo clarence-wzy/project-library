@@ -181,4 +181,12 @@ public interface BkBasicMapper {
      */
     int batchModifyDetail(@Param("status") Integer status, @Param("serIdList") List<String> serIdList);
 
+    /**
+     * 批量删除书籍编号
+     *
+     * @param serIdList 书籍编号列表
+     * @return
+     */
+    int delBatchDetail(@Param("serIdList") List<String> serIdList);
+
 }

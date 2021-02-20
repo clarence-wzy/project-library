@@ -271,4 +271,12 @@ public class BkBasicServiceImpl implements BkBasicService {
         }
     }
 
+    @Override
+    public int delBatchDetail(List<String> serIdList) {
+        if (serIdList != null && serIdList.size() > 0) {
+            bkBasicMapper.delBatchDetail(serIdList);
+        }
+        return 0;
+    }
+
 }

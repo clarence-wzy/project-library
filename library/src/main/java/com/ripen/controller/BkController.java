@@ -268,4 +268,17 @@ public class BkController {
         return JsonResult.ok(imgList);
     }
 
+    /**
+     * 删除书籍详情
+     *
+     * @param serIdList 书籍编号列表
+     * @return
+     */
+    @ApiOperation(value = "删除书籍详情")
+    @DeleteMapping(value = "/delete/detail/{ser_id_list}")
+    public JsonResult delBatchDetail (@PathVariable("ser_id_list") List<String> serIdList) {
+        bkBasicService.delBatchDetail(serIdList);
+        return JsonResult.ok("删除成功");
+    }
+
 }

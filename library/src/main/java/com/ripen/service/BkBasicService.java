@@ -99,4 +99,12 @@ public interface BkBasicService {
      */
     int modifyType(Integer btId, BkType bkType);
 
+    /**
+     * 批量删除书籍编号
+     *
+     * @param serIdList 书籍编号列表
+     * @return
+     */
+    int delBatchDetail(List<String> serIdList);
+
 }
