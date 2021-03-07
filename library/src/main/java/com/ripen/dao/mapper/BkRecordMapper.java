@@ -59,4 +59,21 @@ public interface BkRecordMapper {
      */
     List<String> getSerId (@Param("rcdIdList") List<String> rcdIdList);
 
+    /**
+     * 统计用户未归还书籍数量
+     *
+     * @param account
+     * @return
+     */
+    int countNoReturn (@Param("account") String account);
+
+    /**
+     * 获取书籍过期记录
+     *
+     * @param account
+     * @param expireTime
+     * @return
+     */
+    List<BkRecord> getExpireBook (@Param("account") String account, @Param("expireTime") String expireTime);
+
 }

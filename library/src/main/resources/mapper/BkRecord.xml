@@ -73,4 +73,25 @@
             </foreach>
     </select>
 
+    <!-- 统计用户未归还书籍数量 -->
+    <select id="countNoReturn" resultType="int">
+        SELECT COUNT(id)
+        FROM `bk_record`
+        WHERE account = #{account}
+        AND ISNULL(return_time)
+    </select>
+
+    <!-- 获取书籍过期记录 -->
+    <select id="getExpireBook" resultType="BkRecord">
+        SELECT <include refid="RECORD_COL" />
+        FROM `bk_record`
+        WHERE ISNULL(return_time)
+        <if test="expireTime != null">
+            AND expire_time &lt; #{expireTime}
+        </if>
+        <if test="account != null">
+            AND account = #{account}
+        </if>
+    </select>
+
 </mapper>

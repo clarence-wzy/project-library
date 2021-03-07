@@ -13,10 +13,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 书籍借出归还控制层
@@ -49,6 +52,29 @@ public class BkRecordController {
             return JsonResult.errorMsg("参数错误");
         }
         LocalDateTime now = LocalDateTime.now();
+        // 判断是否可借阅
+        Map<String, Object> tmpRtMap = bkRecordService.isBorrowBook(account, now);
+        int tmpRt = (int) tmpRtMap.get("rt");
+        JsonResult result;
+        switch (tmpRt) {
+            case -1 :
+                return JsonResult.errorMsg("参数错误");
+            case 1 :
+                result = new JsonResult();
+                result.setStatus(501);
+                BigDecimal payMoney = (BigDecimal) tmpRtMap.get("money");
+                result.setData(payMoney);
+                result.setMsg("用户存在逾期未还书籍，请先缴纳费用");
+                return result;
+            case 2 :
+                result = new JsonResult();
+                result.setStatus(502);
+                result.setMsg("借阅数量超过3本，借阅失败");
+                return result;
+            default :
+                break;
+        }
+
         List<BkRecord> recordList = new ArrayList<>(bkRecordList.size());
         BkRecord bkRecord;
         for (BkRecord record : bkRecordList) {
@@ -79,16 +105,29 @@ public class BkRecordController {
      *
      * @param account 账号
      * @param rcdIdList 书籍记录id列表
+     * @param type 类型，0：用户，1：管理员
      * @return
      */
     @ApiOperation(value = "书籍归还")
-    @PostMapping(value = "/return/{account}")
+    @PostMapping(value = "/return/{account}/{type}")
     @Transactional(propagation = Propagation.REQUIRED)
-    public JsonResult returnBk (@PathVariable("account") String account, @RequestBody List<String> rcdIdList) {
+    public JsonResult returnBk (@PathVariable("account") String account, @RequestBody List<String> rcdIdList, @PathVariable("type") int type) {
         if (StringUtil.isNullOrEmpty(account) || rcdIdList == null || rcdIdList.size() == 0) {
             return JsonResult.errorMsg("参数错误");
         }
         LocalDateTime now = LocalDateTime.now();
+
+        if (type == 1) {
+            // 判断归还书籍中是否存在逾期未还书籍
+            List<String> rtList = bkRecordService.getNoReturnBook(account, rcdIdList, now);
+            if (rtList != null && rtList.size() > 0) {
+                JsonResult result = new JsonResult();
+                result.setStatus(501);
+                result.setMsg("归还书籍存在逾期未还书籍");
+                result.setData(rtList);
+                return result;
+            }
+        }
 
         int rt = 0;
         BkRecord bkRecord;
@@ -138,6 +177,16 @@ public class BkRecordController {
     @GetMapping(value = "/rank/lend")
     public JsonResult countLend () {
         return JsonResult.ok(bkRecordService.countByBkId());
+    }
+
+    @ApiOperation(value = "获取用户未归还书籍数量")
+    @GetMapping(value = "/count/no_return/{account}")
+    public JsonResult countNoReturn (@PathVariable("account") String account) {
+        if (StringUtil.isNullOrEmpty(account)) {
+            return JsonResult.errorMsg("参数错误");
+        }
+        Map<String, Object> tmpRtMap = bkRecordService.getNoReturn(account);
+        return JsonResult.ok(tmpRtMap);
     }
 
 }

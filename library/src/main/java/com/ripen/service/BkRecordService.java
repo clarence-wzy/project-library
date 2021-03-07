@@ -4,6 +4,7 @@ import com.ripen.dao.entity.BkInfo;
 import com.ripen.dao.entity.BkRecord;
 import com.ripen.service.impl.BkRecordServiceImpl;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -48,5 +49,32 @@ public interface BkRecordService {
      * @return
      */
     LinkedList<BkInfo> countByBkId ();
+
+    /**
+     * 是否可借阅书籍
+     *
+     * @param account
+     * @param expireTime
+     * @return
+     */
+    Map<String, Object> isBorrowBook (String account, LocalDateTime expireTime);
+
+    /**
+     * 获取归还书籍记录id中未归还书籍的记录id
+     *
+     * @param account
+     * @param rcdIdList
+     * @param expireTime
+     * @return
+     */
+    List<String> getNoReturnBook (String account, List<String> rcdIdList, LocalDateTime expireTime);
+
+    /**
+     * 获取未归还书籍数量以及滞纳金
+     *
+     * @param account
+     * @return
+     */
+    Map<String, Object> getNoReturn (String account);
 
 }

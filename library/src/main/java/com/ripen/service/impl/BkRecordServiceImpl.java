@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * 书籍记录服务层实现类
@@ -121,6 +121,72 @@ public class BkRecordServiceImpl implements BkRecordService {
             }
         }
         return bkInfoList;
+    }
+
+    @Override
+    public Map<String, Object> isBorrowBook(String account, LocalDateTime expireTime) {
+        Map<String, Object> rtMap = new HashMap<>();
+        if (account == null) {
+            rtMap.put("rt", -1);
+            return rtMap;
+        }
+        List<BkRecord> expireBookList = bkRecordMapper.getExpireBook(account, String.valueOf(expireTime));
+        if (expireBookList != null && expireBookList.size() > 0) {
+            rtMap.put("rt", 1);
+            BigDecimal finMoney = new BigDecimal("0");
+            BigDecimal payMoney = new BigDecimal("0.5");
+            for (BkRecord bkRecord : expireBookList) {
+                Duration duration = Duration.between(bkRecord.getExpireTime(), expireTime);
+                long day = duration.toDays();
+                finMoney = finMoney.add(payMoney.multiply(new BigDecimal(day)));
+            }
+            rtMap.put("money", finMoney);
+            return rtMap;
+        }
+        int borrowNum = bkRecordMapper.countNoReturn(account);
+        if (borrowNum >= 3) {
+            rtMap.put("rt", 2);
+            return rtMap;
+        }
+        rtMap.put("rt", 0);
+        return rtMap;
+    }
+
+    @Override
+    public List<String> getNoReturnBook(String account, List<String> rcdIdList, LocalDateTime expireTime) {
+        if (account == null || rcdIdList == null || rcdIdList.size() <= 0) {
+            return null;
+        }
+        List<BkRecord> expireBookList = bkRecordMapper.getExpireBook(account, String.valueOf(expireTime));
+        List<String> finRcdIdList = new ArrayList<>();
+        for (BkRecord bkRecord : expireBookList) {
+            String tmpRcdId = bkRecord.getRcdId();
+            if (rcdIdList.contains(tmpRcdId)) {
+                finRcdIdList.add(bkRecord.getRcdId());
+            }
+        }
+        return finRcdIdList;
+    }
+
+    @Override
+    public Map<String, Object> getNoReturn(String account) {
+        if (account == null) {
+            return null;
+        }
+        List<BkRecord> expireBookList = bkRecordMapper.getExpireBook(account, null);
+        LocalDateTime now = LocalDateTime.now();
+        BigDecimal finMoney = new BigDecimal("0");
+        BigDecimal payMoney = new BigDecimal("0.5");
+        for (BkRecord bkRecord : expireBookList) {
+            Duration duration = Duration.between(bkRecord.getExpireTime(), now);
+            long day = duration.toDays();
+            finMoney = finMoney.add(payMoney.multiply(new BigDecimal(day)));
+        }
+        int borrowNum = bkRecordMapper.countNoReturn(account);
+        Map<String, Object> rtMap = new HashMap<>();
+        rtMap.put("noReturnBookNum", borrowNum);
+        rtMap.put("payMoney", finMoney);
+        return rtMap;
     }
 
 }
